@@ -51,4 +51,4 @@ juce_add_binary_data(ProTuneData
     SOURCES
 )
 
-target_link_libraries(ProTune PRIVATE juce::juce_audio_utils ProTuneData)
+target_link_libraries(ProTune PRIVATE juce::juce_audio_utils juce::juce_dsp ProTuneData)
