@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/kris/Dev/ProTune/build/cmake_install.cmake",
+		"/Users/kris/Dev/ProTune/build/juce/cmake_install.cmake",
+		"/Users/kris/Dev/ProTune/build/juce/modules/cmake_install.cmake",
+		"/Users/kris/Dev/ProTune/build/juce/extras/Build/cmake_install.cmake",
+		"/Users/kris/Dev/ProTune/build/juce/extras/Build/juceaide/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

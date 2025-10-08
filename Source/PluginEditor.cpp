@@ -5,6 +5,17 @@
 
 namespace
 {
+inline int positiveModulo (int value, int modulo) noexcept
+{
+    auto result = value % modulo;
+    return result < 0 ? result + modulo : result;
+}
+
+inline juce::Font makeFont (float height, int style = juce::Font::plain)
+{
+    return juce::Font (juce::FontOptions (height, style));
+}
+
 juce::String frequencyToNoteName (float frequency)
 {
     if (frequency <= 0.0f)
@@ -16,7 +27,7 @@ juce::String frequencyToNoteName (float frequency)
     auto midi = referenceMidi + 12.0f * std::log2 (frequency / referenceFrequency);
     auto rounded = (int) std::round (midi);
     static const juce::StringArray noteNames { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
-    auto noteIndex = juce::positiveModulo (rounded, 12);
+    auto noteIndex = positiveModulo (rounded, 12);
     auto octave = (int) std::floor (rounded / 12.0f) - 1;
     auto name = noteNames[noteIndex];
     return juce::String (name + juce::String (octave));
@@ -38,11 +49,11 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     addAndMakeVisible (midiButton);
 
     detectedLabel.setJustificationType (juce::Justification::centred);
-    detectedLabel.setFont ({ 16.0f, juce::Font::bold });
+    detectedLabel.setFont (makeFont (16.0f, juce::Font::bold));
     addAndMakeVisible (detectedLabel);
 
     targetLabel.setJustificationType (juce::Justification::centred);
-    targetLabel.setFont ({ 16.0f, juce::Font::bold });
+    targetLabel.setFont (makeFont (16.0f, juce::Font::bold));
     addAndMakeVisible (targetLabel);
 
     auto& vts = processor.getValueTreeState();
@@ -73,9 +84,9 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
     g.fillRect (header);
 
     g.setColour (juce::Colours::white);
-    g.setFont ({ 28.0f, juce::Font::bold });
+    g.setFont (makeFont (28.0f, juce::Font::bold));
     g.drawFittedText ("ProTune", header.toNearestInt(), juce::Justification::centredLeft, 1);
-    g.setFont ({ 14.0f });
+    g.setFont (makeFont (14.0f));
     g.drawFittedText ("Instant vocal tuning for studio and stage", header.toNearestInt().reduced (8, 0),
                       juce::Justification::centredRight, 1);
 }

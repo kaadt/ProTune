@@ -55,7 +55,6 @@ private:
 
     juce::SmoothedValue<float> ratioSmoother;
     juce::SmoothedValue<float> pitchSmoother;
-    std::vector<juce::dsp::PitchShifter<float>> shifters;
 
     juce::AudioBuffer<float> dryBuffer;
 

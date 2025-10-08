@@ -1,0 +1,46 @@
+{
+  "Name": "ProTune",
+  "Version": "0.1.0",
+  "Factory Info": {
+    "Vendor": "OpenAI",
+    "URL": "",
+    "E-Mail": "",
+    "Flags": {
+      "Unicode": true,
+      "Classes Discardable": false,
+      "Component Non Discardable": false,
+    },
+  },
+  "Classes": [
+    {
+      "CID": "56535450726F7470726F74756E650000",
+      "Category": "Audio Module Class",
+      "Name": "ProTune",
+      "Vendor": "OpenAI",
+      "Version": "0.1.0",
+      "SDKVersion": "VST 3.7.12",
+      "Sub Categories": [
+        "Fx",
+      ],
+      "Class Flags": 0,
+      "Cardinality": 2147483647,
+      "Snapshots": [
+      ],
+    },
+    {
+      "CID": "56534550726F7470726F74756E650000",
+      "Category": "Component Controller Class",
+      "Name": "ProTune",
+      "Vendor": "OpenAI",
+      "Version": "0.1.0",
+      "SDKVersion": "VST 3.7.12",
+      "Sub Categories": [
+        "Fx",
+      ],
+      "Class Flags": 0,
+      "Cardinality": 2147483647,
+      "Snapshots": [
+      ],
+    },
+  ],
+}

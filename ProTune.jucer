@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="Ffa32c" name="ProTune" projectType="audioplug" version="0.1.0"
+              companyName="OpenAI" companyEmail="" companyWebsite=""
+              bundleIdentifier="com.openai.protune" includeBinaryInJuceHeader="0"
+              jucerVersion="7.0.12" displaySplashScreen="0" reportAppUsage="0"
+              buildStandalone="1" buildVST3="1" buildAU="0" buildAUv3="0"
+              buildAAX="0" buildLV2="0" enableIAA="0" enableIAAInBackground="0"
+              pluginName="ProTune" pluginDesc="ProTune" pluginManufacturer="OpenAI"
+              pluginManufacturerCode="Juce" pluginCode="Prot"
+              pluginChannelConfigs="{1,1},{2,2}" pluginIsSynth="0"
+              pluginWantsMidiInput="1" pluginProducesMidiOutput="0"
+              pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeyboardFocus="0"
+              pluginVST3Category="Fx" pluginAUMainType="kAudioUnitType_Effect"
+              pluginAUExportPrefix="" pluginAUExportMainSubcategory=""
+              pluginAAXCategory="AAX_ePlugInCategory_PitchShift"
+              pluginAAXDisableBypass="0" pluginAAXDisableMultiMono="0"
+              pluginVST3DisableBypass="0" pluginVST3DisableMultiMono="0"
+              cppLanguageStandard="17" juceNamespace="juce" useAppConfig="1"
+              addUsingNamespaceToJuceHeader="0" binaryDataNamespace=""
+              binaryDataCustomHeader="" binaryDataClass="ProTuneData"
+              defines="JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0">
+  <MAINGROUP id="qiGdTs" name="ProTune">
+    <GROUP id="M6LhvE" name="Source">
+      <FILE id="Vr9ZB9" name="PitchCorrectionEngine.cpp" compile="1" resource="0" file="Source/PitchCorrectionEngine.cpp"/>
+      <FILE id="sYpw6G" name="PitchCorrectionEngine.h" compile="0" resource="0" file="Source/PitchCorrectionEngine.h"/>
+      <FILE id="zBuyXX" name="PluginEditor.cpp" compile="1" resource="0" file="Source/PluginEditor.cpp"/>
+      <FILE id="bo86MM" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="bQJoF4" name="PluginProcessor.cpp" compile="1" resource="0" file="Source/PluginProcessor.cpp"/>
+      <FILE id="daUdBn" name="PluginProcessor.h" compile="0" resource="0" file="Source/PluginProcessor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_recommended_config_flags" showAllCode="0" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="ProTune"/>
+      <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="ProTune"/>
+    </XCODE_MAC>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATION name="Debug" winArchitecture="x64" isDebug="1" optimisation="1" targetName="ProTune"/>
+      <CONFIGURATION name="Release" winArchitecture="x64" isDebug="0" optimisation="3" targetName="ProTune"/>
+    </VS2022>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="ProTune"/>
+      <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="ProTune"/>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <LIVE_SETTINGS_SCREEN fps="60" width="960" height="540" useOpenGLRenderer="0"/>
+</JUCERPROJECT>

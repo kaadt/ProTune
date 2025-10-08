@@ -40,8 +40,20 @@ You can provide JUCE to the project in one of two ways:
    cmake -B build -S . -DJUCE_DIR="C:/path/to/juce/extras/Build/JUCE"
    ```
 2. Open `build/ProTune.sln` in Visual Studio.
-3. Select the `ProTune_VST3` target and build.
+3. Select the `ProTune_VST3` target and build. You can also build the `ProTune_Standalone` target for a self-contained test app.
 4. The resulting VST3 binary will be copied to `build/ProTune_artefacts/VST3/`.
+
+### Quick Testing via Projucer
+
+If you prefer to iterate inside JUCE's Projucer rather than launching a full DAW:
+
+1. Open `ProTune.jucer` in Projucer and ensure your JUCE modules path is configured under **Projucer → Global Paths**.
+2. Enable the exporter you want to use (e.g. Xcode, Visual Studio 2022, or Linux Make) and click **Save Project** to generate the platform builds.
+3. If your JUCE checkout lives somewhere other than `../JUCE`, edit the module paths in `ProTune.jucer` (or set Projucer's **Global Paths**) so they point at your local `JUCE/modules` directory.
+4. Click **Open in IDE** (or open the generated project manually) and build the `ProTune_Standalone` target once so the executable exists.
+5. Back in Projucer, pick the same exporter/configuration and press the run button to launch the standalone instance for quick auditions without FL Studio.
+
+The standalone build output lives under `Builds/<Exporter>/<Configuration>/ProTune_Standalone` and will recompile as you tweak code and resave the project.
 
 ### Using in FL Studio
 

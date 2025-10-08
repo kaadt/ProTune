@@ -9,6 +9,7 @@ ProTuneAudioProcessor::ProTuneAudioProcessor()
                                 .withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
       parameters (*this, nullptr, "Parameters", createParameterLayout())
 {
+    DBG ("ProTuneAudioProcessor constructed");
     speedParam = parameters.getRawParameterValue ("speed");
     transitionParam = parameters.getRawParameterValue ("transition");
     toleranceParam = parameters.getRawParameterValue ("tolerance");
@@ -22,6 +23,7 @@ ProTuneAudioProcessor::ProTuneAudioProcessor()
 
 void ProTuneAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    DBG ("prepareToPlay — sampleRate: " << sampleRate << ", blockSize: " << samplesPerBlock);
     engine.prepare (sampleRate, samplesPerBlock);
     updateEngineParameters();
 }
@@ -47,6 +49,7 @@ bool ProTuneAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) 
 
 void ProTuneAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    DBG ("processBlock — channels: " << buffer.getNumChannels() << ", samples: " << buffer.getNumSamples());
     juce::ScopedNoDenormals noDenormals;
 
     for (int channel = getTotalNumInputChannels(); channel < getTotalNumOutputChannels(); ++channel)
@@ -62,26 +65,25 @@ void ProTuneAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 
 juce::AudioProcessorEditor* ProTuneAudioProcessor::createEditor()
 {
+    DBG ("createEditor called");
     return new ProTuneAudioProcessorEditor (*this);
 }
 
 void ProTuneAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    if (auto state = parameters.copyState())
-    {
-        juce::MemoryOutputStream stream (destData, false);
-        state.writeToStream (stream);
-    }
+    auto state = parameters.copyState();
+    juce::MemoryOutputStream stream (destData, false);
+    state.writeToStream (stream);
 }
 
 void ProTuneAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     auto tree = juce::ValueTree::readFromData (data, sizeInBytes);
-    if (tree.isValid())
-    {
-        parameters.replaceState (tree);
-        updateEngineParameters();
-    }
+    if (! tree.isValid())
+        return;
+
+    parameters.replaceState (tree);
+    updateEngineParameters();
 }
 
 void ProTuneAudioProcessor::updateEngineParameters()
@@ -136,5 +138,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout ProTuneAudioProcessor::creat
 
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
+    DBG ("createPluginFilter invoked");
     return new ProTuneAudioProcessor();
 }

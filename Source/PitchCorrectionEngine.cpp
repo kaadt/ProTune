@@ -27,7 +27,7 @@ void PitchCorrectionEngine::prepare (double sampleRate, int samplesPerBlock)
     analysisBuffer.setSize (1, fftSize);
     analysisBuffer.clear();
     windowedBuffer = createHannWindow (fftSize);
-    fftBuffer.allocate (fftSize);
+    fftBuffer.allocate (fftSize, true);
     analysisWritePosition = 0;
 
     ratioSmoother.reset (sampleRate, 0.01);
@@ -36,16 +36,6 @@ void PitchCorrectionEngine::prepare (double sampleRate, int samplesPerBlock)
     pitchSmoother.setCurrentAndTargetValue (0.0f);
     detectionSmoother.reset (sampleRate, 0.05);
     detectionSmoother.setCurrentAndTargetValue (0.0f);
-
-    shifters.clear();
-    shifters.resize (2);
-    for (auto& shifter : shifters)
-    {
-        juce::dsp::ProcessSpec spec { sampleRate, (juce::uint32) samplesPerBlock, 1 };
-        shifter.prepare (spec);
-        shifter.setWindowSize (fftSize);
-        shifter.setHopSize (fftSize / 4);
-    }
 
     dryBuffer.setSize (2, samplesPerBlock);
 }
@@ -60,8 +50,7 @@ void PitchCorrectionEngine::reset()
     lastDetectedFrequency = 0.0f;
     lastTargetFrequency = 0.0f;
     heldMidiNote = std::numeric_limits<float>::quiet_NaN();
-    for (auto& shifter : shifters)
-        shifter.reset();
+    dryBuffer.clear();
 }
 
 void PitchCorrectionEngine::setParameters (const Parameters& newParams)
@@ -115,32 +104,14 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
     ratioSmoother.setTargetValue (ratio);
     pitchSmoother.setTargetValue (target);
 
-    auto currentRatio = ratioSmoother.getCurrentValue();
     ratioSmoother.skip (numSamples);
     lastTargetFrequency = target;
     pitchSmoother.skip (numSamples);
 
-    juce::dsp::AudioBlock<float> block (buffer);
-
+    // TODO: Replace with a real pitch-shifting stage once a JUCE-compatible shifter is available.
     dryBuffer.setSize (buffer.getNumChannels(), buffer.getNumSamples(), false, false, true);
     for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
         dryBuffer.copyFrom (ch, 0, buffer, ch, 0, buffer.getNumSamples());
-
-    for (size_t ch = 0; ch < block.getNumChannels(); ++ch)
-    {
-        if (ch >= shifters.size())
-        {
-            shifters.emplace_back();
-            juce::dsp::ProcessSpec spec { currentSampleRate, (juce::uint32) maxBlockSize, 1 };
-            shifters.back().prepare (spec);
-            shifters.back().setWindowSize (fftSize);
-            shifters.back().setHopSize (fftSize / 4);
-        }
-
-        auto& shifter = shifters[ch];
-        shifter.setPitchRatio (currentRatio);
-        shifter.process (juce::dsp::ProcessContextReplacing<float> (block.getSingleChannelBlock (ch)));
-    }
 
     if (params.formantPreserve > 0.0f)
     {

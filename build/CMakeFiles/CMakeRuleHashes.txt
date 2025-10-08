@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+62b0ccefebae6eb8f8831d9b176b11c5 ProTune_artefacts/JuceLibraryCode/JuceHeader.h
+d3138eab77ccf0c083ccc6ee681189f9 ProTune_artefacts/JuceLibraryCode/ProTune_Standalone/PkgInfo
+1f41d96a45f7ad62cf09fe009bb68fcf ProTune_artefacts/JuceLibraryCode/ProTune_VST3/PkgInfo
