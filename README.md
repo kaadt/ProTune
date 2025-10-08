@@ -1,1 +1,68 @@
 # ProTune
+
+ProTune is a JUCE-based VST3 plugin that delivers transparent or creative automatic vocal tuning with ultra-low latency. It is designed for real-time use in DAWs such as FL Studio and supports MIDI control for live performance workflows.
+
+## Features
+
+- Real-time pitch detection and correction powered by FFT analysis and JUCE's pitch-shifting utilities
+- Speed and Note Transition controls for choosing between transparent correction and hard-tuned effects
+- Tolerance control to preserve natural performance nuance
+- Advanced formant preservation mix for natural-sounding vocals
+- Adjustable vocal range and vibrato tracking
+- Optional MIDI-controlled target notes for stage-ready performances
+- Responsive UI with live detected/target pitch readouts
+
+## Getting Started
+
+### Prerequisites
+
+- **JUCE 7.0 or newer** with the `juce_dsp` module available. Either install the JUCE CMake package or clone JUCE locally.
+- **CMake 3.15+**
+- **Visual Studio 2022** with the Desktop development with C++ workload
+
+### Configure JUCE
+
+You can provide JUCE to the project in one of two ways:
+
+1. **Using the JUCE CMake package** (recommended):
+   ```powershell
+   cmake -B build -DJUCE_DIR="C:/path/to/juce/extras/Build/JUCE"
+   ```
+2. **Using JUCE sources**:
+   ```powershell
+   cmake -B build -DJUCE_SOURCE_DIR="C:/path/to/JUCE"
+   ```
+
+### Build the Plugin
+
+1. Generate the Visual Studio solution:
+   ```powershell
+   cmake -B build -S . -DJUCE_DIR="C:/path/to/juce/extras/Build/JUCE"
+   ```
+2. Open `build/ProTune.sln` in Visual Studio.
+3. Select the `ProTune_VST3` target and build.
+4. The resulting VST3 binary will be copied to `build/ProTune_artefacts/VST3/`.
+
+### Using in FL Studio
+
+1. Copy the generated `ProTune.vst3` to your VST3 plugins folder (e.g. `C:\Program Files\Common Files\VST3`).
+2. In FL Studio, run **Options → Manage plugins** and refresh the plugin list.
+3. Load ProTune from the Effects section and fine-tune the parameters to match your vocalist and desired effect.
+
+## MIDI Control
+
+Enable the **MIDI Control** toggle to drive pitch correction from incoming MIDI notes. When active, held MIDI notes determine the target pitch instead of the automatic scale snapping, enabling expressive live performance control.
+
+## Project Structure
+
+```
+CMakeLists.txt
+Source/
+  ├── PitchCorrectionEngine.h/.cpp   // DSP engine for pitch detection and correction
+  ├── PluginProcessor.h/.cpp         // JUCE audio processor implementation
+  └── PluginEditor.h/.cpp            // UI and parameter controls
+```
+
+## License
+
+This project is provided as-is for educational purposes.
