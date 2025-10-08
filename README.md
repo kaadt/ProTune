@@ -16,7 +16,7 @@ ProTune is a JUCE-based VST3 plugin that delivers transparent or creative automa
 
 ### Prerequisites
 
-- **JUCE 7.0 or newer**. Either install the JUCE CMake package or clone JUCE locally.
+- **JUCE 7.0 or newer** with the `juce_dsp` module available. Either install the JUCE CMake package or clone JUCE locally.
 - **CMake 3.15+**
 - **Visual Studio 2022** with the Desktop development with C++ workload
 
