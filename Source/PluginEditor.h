@@ -64,5 +64,8 @@ private:
     float displayedTargetHz = 0.0f;
     float displayedConfidence = 0.0f;
 
+    int lastNonChromaticScaleId = 2;
+    bool isUpdatingScaleControls = false;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProTuneAudioProcessorEditor)
 };
