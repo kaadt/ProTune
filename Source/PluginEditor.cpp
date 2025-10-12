@@ -82,11 +82,12 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     rangeLowAttachment = std::make_unique<SliderAttachment> (vts, "rangeLow", rangeLowSlider);
     rangeHighAttachment = std::make_unique<SliderAttachment> (vts, "rangeHigh", rangeHighSlider);
 
-    chromaticAttachment = std::make_unique<ButtonAttachment> (vts, "chromatic", chromaticButton);
+    scaleAttachment = std::make_unique<ComboBoxAttachment> (vts, "scaleMode", scaleSelector);
+    keyAttachment = std::make_unique<ComboBoxAttachment> (vts, "scaleRoot", keySelector);
     midiAttachment = std::make_unique<ButtonAttachment> (vts, "midiEnabled", midiButton);
     forceCorrectionAttachment = std::make_unique<ButtonAttachment> (vts, "forceCorrection", forceCorrectionButton);
 
-    setSize (680, 360);
+    setSize (820, 480);
     startTimerHz (30);
 }
 
@@ -197,10 +198,23 @@ void ProTuneAudioProcessorEditor::timerCallback()
     auto detected = processor.getLastDetectedFrequency();
     auto target = processor.getLastTargetFrequency();
 
-    auto detectedText = juce::String (detected > 0.0f ? juce::String (detected, 2) + " Hz" : "--")
-                        + " (" + frequencyToNoteName (detected) + ")";
-    auto targetText = juce::String (target > 0.0f ? juce::String (target, 2) + " Hz" : "--")
-                      + " (" + frequencyToNoteName (target) + ")";
+    const auto smooth = [] (float current, float targetValue, float factor)
+    {
+        return current + (targetValue - current) * factor;
+    };
+
+    constexpr float smoothing = 0.2f;
+
+    displayedDetectedHz = smooth (displayedDetectedHz, juce::jmax (0.0f, detected), smoothing);
+    displayedTargetHz = smooth (displayedTargetHz, juce::jmax (0.0f, target), smoothing);
+
+    auto confidence = juce::jlimit (0.0f, 1.0f, processor.getLastDetectionConfidence());
+    displayedConfidence = smooth (displayedConfidence, confidence, smoothing);
+
+    auto detectedText = juce::String (displayedDetectedHz > 0.0f ? juce::String (displayedDetectedHz, 2) + " Hz" : "--")
+                        + " (" + frequencyToNoteName (displayedDetectedHz) + ")";
+    auto targetText = juce::String (displayedTargetHz > 0.0f ? juce::String (displayedTargetHz, 2) + " Hz" : "--")
+                      + " (" + frequencyToNoteName (displayedTargetHz) + ")";
 
     detectedLabel.setText ("Detected: " + detectedText, juce::dontSendNotification);
     targetLabel.setText ("Target: " + targetText, juce::dontSendNotification);

@@ -13,7 +13,8 @@ int main()
 
     PitchCorrectionEngine::Parameters params;
     params.forceCorrection = true;
-    params.chromaticScale = true;
+    params.scaleMode = PitchCorrectionEngine::Parameters::ScaleMode::Chromatic;
+    params.scaleRoot = 0;
     params.speed = 1.0f;
     params.transition = 0.0f;
     engine.setParameters (params);

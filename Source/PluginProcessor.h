@@ -59,7 +59,8 @@ private:
     std::atomic<float>* vibratoParam = nullptr;
     std::atomic<float>* rangeLowParam = nullptr;
     std::atomic<float>* rangeHighParam = nullptr;
-    std::atomic<float>* chromaticParam = nullptr;
+    std::atomic<float>* scaleModeParam = nullptr;
+    std::atomic<float>* scaleRootParam = nullptr;
     std::atomic<float>* midiParam = nullptr;
     std::atomic<float>* forceCorrectionParam = nullptr;
 

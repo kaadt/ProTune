@@ -20,8 +20,15 @@ public:
         float vibratoTracking = 0.5f;
         float rangeLowHz = 80.0f;
         float rangeHighHz = 1000.0f;
+        enum class ScaleMode
+        {
+            Chromatic = 0,
+            Major,
+            Minor
+        };
+        ScaleMode scaleMode = ScaleMode::Chromatic;
+        int scaleRoot = 0;
         bool midiEnabled = false;
-        bool chromaticScale = true;
         bool forceCorrection = true;
     };
 
@@ -53,7 +60,7 @@ private:
 
     static float frequencyToMidiNote (float freq);
     static float midiNoteToFrequency (float midiNote);
-    static float snapNoteToScale (float midiNote, bool chromatic);
+    static float snapNoteToScale (float midiNote, int rootNote, Parameters::ScaleMode mode);
 
     static constexpr int minAnalysisFftOrder = 9;
     static constexpr int maxAnalysisFftOrder = 12;

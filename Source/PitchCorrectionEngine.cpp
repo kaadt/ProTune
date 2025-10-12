@@ -1,6 +1,7 @@
 #include "PitchCorrectionEngine.h"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <cstring>
 
@@ -22,6 +23,12 @@ inline float wrapPhase (float value)
 {
     return value - juce::MathConstants<float>::twoPi * std::floor ((value + juce::MathConstants<float>::pi)
                                                                    / juce::MathConstants<float>::twoPi);
+}
+
+inline int positiveModulo (int value, int modulo) noexcept
+{
+    auto remainder = value % modulo;
+    return remainder < 0 ? remainder + modulo : remainder;
 }
 }
 
@@ -71,6 +78,8 @@ void PitchCorrectionEngine::reset()
 
 void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 {
+    auto previousMode = params.scaleMode;
+    auto previousRoot = params.scaleRoot;
     params = newParams;
 
     baseRatioGlideTime = juce::jmap (params.speed, 0.0f, 1.0f, 0.005f, 0.3f);
@@ -549,28 +558,95 @@ float PitchCorrectionEngine::midiNoteToFrequency (float midiNote)
     return referenceFrequency * std::pow (2.0f, (midiNote - referenceMidiNote) / 12.0f);
 }
 
-float PitchCorrectionEngine::snapNoteToScale (float midiNote, bool chromatic)
+float PitchCorrectionEngine::snapNoteToScale (float midiNote, int rootNote, Parameters::ScaleMode mode)
 {
-    if (chromatic)
+    if (mode == Parameters::ScaleMode::Chromatic)
         return std::round (midiNote);
 
-    static constexpr int majorScale[] = { 0, 2, 4, 5, 7, 9, 11 };
-    auto octave = std::floor (midiNote / 12.0f);
-    auto noteInOctave = midiNote - octave * 12.0f;
+    static constexpr std::array<int, 7> majorScale { 0, 2, 4, 5, 7, 9, 11 };
+    static constexpr std::array<int, 7> minorScale { 0, 2, 3, 5, 7, 8, 10 };
 
-    int closest = majorScale[0];
+    const auto& intervals = (mode == Parameters::ScaleMode::Minor) ? minorScale : majorScale;
+
+    auto root = positiveModulo (rootNote, 12);
+    auto normalised = midiNote - (float) root;
+    auto octave = std::floor (normalised / 12.0f);
+    auto noteInOctave = normalised - octave * 12.0f;
+
+    float bestInterval = (float) intervals.front();
     float bestDistance = std::numeric_limits<float>::max();
-    for (auto note : majorScale)
+
+    for (auto interval : intervals)
     {
-        auto distance = std::abs (noteInOctave - (float) note);
+        auto distance = std::abs (noteInOctave - (float) interval);
         if (distance < bestDistance)
         {
             bestDistance = distance;
-            closest = note;
+            bestInterval = (float) interval;
         }
     }
 
-    return octave * 12.0f + (float) closest;
+    return octave * 12.0f + (float) root + bestInterval;
+}
+
+float PitchCorrectionEngine::computeDynamicRatioTime (float detectedFrequency, float targetFrequency) const
+{
+    auto time = baseRatioGlideTime;
+    if (detectedFrequency <= 0.0f || targetFrequency <= 0.0f)
+        return juce::jlimit (0.001f, 0.35f, time);
+
+    auto detectedMidi = frequencyToMidiNote (detectedFrequency);
+    auto targetMidi = frequencyToMidiNote (targetFrequency);
+    auto semitoneDelta = std::abs (targetMidi - detectedMidi);
+
+    auto vibratoFactor = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 1.35f, 0.6f);
+    auto distanceFactor = juce::jmap (juce::jlimit (0.0f, 4.0f, semitoneDelta), 0.0f, 4.0f, 1.4f, 0.35f);
+    auto combined = juce::jlimit (0.3f, 1.6f, vibratoFactor * distanceFactor);
+
+    return juce::jlimit (0.001f, 0.35f, time * combined);
+}
+
+float PitchCorrectionEngine::computeDynamicTransitionTime (float detectedFrequency, float targetFrequency) const
+{
+    juce::ignoreUnused (detectedFrequency);
+
+    auto time = baseTargetTransitionTime;
+    if (targetFrequency <= 0.0f)
+        return juce::jlimit (0.001f, 0.4f, time);
+
+    auto previousTarget = lastTargetFrequency > 0.0f ? lastTargetFrequency : targetFrequency;
+    auto semitoneJump = std::abs (frequencyToMidiNote (targetFrequency) - frequencyToMidiNote (previousTarget));
+
+    auto distanceFactor = juce::jmap (juce::jlimit (0.0f, 7.0f, semitoneJump), 0.0f, 7.0f, 1.3f, 0.4f);
+    return juce::jlimit (0.001f, 0.4f, time * juce::jlimit (0.35f, 1.5f, distanceFactor));
+}
+
+float PitchCorrectionEngine::applyTargetHysteresis (float candidateMidi, float rawMidi)
+{
+    auto hysteresis = juce::jmap (params.transition, 0.0f, 1.0f, 0.05f, 0.45f);
+
+    if (std::isnan (activeTargetMidi))
+    {
+        activeTargetMidi = candidateMidi;
+        return activeTargetMidi;
+    }
+
+    auto deltaFromActive = std::abs (rawMidi - activeTargetMidi);
+    if (deltaFromActive < hysteresis)
+        return activeTargetMidi;
+
+    activeTargetMidi = candidateMidi;
+    return activeTargetMidi;
+}
+
+float PitchCorrectionEngine::clampMidiToRange (float midi) const noexcept
+{
+    return juce::jlimit (frequencyToMidiNote (params.rangeLowHz), frequencyToMidiNote (params.rangeHighHz), midi);
+}
+
+float PitchCorrectionEngine::minimumConfidenceForLock() const noexcept
+{
+    return juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 0.18f, 0.06f);
 }
 
 float PitchCorrectionEngine::computeDynamicRatioTime (float detectedFrequency, float targetFrequency) const
