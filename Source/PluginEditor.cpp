@@ -37,8 +37,8 @@ juce::String frequencyToNoteName (float frequency)
 ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor& p)
     : juce::AudioProcessorEditor (&p), processor (p)
 {
-    configureSlider (speedSlider, "Speed");
-    configureSlider (transitionSlider, "Note Transition");
+    configureSlider (speedSlider, "Retune Speed");
+    configureSlider (transitionSlider, "Humanize");
     configureSlider (toleranceSlider, "Tolerance");
     configureSlider (formantSlider, "Formant");
     configureSlider (vibratoSlider, "Vibrato");
@@ -48,6 +48,52 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     addAndMakeVisible (chromaticButton);
     addAndMakeVisible (midiButton);
     addAndMakeVisible (forceCorrectionButton);
+
+    addAndMakeVisible (scaleSelector);
+    addAndMakeVisible (keySelector);
+
+    addAndMakeVisible (retuneLabel);
+    retuneLabel.setJustificationType (juce::Justification::centred);
+    retuneLabel.setFont (makeFont (14.0f, juce::Font::bold));
+    retuneLabel.setColour (juce::Label::textColourId, juce::Colours::white);
+    retuneLabel.setInterceptsMouseClicks (false, false);
+    retuneLabel.attachToComponent (&speedSlider, false);
+
+    addAndMakeVisible (humanizeLabel);
+    humanizeLabel.setJustificationType (juce::Justification::centred);
+    humanizeLabel.setFont (makeFont (14.0f, juce::Font::bold));
+    humanizeLabel.setColour (juce::Label::textColourId, juce::Colours::white);
+    humanizeLabel.setInterceptsMouseClicks (false, false);
+    humanizeLabel.attachToComponent (&transitionSlider, false);
+
+    addAndMakeVisible (scaleLabel);
+    scaleLabel.setJustificationType (juce::Justification::centredLeft);
+    scaleLabel.setColour (juce::Label::textColourId, juce::Colours::white);
+    scaleLabel.setInterceptsMouseClicks (false, false);
+    scaleLabel.attachToComponent (&scaleSelector, true);
+
+    addAndMakeVisible (keyLabel);
+    keyLabel.setJustificationType (juce::Justification::centredLeft);
+    keyLabel.setColour (juce::Label::textColourId, juce::Colours::white);
+    keyLabel.setInterceptsMouseClicks (false, false);
+    keyLabel.attachToComponent (&keySelector, true);
+
+    scaleSelector.addItemList (juce::StringArray { "Chromatic", "Major", "Minor" }, 1);
+    scaleSelector.setJustificationType (juce::Justification::centredLeft);
+    auto comboBackground = juce::Colour::fromRGB (18, 24, 34);
+    scaleSelector.setColour (juce::ComboBox::backgroundColourId, comboBackground);
+    scaleSelector.setColour (juce::ComboBox::textColourId, juce::Colours::white);
+    scaleSelector.setColour (juce::ComboBox::arrowColourId, juce::Colours::white);
+    scaleSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
+    scaleSelector.setTooltip ("Select the scale mode for automatic correction");
+
+    keySelector.addItemList (juce::StringArray { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" }, 1);
+    keySelector.setJustificationType (juce::Justification::centredLeft);
+    keySelector.setColour (juce::ComboBox::backgroundColourId, comboBackground);
+    keySelector.setColour (juce::ComboBox::textColourId, juce::Colours::white);
+    keySelector.setColour (juce::ComboBox::arrowColourId, juce::Colours::white);
+    keySelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
+    keySelector.setTooltip ("Choose the key signature root note");
 
     detectedLabel.setJustificationType (juce::Justification::centred);
     detectedLabel.setFont (makeFont (16.0f, juce::Font::bold));
@@ -87,7 +133,7 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     midiAttachment = std::make_unique<ButtonAttachment> (vts, "midiEnabled", midiButton);
     forceCorrectionAttachment = std::make_unique<ButtonAttachment> (vts, "forceCorrection", forceCorrectionButton);
 
-    setSize (820, 480);
+    setSize (820, 520);
     startTimerHz (30);
 }
 
@@ -178,19 +224,32 @@ void ProTuneAudioProcessorEditor::resized()
     midiButton.setBounds (toggleArea.removeFromTop (36));
     forceCorrectionButton.setBounds (toggleArea.removeFromTop (36));
 
-    auto firstRow = controlArea.removeFromTop (controlArea.getHeight() / 2);
+    juce::FlexBox selectorBox;
+    selectorBox.flexDirection = juce::FlexBox::Direction::column;
+    selectorBox.justifyContent = juce::FlexBox::JustifyContent::flexStart;
+    selectorBox.alignContent = juce::FlexBox::AlignContent::stretch;
+
+    auto comboMargin = juce::FlexItem::Margin (6.0f, 0.0f, 6.0f, 0.0f);
+    selectorBox.items.add (juce::FlexItem (scaleSelector).withMinHeight (40.0f).withFlex (1.0f).withMargin (comboMargin));
+    selectorBox.items.add (juce::FlexItem (keySelector).withMinHeight (40.0f).withFlex (1.0f).withMargin (comboMargin));
+
+    auto comboArea = toggleArea.toFloat();
+    selectorBox.performLayout (comboArea);
+
+    auto firstRowHeight = juce::jmin (juce::roundToInt (juce::jmax (72.0f, controlArea.getHeight() / 2.0f)), controlArea.getHeight());
+    auto firstRow = controlArea.removeFromTop (firstRowHeight);
     auto secondRow = controlArea;
 
     auto firstColumnWidth = firstRow.getWidth() / 4;
-    speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    vibratoSlider.setBounds (firstRow.reduced (12));
+    speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
+    transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
+    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
+    vibratoSlider.setBounds (firstRow.reduced (12, 6));
 
     auto secondColumnWidth = secondRow.getWidth() / 3;
-    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12));
-    rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12));
-    rangeHighSlider.setBounds (secondRow.reduced (12));
+    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 6));
+    rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 6));
+    rangeHighSlider.setBounds (secondRow.reduced (12, 6));
 }
 
 void ProTuneAudioProcessorEditor::timerCallback()
