@@ -1,6 +1,8 @@
 #include "PitchCorrectionEngine.h"
 
+#include <algorithm>
 #include <cmath>
+#include <cstring>
 
 namespace
 {
@@ -16,6 +18,12 @@ juce::AudioBuffer<float> createHannWindow (int size)
     for (int i = 0; i < size; ++i)
         data[i] = 0.5f * (1.0f - std::cos (juce::MathConstants<float>::twoPi * i / (float) (size - 1)));
     return buffer;
+}
+
+inline float wrapPhase (float value)
+{
+    return value - juce::MathConstants<float>::twoPi * std::floor ((value + juce::MathConstants<float>::pi)
+                                                                   / juce::MathConstants<float>::twoPi);
 }
 }
 
@@ -38,6 +46,10 @@ void PitchCorrectionEngine::prepare (double sampleRate, int samplesPerBlock)
     detectionSmoother.setCurrentAndTargetValue (0.0f);
 
     dryBuffer.setSize (2, samplesPerBlock);
+
+    ensurePitchShiftChannels (2);
+    for (auto& channel : pitchChannels)
+        channel.prepare (pitchFftSize, pitchOversampling, currentSampleRate);
 }
 
 void PitchCorrectionEngine::reset()
@@ -51,6 +63,9 @@ void PitchCorrectionEngine::reset()
     lastTargetFrequency = 0.0f;
     heldMidiNote = std::numeric_limits<float>::quiet_NaN();
     dryBuffer.clear();
+
+    for (auto& channel : pitchChannels)
+        channel.reset();
 }
 
 void PitchCorrectionEngine::setParameters (const Parameters& newParams)
@@ -104,24 +119,39 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
     ratioSmoother.setTargetValue (ratio);
     pitchSmoother.setTargetValue (target);
 
-    ratioSmoother.skip (numSamples);
-    lastTargetFrequency = target;
-    pitchSmoother.skip (numSamples);
+    ensurePitchShiftChannels (buffer.getNumChannels());
 
-    // TODO: Replace with a real pitch-shifting stage once a JUCE-compatible shifter is available.
     dryBuffer.setSize (buffer.getNumChannels(), buffer.getNumSamples(), false, false, true);
     for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
         dryBuffer.copyFrom (ch, 0, buffer, ch, 0, buffer.getNumSamples());
 
+    juce::HeapBlock<float> ratioValues;
+    ratioValues.allocate ((size_t) numSamples, false);
+
+    float finalTarget = target;
+    for (int i = 0; i < numSamples; ++i)
+    {
+        ratioValues[i] = juce::jlimit (0.25f, 4.0f, ratioSmoother.getNextValue());
+        finalTarget = pitchSmoother.getNextValue();
+    }
+
+    for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
+        pitchChannels[(size_t) ch].processSamples (buffer.getWritePointer (ch), numSamples, ratioValues.get(), pitchFft);
+
+    lastTargetFrequency = finalTarget;
+
     if (params.formantPreserve > 0.0f)
     {
+        auto dryMix = juce::jlimit (0.0f, 1.0f, params.formantPreserve);
+        auto wetMix = 1.0f - dryMix;
+
         for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
         {
             auto* data = buffer.getWritePointer (ch);
             auto* dry = dryBuffer.getReadPointer (ch);
             for (int i = 0; i < numSamples; ++i)
             {
-                auto mixed = juce::jmap (params.formantPreserve, 0.0f, 1.0f, dry[i], data[i]);
+                auto mixed = wetMix * data[i] + dryMix * dry[i];
                 data[i] = juce::jlimit (-1.0f, 1.0f, mixed);
             }
         }
@@ -207,6 +237,174 @@ float PitchCorrectionEngine::estimatePitchFromSpectrum()
     auto frequency = (bestBin * currentSampleRate) / (float) fftSize;
     lastDetectedFrequency = frequency;
     return frequency;
+}
+
+void PitchCorrectionEngine::ensurePitchShiftChannels (int requiredChannels)
+{
+    if ((int) pitchChannels.size() < requiredChannels)
+    {
+        auto previousSize = pitchChannels.size();
+        pitchChannels.resize ((size_t) requiredChannels);
+        for (size_t i = previousSize; i < pitchChannels.size(); ++i)
+            pitchChannels[i].prepare (pitchFftSize, pitchOversampling, currentSampleRate);
+    }
+}
+
+void PitchCorrectionEngine::PitchShiftChannel::prepare (int frameSizeIn, int oversamplingIn, double sampleRateIn)
+{
+    juce::ignoreUnused (sampleRateIn);
+
+    frameSize = frameSizeIn;
+    oversampling = oversamplingIn;
+    hopSize = frameSize / oversampling;
+    spectrumSize = frameSize / 2;
+
+    inFifo.allocate ((size_t) frameSize, true);
+    outFifo.allocate ((size_t) frameSize, true);
+    window.allocate ((size_t) frameSize, true);
+    analysisMag.allocate ((size_t) (spectrumSize + 1), true);
+    analysisFreq.allocate ((size_t) (spectrumSize + 1), true);
+    synthesisMag.allocate ((size_t) (spectrumSize + 1), true);
+    synthesisFreq.allocate ((size_t) (spectrumSize + 1), true);
+    lastPhase.allocate ((size_t) (spectrumSize + 1), true);
+    sumPhase.allocate ((size_t) (spectrumSize + 1), true);
+    fftBuffer.allocate ((size_t) (frameSize * 2), true);
+
+    juce::dsp::WindowingFunction<float>::fillWindowingTables (window.get(), frameSize,
+                                                              juce::dsp::WindowingFunction<float>::hann, false);
+
+    reset();
+}
+
+void PitchCorrectionEngine::PitchShiftChannel::reset()
+{
+    if (frameSize == 0)
+        return;
+
+    std::fill (inFifo.get(), inFifo.get() + frameSize, 0.0f);
+    std::fill (outFifo.get(), outFifo.get() + frameSize, 0.0f);
+    std::fill (analysisMag.get(), analysisMag.get() + spectrumSize + 1, 0.0f);
+    std::fill (analysisFreq.get(), analysisFreq.get() + spectrumSize + 1, 0.0f);
+    std::fill (synthesisMag.get(), synthesisMag.get() + spectrumSize + 1, 0.0f);
+    std::fill (synthesisFreq.get(), synthesisFreq.get() + spectrumSize + 1, 0.0f);
+    std::fill (lastPhase.get(), lastPhase.get() + spectrumSize + 1, 0.0f);
+    std::fill (sumPhase.get(), sumPhase.get() + spectrumSize + 1, 0.0f);
+    std::fill (fftBuffer.get(), fftBuffer.get() + frameSize * 2, 0.0f);
+
+    inFifoIndex = 0;
+    outFifoIndex = 0;
+    ratioAccumulator = 0.0f;
+    ratioSampleCount = 0;
+}
+
+void PitchCorrectionEngine::PitchShiftChannel::processSamples (float* samples, int numSamples,
+                                                               const float* ratios, juce::dsp::FFT& fft)
+{
+    if (frameSize == 0)
+        return;
+
+    for (int i = 0; i < numSamples; ++i)
+    {
+        inFifo[inFifoIndex] = samples[i];
+        samples[i] = outFifo[outFifoIndex];
+        outFifo[outFifoIndex] = 0.0f;
+
+        ratioAccumulator += ratios[i];
+        ++ratioSampleCount;
+
+        ++inFifoIndex;
+        ++outFifoIndex;
+
+        if (inFifoIndex >= frameSize)
+        {
+            auto averageRatio = ratioSampleCount > 0 ? ratioAccumulator / (float) ratioSampleCount : 1.0f;
+            processFrame (juce::jlimit (0.25f, 4.0f, averageRatio), fft);
+
+            ratioAccumulator = 0.0f;
+            ratioSampleCount = 0;
+
+            inFifoIndex = frameSize - hopSize;
+            outFifoIndex = frameSize - hopSize;
+
+            std::memmove (inFifo.get(), inFifo.get() + hopSize, sizeof (float) * (size_t) inFifoIndex);
+            std::memmove (outFifo.get(), outFifo.get() + hopSize, sizeof (float) * (size_t) outFifoIndex);
+            std::fill (inFifo.get() + inFifoIndex, inFifo.get() + frameSize, 0.0f);
+            std::fill (outFifo.get() + outFifoIndex, outFifo.get() + frameSize, 0.0f);
+        }
+    }
+}
+
+void PitchCorrectionEngine::PitchShiftChannel::processFrame (float ratio, juce::dsp::FFT& fft)
+{
+    auto* fftData = fftBuffer.get();
+
+    for (int i = 0; i < frameSize; ++i)
+    {
+        fftData[2 * i] = inFifo[i] * window[i];
+        fftData[2 * i + 1] = 0.0f;
+    }
+
+    fft.performRealOnlyForwardTransform (fftData);
+
+    const float expectedPhaseAdvance = juce::MathConstants<float>::twoPi * (float) hopSize / (float) frameSize;
+
+    for (int bin = 0; bin <= spectrumSize; ++bin)
+    {
+        auto real = fftData[2 * bin];
+        auto imag = fftData[2 * bin + 1];
+
+        auto magnitude = std::sqrt (real * real + imag * imag);
+        auto phase = std::atan2 (imag, real);
+
+        auto deltaPhase = wrapPhase (phase - lastPhase[bin] - (float) bin * expectedPhaseAdvance);
+        lastPhase[bin] = phase;
+
+        auto binDeviation = deltaPhase / expectedPhaseAdvance;
+
+        analysisMag[bin] = magnitude;
+        analysisFreq[bin] = (float) bin + binDeviation;
+    }
+
+    for (int bin = 0; bin <= spectrumSize; ++bin)
+    {
+        synthesisMag[bin] = 0.0f;
+        synthesisFreq[bin] = (float) bin;
+    }
+
+    for (int bin = 0; bin <= spectrumSize; ++bin)
+    {
+        auto targetBin = (int) std::round ((float) bin * ratio);
+        if (targetBin > spectrumSize)
+            continue;
+
+        synthesisMag[targetBin] += analysisMag[bin];
+        synthesisFreq[targetBin] = analysisFreq[bin] * ratio;
+    }
+
+    for (int bin = 0; bin <= spectrumSize; ++bin)
+    {
+        auto phaseIncrement = expectedPhaseAdvance * synthesisFreq[bin];
+        sumPhase[bin] = wrapPhase (sumPhase[bin] + phaseIncrement);
+
+        auto magnitude = synthesisMag[bin];
+        fftData[2 * bin] = magnitude * std::cos (sumPhase[bin]);
+        fftData[2 * bin + 1] = magnitude * std::sin (sumPhase[bin]);
+    }
+
+    for (int bin = spectrumSize + 1; bin < frameSize; ++bin)
+    {
+        auto mirror = frameSize - bin;
+        fftData[2 * bin] = fftData[2 * mirror];
+        fftData[2 * bin + 1] = -fftData[2 * mirror + 1];
+    }
+
+    fft.performRealOnlyInverseTransform (fftData);
+
+    const float normalisation = 1.0f / (float) frameSize;
+    const float gain = 2.0f / (float) oversampling;
+
+    for (int i = 0; i < frameSize; ++i)
+        outFifo[i] += fftData[2 * i] * normalisation * gain * window[i];
 }
 
 float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
