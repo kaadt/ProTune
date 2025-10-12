@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kris/Dev/ProTune/JUCE/extras/Build/juceaide
+# Install script for directory: /Users/kris/Dev/JUCE/extras/Build/juceaide
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,7 +38,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin/JUCE-8.0.10" TYPE PROGRAM FILES "/Users/kris/Dev/ProTune/build/juce/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin/JUCE-8.0.9" TYPE PROGRAM FILES "/Users/kris/Dev/ProTune/build/juce/tools/extras/Build/juceaide/juceaide_artefacts/Custom/juceaide")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT

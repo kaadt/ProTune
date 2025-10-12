@@ -210,8 +210,8 @@ CMakeFiles/ProTune.dir/clean:
 # Target rules for target CMakeFiles/ProTune_All.dir
 
 # All Build rule for target.
-CMakeFiles/ProTune_All.dir/all: CMakeFiles/ProTune_Standalone.dir/all
 CMakeFiles/ProTune_All.dir/all: CMakeFiles/ProTune_VST3.dir/all
+CMakeFiles/ProTune_All.dir/all: CMakeFiles/ProTune_Standalone.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_All.dir/build.make CMakeFiles/ProTune_All.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_All.dir/build.make CMakeFiles/ProTune_All.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num= "Built target ProTune_All"
@@ -229,8 +229,8 @@ ProTune_All: CMakeFiles/ProTune_All.dir/rule
 .PHONY : ProTune_All
 
 # codegen rule for target.
-CMakeFiles/ProTune_All.dir/codegen: CMakeFiles/ProTune_Standalone.dir/all
 CMakeFiles/ProTune_All.dir/codegen: CMakeFiles/ProTune_VST3.dir/all
+CMakeFiles/ProTune_All.dir/codegen: CMakeFiles/ProTune_Standalone.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_All.dir/build.make CMakeFiles/ProTune_All.dir/codegen
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num= "Finished codegen for target ProTune_All"
 .PHONY : CMakeFiles/ProTune_All.dir/codegen
@@ -276,8 +276,8 @@ CMakeFiles/ProTune_Standalone.dir/clean:
 # Target rules for target CMakeFiles/ProTune_VST3.dir
 
 # All Build rule for target.
-CMakeFiles/ProTune_VST3.dir/all: CMakeFiles/ProTune.dir/all
 CMakeFiles/ProTune_VST3.dir/all: CMakeFiles/ProTune_vst3_helper.dir/all
+CMakeFiles/ProTune_VST3.dir/all: CMakeFiles/ProTune.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=36,37,38,39,40,41,42,43,44,45,46,47,48 "Built target ProTune_VST3"

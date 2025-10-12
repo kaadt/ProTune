@@ -168,7 +168,7 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 CMAKE_PROJECT_NAME:STATIC=JUCE
 
 //Value Computed by CMake
-CMAKE_PROJECT_VERSION:STATIC=8.0.10
+CMAKE_PROJECT_VERSION:STATIC=8.0.9
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION_MAJOR:STATIC=8
@@ -177,7 +177,7 @@ CMAKE_PROJECT_VERSION_MAJOR:STATIC=8
 CMAKE_PROJECT_VERSION_MINOR:STATIC=0
 
 //Value Computed by CMake
-CMAKE_PROJECT_VERSION_PATCH:STATIC=10
+CMAKE_PROJECT_VERSION_PATCH:STATIC=9
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION_TWEAK:STATIC=
@@ -276,7 +276,7 @@ JUCE_ENABLE_MODULE_SOURCE_GROUPS:BOOL=OFF
 
 //The location, relative to the install prefix, where the JUCE
 // config file will be installed
-JUCE_INSTALL_DESTINATION:STRING=lib/cmake/JUCE-8.0.10
+JUCE_INSTALL_DESTINATION:STRING=lib/cmake/JUCE-8.0.9
 
 //Value Computed by CMake
 JUCE_IS_TOP_LEVEL:STATIC=ON
@@ -285,7 +285,7 @@ JUCE_IS_TOP_LEVEL:STATIC=ON
 JUCE_MODULES_ONLY:BOOL=OFF
 
 //Value Computed by CMake
-JUCE_SOURCE_DIR:STATIC=/Users/kris/Dev/ProTune/JUCE
+JUCE_SOURCE_DIR:STATIC=/Users/kris/Dev/JUCE
 
 //Location that overrides the default directory where our FindWebView2
 // script is looking for the *Microsoft.Web.WebView2* directory
@@ -427,7 +427,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/Users/kris/Dev/ProTune/JUCE
+CMAKE_HOME_DIRECTORY:INTERNAL=/Users/kris/Dev/JUCE
 //ADVANCED property for variable: CMAKE_INSTALL_NAME_TOOL
 CMAKE_INSTALL_NAME_TOOL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
@@ -499,7 +499,7 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //The path to the folder holding this file and other resources
-JUCE_CMAKE_UTILS_DIR:INTERNAL=/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake
+JUCE_CMAKE_UTILS_DIR:INTERNAL=/Users/kris/Dev/JUCE/extras/Build/CMake
 //The path to JUCE modules
-JUCE_MODULES_DIR:INTERNAL=/Users/kris/Dev/ProTune/JUCE/modules
+JUCE_MODULES_DIR:INTERNAL=/Users/kris/Dev/JUCE/modules
 

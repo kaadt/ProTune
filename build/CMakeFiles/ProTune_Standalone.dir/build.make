@@ -76,202 +76,202 @@ ProTune_artefacts/JuceLibraryCode/ProTune_Standalone/PkgInfo:
 CMakeFiles/ProTune_Standalone.dir/codegen:
 .PHONY : CMakeFiles/ProTune_Standalone.dir/codegen
 
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib: /Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Copying OS X content ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib"
-	$(CMAKE_COMMAND) -E copy /Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib
+ProTune_artefacts/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib: /Users/kris/Dev/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Copying OS X content ProTune_artefacts/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib"
+	$(CMAKE_COMMAND) -E copy /Users/kris/Dev/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib ProTune_artefacts/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o -MF CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o: CMakeFiles/ProTune_Standalone.dir/flags.make
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o: CMakeFiles/ProTune_Standalone.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o -MF CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o.d -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm > CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm > CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
 
-CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm -o CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
+CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm -o CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
 
 # Object files for target ProTune_Standalone
 ProTune_Standalone_OBJECTS = \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o" \
-"CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o"
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o" \
+"CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o"
 
 # External object files for target ProTune_Standalone
 ProTune_Standalone_EXTERNAL_OBJECTS =
 
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/build.make
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: ProTune_artefacts/Debug/libProTune_SharedCode.a
-ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune"
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/build.make
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: ProTune_artefacts/libProTune_SharedCode.a
+ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune: CMakeFiles/ProTune_Standalone.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ProTune_Standalone.dir/link.txt --verbose=$(VERBOSE)
-	/opt/homebrew/bin/cmake -E copy /Users/kris/Dev/ProTune/build/ProTune_artefacts/JuceLibraryCode/ProTune_Standalone/PkgInfo /Users/kris/Dev/ProTune/build/ProTune_artefacts/Debug/Standalone/ProTune.app/Contents
+	/opt/homebrew/bin/cmake -E copy /Users/kris/Dev/ProTune/build/ProTune_artefacts/JuceLibraryCode/ProTune_Standalone/PkgInfo /Users/kris/Dev/ProTune/build/ProTune_artefacts/Standalone/ProTune.app/Contents
 
 # Rule to build all files generated by this target.
-CMakeFiles/ProTune_Standalone.dir/build: ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/MacOS/ProTune
-CMakeFiles/ProTune_Standalone.dir/build: ProTune_artefacts/Debug/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib
+CMakeFiles/ProTune_Standalone.dir/build: ProTune_artefacts/Standalone/ProTune.app/Contents/MacOS/ProTune
+CMakeFiles/ProTune_Standalone.dir/build: ProTune_artefacts/Standalone/ProTune.app/Contents/Resources/RecentFilesMenuTemplate.nib
 .PHONY : CMakeFiles/ProTune_Standalone.dir/build
 
 CMakeFiles/ProTune_Standalone.dir/clean:

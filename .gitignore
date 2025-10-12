@@ -1,0 +1,39 @@
+# Build artifacts
+build/
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# JUCE framework (should be installed separately or as a git submodule)
+JUCE/
+
+# Projucer generated files
+Builds/
+JuceLibraryCode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Plugin binaries (usually in build artifacts)
+*.vst
+*.vst3
+*.component
+*.aaxplugin
+*.app/
