@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include <limits>
+#include <memory>
 #include <vector>
 
 class PitchCorrectionEngine
@@ -18,6 +19,7 @@ public:
         float rangeHighHz = 1000.0f;
         bool midiEnabled = false;
         bool chromaticScale = true;
+        bool forceCorrection = true;
     };
 
     void prepare (double sampleRate, int samplesPerBlock);
@@ -28,6 +30,8 @@ public:
 
     void process (juce::AudioBuffer<float>& buffer);
 
+    void setAnalysisWindowOrder (int newOrder);
+
     [[nodiscard]] float getLastDetectedFrequency() const noexcept { return lastDetectedFrequency; }
     [[nodiscard]] float getLastTargetFrequency() const noexcept { return lastTargetFrequency; }
 
@@ -35,17 +39,25 @@ private:
     void analyseBlock (const float* samples, int numSamples);
     float estimatePitchFromSpectrum();
     float chooseTargetFrequency (float detectedFrequency);
+    void updateAnalysisResources();
+    [[nodiscard]] int getAnalysisFftSize() const noexcept { return 1 << analysisFftOrder; }
 
     static float frequencyToMidiNote (float freq);
     static float midiNoteToFrequency (float midiNote);
     static float snapNoteToScale (float midiNote, bool chromatic);
 
+    static constexpr int minAnalysisFftOrder = 9;
+    static constexpr int maxAnalysisFftOrder = 12;
+    static constexpr int defaultAnalysisFftOrder = 11;
+
     double currentSampleRate = 44100.0;
     int maxBlockSize = 0;
 
+    int analysisFftOrder = defaultAnalysisFftOrder;
+
     Parameters params;
 
-    juce::dsp::FFT fft { 12 }; // 4096 point FFT
+    std::unique_ptr<juce::dsp::FFT> analysisFft;
     juce::AudioBuffer<float> analysisBuffer;
     juce::AudioBuffer<float> windowedBuffer;
     juce::HeapBlock<juce::dsp::Complex<float>> fftBuffer;
@@ -53,6 +65,9 @@ private:
 
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;
+
+    float lastLoggedDetected = 0.0f;
+    float lastLoggedTarget = 0.0f;
 
     juce::SmoothedValue<float> ratioSmoother;
     juce::SmoothedValue<float> pitchSmoother;

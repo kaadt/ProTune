@@ -6,8 +6,6 @@
 
 namespace
 {
-constexpr int fftOrder = 12;
-constexpr int fftSize = 1 << fftOrder;
 constexpr float referenceFrequency = 440.0f;
 constexpr int referenceMidiNote = 69;
 
@@ -32,11 +30,7 @@ void PitchCorrectionEngine::prepare (double sampleRate, int samplesPerBlock)
     currentSampleRate = sampleRate;
     maxBlockSize = samplesPerBlock;
 
-    analysisBuffer.setSize (1, fftSize);
-    analysisBuffer.clear();
-    windowedBuffer = createHannWindow (fftSize);
-    fftBuffer.allocate (fftSize, true);
-    analysisWritePosition = 0;
+    updateAnalysisResources();
 
     ratioSmoother.reset (sampleRate, 0.01);
     ratioSmoother.setCurrentAndTargetValue (1.0f);
@@ -61,6 +55,8 @@ void PitchCorrectionEngine::reset()
     detectionSmoother.setCurrentAndTargetValue (0.0f);
     lastDetectedFrequency = 0.0f;
     lastTargetFrequency = 0.0f;
+    lastLoggedDetected = 0.0f;
+    lastLoggedTarget = 0.0f;
     heldMidiNote = std::numeric_limits<float>::quiet_NaN();
     dryBuffer.clear();
 
@@ -80,6 +76,17 @@ void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 
     auto detectionTime = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 0.2f, 0.01f);
     detectionSmoother.reset (currentSampleRate, detectionTime);
+}
+
+void PitchCorrectionEngine::setAnalysisWindowOrder (int newOrder)
+{
+    auto clampedOrder = juce::jlimit (minAnalysisFftOrder, maxAnalysisFftOrder, newOrder);
+    if (clampedOrder == analysisFftOrder)
+        return;
+
+    analysisFftOrder = clampedOrder;
+    updateAnalysisResources();
+    reset();
 }
 
 void PitchCorrectionEngine::pushMidi (const juce::MidiBuffer& midiMessages)
@@ -140,6 +147,31 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
 
     lastTargetFrequency = finalTarget;
 
+    if (detected > 0.0f && finalTarget > 0.0f)
+    {
+        auto differenceDetected = std::abs (detected - lastLoggedDetected);
+        auto differenceTarget = std::abs (finalTarget - lastLoggedTarget);
+        constexpr float logThreshold = 0.5f; // Hz change before printing again
+
+        if (differenceDetected >= logThreshold || differenceTarget >= logThreshold)
+        {
+            juce::String message ("PitchCorrectionEngine: detected "
+                                  + juce::String (detected, 2) + " Hz -> target "
+                                  + juce::String (finalTarget, 2) + " Hz");
+
+            if (params.midiEnabled && ! std::isnan (heldMidiNote))
+            {
+                auto forcedFrequency = midiNoteToFrequency (heldMidiNote);
+                message += " (MIDI override " + juce::String (forcedFrequency, 2) + " Hz)";
+            }
+
+            DBG (message);
+
+            lastLoggedDetected = detected;
+            lastLoggedTarget = finalTarget;
+        }
+    }
+
     if (params.formantPreserve > 0.0f)
     {
         auto dryMix = juce::jlimit (0.0f, 1.0f, params.formantPreserve);
@@ -160,6 +192,10 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
 
 void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
 {
+    if (analysisFft == nullptr)
+        return;
+
+    auto fftSize = getAnalysisFftSize();
     auto* writePtr = analysisBuffer.getWritePointer (0);
 
     for (int i = 0; i < numSamples; ++i)
@@ -180,7 +216,8 @@ void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
     juce::FloatVectorOperations::copy (fftData, framePtr, fftSize);
     juce::FloatVectorOperations::clear (fftData + fftSize, fftSize);
 
-    fft.performRealOnlyForwardTransform (fftData);
+    if (analysisFft != nullptr)
+        analysisFft->performRealOnlyForwardTransform (fftData);
 
     lastDetectedFrequency = estimatePitchFromSpectrum();
     if (lastDetectedFrequency > 0.0f)
@@ -189,7 +226,13 @@ void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
 
 float PitchCorrectionEngine::estimatePitchFromSpectrum()
 {
-    auto* fftData = reinterpret_cast<float*> (fftBuffer.get());
+    auto* complexData = fftBuffer.get();
+    if (complexData == nullptr)
+        return 0.0f;
+
+    auto* fftData = reinterpret_cast<float*> (complexData);
+
+    auto fftSize = getAnalysisFftSize();
 
     int binLow = (int) std::floor (params.rangeLowHz * fftSize / currentSampleRate);
     int binHigh = (int) std::ceil (params.rangeHighHz * fftSize / currentSampleRate);
@@ -237,6 +280,19 @@ float PitchCorrectionEngine::estimatePitchFromSpectrum()
     auto frequency = (bestBin * currentSampleRate) / (float) fftSize;
     lastDetectedFrequency = frequency;
     return frequency;
+}
+
+void PitchCorrectionEngine::updateAnalysisResources()
+{
+    auto fftSize = getAnalysisFftSize();
+
+    analysisFft = std::make_unique<juce::dsp::FFT> (analysisFftOrder);
+
+    analysisBuffer.setSize (1, fftSize);
+    analysisBuffer.clear();
+    windowedBuffer = createHannWindow (fftSize);
+    fftBuffer.allocate ((size_t) fftSize, true);
+    analysisWritePosition = 0;
 }
 
 void PitchCorrectionEngine::ensurePitchShiftChannels (int requiredChannels)
@@ -424,12 +480,15 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
                                          frequencyToMidiNote (params.rangeHighHz),
                                          targetMidi);
 
-    auto toleranceSemitones = params.toleranceCents / 100.0f;
-    if (toleranceSemitones > 0.0f)
+    if (! params.forceCorrection)
     {
-        auto deltaSemitones = constrainedMidi - rawMidi;
-        auto correctionMix = juce::jlimit (0.0f, 1.0f, std::abs (deltaSemitones) / toleranceSemitones);
-        constrainedMidi = rawMidi + deltaSemitones * correctionMix;
+        auto toleranceSemitones = params.toleranceCents / 100.0f;
+        if (toleranceSemitones > 0.0f)
+        {
+            auto deltaSemitones = constrainedMidi - rawMidi;
+            auto correctionMix = juce::jlimit (0.0f, 1.0f, std::abs (deltaSemitones) / toleranceSemitones);
+            constrainedMidi = rawMidi + deltaSemitones * correctionMix;
+        }
     }
 
     return midiNoteToFrequency (constrainedMidi);

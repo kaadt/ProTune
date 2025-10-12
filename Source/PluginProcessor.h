@@ -60,6 +60,7 @@ private:
     std::atomic<float>* rangeHighParam = nullptr;
     std::atomic<float>* chromaticParam = nullptr;
     std::atomic<float>* midiParam = nullptr;
+    std::atomic<float>* forceCorrectionParam = nullptr;
 
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;

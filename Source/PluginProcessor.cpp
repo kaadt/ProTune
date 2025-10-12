@@ -19,6 +19,7 @@ ProTuneAudioProcessor::ProTuneAudioProcessor()
     rangeHighParam = parameters.getRawParameterValue ("rangeHigh");
     chromaticParam = parameters.getRawParameterValue ("chromatic");
     midiParam = parameters.getRawParameterValue ("midiEnabled");
+    forceCorrectionParam = parameters.getRawParameterValue ("forceCorrection");
 }
 
 void ProTuneAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
@@ -97,6 +98,7 @@ void ProTuneAudioProcessor::updateEngineParameters()
     engineParameters.rangeHighHz = rangeHighParam->load();
     engineParameters.chromaticScale = chromaticParam->load() > 0.5f;
     engineParameters.midiEnabled = midiParam->load() > 0.5f;
+    engineParameters.forceCorrection = forceCorrectionParam->load() > 0.5f;
 
     if (engineParameters.rangeLowHz > engineParameters.rangeHighHz)
         std::swap (engineParameters.rangeLowHz, engineParameters.rangeHighHz);
@@ -132,6 +134,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ProTuneAudioProcessor::creat
 
     params.push_back (std::make_unique<juce::AudioParameterBool> ("chromatic", "Chromatic Scale", true));
     params.push_back (std::make_unique<juce::AudioParameterBool> ("midiEnabled", "MIDI Control", false));
+    params.push_back (std::make_unique<juce::AudioParameterBool> ("forceCorrection", "Force Correction", true));
 
     return { params.begin(), params.end() };
 }

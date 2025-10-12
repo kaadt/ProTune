@@ -10,8 +10,8 @@ This guide walks through the practical steps required to get an audible "hard tu
 
 ## 2. Match the analysis window to your song
 
-1. The detection FFT is currently fixed at 4096 samples (~93 ms at 44.1 kHz). This trades responsiveness for accuracy.【F:Source/PitchCorrectionEngine.cpp†L6-L103】
-2. For faster passages, lower `fftOrder` (e.g. to 11 = 2048 points) and rebuild. For smoother vibrato tracking, keep 4096 but accept slower reaction. When editing, change the `fftOrder` constant at the top of `PitchCorrectionEngine.cpp` and rebuild the plugin.【F:Source/PitchCorrectionEngine.cpp†L8-L37】
+1. The detection FFT now defaults to 2048 samples (~46 ms at 44.1 kHz), reducing response latency while keeping octave detection stable.【F:Source/PitchCorrectionEngine.cpp†L15-L108】
+2. Call `PitchCorrectionEngine::setAnalysisWindowOrder` with values between 9 (512 samples) and 12 (4096 samples) to audition different trade-offs without touching internal constants.【F:Source/PitchCorrectionEngine.cpp†L72-L103】
 3. After each change, rebuild the plugin, reload it in your host, and confirm that tuning still occurs.
 
 ## 3. Calibrate the pitch range and tolerance
@@ -24,7 +24,7 @@ This guide walks through the practical steps required to get an audible "hard tu
 1. Dial **Speed** fully clockwise. This lowers the smoothing ramp in `ratioSmoother` to ~5 ms so ratios snap almost instantly.【F:Source/PitchCorrectionEngine.cpp†L45-L62】
 2. Increase **Transition** so the `pitchSmoother` follows targets quickly (1–5 ms).【F:Source/PitchCorrectionEngine.cpp†L45-L62】
 3. Set **Vibrato Tracking** near zero if you want vibrato flattened; higher values let the detector glide instead of locking to the scale.【F:Source/PitchCorrectionEngine.cpp†L45-L62】
-4. Disable MIDI mode unless you are actively holding notes. When `params.midiEnabled` is true and a key is held, the engine locks to that MIDI note, so stray note-ons can prevent automatic snapping.【F:Source/PitchCorrectionEngine.cpp†L188-L214】
+4. Disable MIDI mode unless you are actively holding notes. When `params.midiEnabled` is true and a key is held, the engine locks to that MIDI note, so stray note-ons can prevent automatic snapping.【F:Source/PitchCorrectionEngine.cpp†L190-L218】 Use the **Force Correction** toggle if you want to hear instant correction regardless of the tolerance slider while debugging.【F:Source/PitchCorrectionEngine.cpp†L206-L229】【F:Source/PluginEditor.cpp†L24-L92】
 
 ## 5. Snap to the desired scale
 
