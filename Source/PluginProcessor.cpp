@@ -62,6 +62,7 @@ void ProTuneAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 
     lastDetectedFrequency = engine.getLastDetectedFrequency();
     lastTargetFrequency = engine.getLastTargetFrequency();
+    lastDetectionConfidence = engine.getLastDetectionConfidence();
 }
 
 juce::AudioProcessorEditor* ProTuneAudioProcessor::createEditor()

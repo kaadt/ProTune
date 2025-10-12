@@ -40,6 +40,7 @@ public:
 
     float getLastDetectedFrequency() const noexcept { return lastDetectedFrequency; }
     float getLastTargetFrequency() const noexcept { return lastTargetFrequency; }
+    float getLastDetectionConfidence() const noexcept { return lastDetectionConfidence; }
 
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
@@ -64,6 +65,7 @@ private:
 
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;
+    float lastDetectionConfidence = 0.0f;
 };
 
 class ProTuneAudioProcessorEditor;

@@ -9,6 +9,8 @@ ProTune is a JUCE-based VST3 plugin that delivers transparent or creative automa
 - Tolerance control to preserve natural performance nuance
 - Advanced formant preservation mix for natural-sounding vocals
 - Adjustable vocal range and vibrato tracking
+- Confidence-weighted note locking and dynamic retune response inspired by the Hildebrandt Auto-Tune patent
+- Auto-Tune style tuning meter with live detected/target note readouts
 - Optional MIDI-controlled target notes for stage-ready performances
 - Responsive UI with live detected/target pitch readouts
 
