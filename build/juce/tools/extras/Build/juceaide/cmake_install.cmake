@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kris/Dev/JUCE/extras/Build/juceaide
+# Install script for directory: /Users/kris/Dev/ProTune/JUCE/extras/Build/juceaide
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

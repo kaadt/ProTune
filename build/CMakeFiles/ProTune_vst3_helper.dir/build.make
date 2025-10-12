@@ -72,28 +72,28 @@ include CMakeFiles/ProTune_vst3_helper.dir/flags.make
 CMakeFiles/ProTune_vst3_helper.dir/codegen:
 .PHONY : CMakeFiles/ProTune_vst3_helper.dir/codegen
 
-CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o: CMakeFiles/ProTune_vst3_helper.dir/flags.make
-CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm
-CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o: CMakeFiles/ProTune_vst3_helper.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o -MF CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o.d -o CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm
+CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o: CMakeFiles/ProTune_vst3_helper.dir/flags.make
+CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm
+CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o: CMakeFiles/ProTune_vst3_helper.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o -MF CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o.d -o CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm
 
-CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm > CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
+CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm > CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
 
-CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm -o CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
+CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm -o CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
 
 # Object files for target ProTune_vst3_helper
 ProTune_vst3_helper_OBJECTS = \
-"CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o"
+"CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o"
 
 # External object files for target ProTune_vst3_helper
 ProTune_vst3_helper_EXTERNAL_OBJECTS =
 
-ProTune_vst3_helper: CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
+ProTune_vst3_helper: CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
 ProTune_vst3_helper: CMakeFiles/ProTune_vst3_helper.dir/build.make
 ProTune_vst3_helper: CMakeFiles/ProTune_vst3_helper.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ProTune_vst3_helper"

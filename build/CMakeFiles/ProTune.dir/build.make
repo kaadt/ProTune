@@ -118,266 +118,266 @@ CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/Source/PitchCorrectionEngine.cpp -o CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp > CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp > CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_processors/juce_audio_processors.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o: /Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o -c /Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_extra/juce_gui_extra.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_extra/juce_gui_extra.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_extra/juce_gui_extra.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_extra/juce_gui_extra.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o: /Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o -c /Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_basics/juce_gui_basics.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_basics/juce_gui_basics.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_basics/juce_gui_basics.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_gui_basics/juce_gui_basics.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o: /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp > CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp -o CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o: /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o -c /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c > CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c -o CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o: /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o -c /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o: /Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o -c /Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_events/juce_events.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_events/juce_events.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_events/juce_events.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_events/juce_events.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o: /Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o -c /Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core_CompilationTime.cpp
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core_CompilationTime.cpp
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core_CompilationTime.cpp > CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core_CompilationTime.cpp -o CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o: /Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o -c /Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_core/juce_core.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o: /Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o -c /Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_data_structures/juce_data_structures.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_data_structures/juce_data_structures.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_data_structures/juce_data_structures.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_data_structures/juce_data_structures.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_basics/juce_audio_basics.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_basics/juce_audio_basics.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_basics/juce_audio_basics.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_basics/juce_audio_basics.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_utils/juce_audio_utils.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_utils/juce_audio_utils.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_utils/juce_audio_utils.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_utils/juce_audio_utils.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_formats/juce_audio_formats.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_formats/juce_audio_formats.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_formats/juce_audio_formats.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_formats/juce_audio_formats.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o: /Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o -c /Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_devices/juce_audio_devices.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_devices/juce_audio_devices.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_devices/juce_audio_devices.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_audio_devices/juce_audio_devices.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o: CMakeFiles/ProTune.dir/flags.make
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o: /Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o -MF CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o.d -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o -c /Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o: CMakeFiles/ProTune.dir/flags.make
+CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o: /Users/kris/Dev/ProTune/JUCE/modules/juce_dsp/juce_dsp.mm
+CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o: CMakeFiles/ProTune.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o -MF CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o.d -o CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o -c /Users/kris/Dev/ProTune/JUCE/modules/juce_dsp/juce_dsp.mm
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm > CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.i
+CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/kris/Dev/ProTune/JUCE/modules/juce_dsp/juce_dsp.mm > CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.i
 
-CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm -o CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.s
+CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/kris/Dev/ProTune/JUCE/modules/juce_dsp/juce_dsp.mm -o CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.s
 
 # Object files for target ProTune
 ProTune_OBJECTS = \
 "CMakeFiles/ProTune.dir/Source/PluginEditor.cpp.o" \
 "CMakeFiles/ProTune.dir/Source/PluginProcessor.cpp.o" \
 "CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o" \
-"CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o"
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o" \
+"CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o"
 
 # External object files for target ProTune
 ProTune_EXTERNAL_OBJECTS =
@@ -385,23 +385,23 @@ ProTune_EXTERNAL_OBJECTS =
 ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Source/PluginEditor.cpp.o
 ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Source/PluginProcessor.cpp.o
 ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
-ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
+ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o
 ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/build.make
 ProTune_artefacts/libProTune_SharedCode.a: CMakeFiles/ProTune.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX static library ProTune_artefacts/libProTune_SharedCode.a"

@@ -54,7 +54,7 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/kris/Dev/JUCE
+CMAKE_SOURCE_DIR = /Users/kris/Dev/ProTune/JUCE
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /Users/kris/Dev/ProTune/build/juce/tools

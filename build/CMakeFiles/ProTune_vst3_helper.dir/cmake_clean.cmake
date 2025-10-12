@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o"
-  "CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o.d"
+  "CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o"
+  "CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o.d"
   "ProTune_vst3_helper"
   "ProTune_vst3_helper.pdb"
 )

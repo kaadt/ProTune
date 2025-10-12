@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm" "CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o" "gcc" "CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o.d"
+  "/Users/kris/Dev/ProTune/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm" "CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o" "gcc" "CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

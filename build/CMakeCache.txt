@@ -248,7 +248,7 @@ JUCE_ENABLE_MODULE_SOURCE_GROUPS:BOOL=OFF
 
 //The location, relative to the install prefix, where the JUCE
 // config file will be installed
-JUCE_INSTALL_DESTINATION:STRING=lib/cmake/JUCE-8.0.9
+JUCE_INSTALL_DESTINATION:STRING=lib/cmake/JUCE-8.0.10
 
 //Value Computed by CMake
 JUCE_IS_TOP_LEVEL:STATIC=OFF
@@ -257,11 +257,11 @@ JUCE_IS_TOP_LEVEL:STATIC=OFF
 JUCE_MODULES_ONLY:BOOL=OFF
 
 //Value Computed by CMake
-JUCE_SOURCE_DIR:STATIC=/Users/kris/Dev/JUCE
+JUCE_SOURCE_DIR:STATIC=/Users/kris/Dev/ProTune/JUCE
 
 //The location, relative to the install prefix, where juceaide
 // will be installed
-JUCE_TOOL_INSTALL_DIR:STRING=bin/JUCE-8.0.9
+JUCE_TOOL_INSTALL_DIR:STRING=bin/JUCE-8.0.10
 
 //Location that overrides the default directory where our FindWebView2
 // script is looking for the *Microsoft.Web.WebView2* directory
@@ -474,9 +474,9 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //The path to the folder holding this file and other resources
-JUCE_CMAKE_UTILS_DIR:INTERNAL=/Users/kris/Dev/JUCE/extras/Build/CMake
+JUCE_CMAKE_UTILS_DIR:INTERNAL=/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake
 //The name of the juceaide program
 JUCE_JUCEAIDE_NAME:INTERNAL=juceaide
 //The path to JUCE modules
-JUCE_MODULES_DIR:INTERNAL=/Users/kris/Dev/JUCE/modules
+JUCE_MODULES_DIR:INTERNAL=/Users/kris/Dev/ProTune/JUCE/modules
 

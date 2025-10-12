@@ -54,6 +54,12 @@ endif()
 
 target_link_libraries(ProTune PRIVATE juce::juce_audio_utils juce::juce_dsp)
 
+if (APPLE)
+    set(_juce_user_vst3_dir "$ENV{HOME}/Library/Audio/Plug-Ins/VST3")
+    file(MAKE_DIRECTORY "${_juce_user_vst3_dir}")
+    set_target_properties(ProTune_VST3 PROPERTIES JUCE_VST3_COPY_DIR "${_juce_user_vst3_dir}")
+endif()
+
 add_executable(VST3Probe
     Tools/VST3Probe.cpp
 )

@@ -1,4 +1,4 @@
-# Install script for directory: /Users/kris/Dev/JUCE
+# Install script for directory: /Users/kris/Dev/ProTune/JUCE
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -48,25 +48,25 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/JUCE-8.0.9" TYPE FILE FILES
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/JUCE-8.0.10" TYPE FILE FILES
     "/Users/kris/Dev/ProTune/build/juce/JUCEConfigVersion.cmake"
     "/Users/kris/Dev/ProTune/build/juce/JUCEConfig.cmake"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/JUCECheckAtomic.cmake"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/JUCEHelperTargets.cmake"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/JUCEModuleSupport.cmake"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/JUCEUtils.cmake"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/JuceLV2Defines.h.in"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/LaunchScreen.storyboard"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/PIPAudioProcessor.cpp.in"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/PIPAudioProcessorWithARA.cpp.in"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/PIPComponent.cpp.in"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/PIPConsole.cpp.in"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/UnityPluginGUIScript.cs.in"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/checkBundleSigning.cmake"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/copyDir.cmake"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/juce_runtime_arch_detection.cpp"
-    "/Users/kris/Dev/JUCE/extras/Build/CMake/juce_LinuxSubprocessHelper.cpp"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/JUCECheckAtomic.cmake"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/JUCEHelperTargets.cmake"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/JUCEModuleSupport.cmake"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/JUCEUtils.cmake"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/JuceLV2Defines.h.in"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/LaunchScreen.storyboard"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/PIPAudioProcessor.cpp.in"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/PIPAudioProcessorWithARA.cpp.in"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/PIPComponent.cpp.in"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/PIPConsole.cpp.in"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/RecentFilesMenuTemplate.nib"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/UnityPluginGUIScript.cs.in"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/checkBundleSigning.cmake"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/copyDir.cmake"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/juce_runtime_arch_detection.cpp"
+    "/Users/kris/Dev/ProTune/JUCE/extras/Build/CMake/juce_LinuxSubprocessHelper.cpp"
     )
 endif()
 

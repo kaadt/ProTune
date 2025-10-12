@@ -1,18 +1,18 @@
 extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juce_graphics_Sheenbidi.c.o: \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c \
-  /Users/kris/Dev/JUCE/modules/juce_core/system/juce_CompilerWarnings.h \
-  /Users/kris/Dev/JUCE/modules/juce_core/system/juce_TargetPlatform.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_core/system/juce_CompilerWarnings.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_core/system/juce_TargetPlatform.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SheenBidi.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBConfig.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SheenBidi.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBAlgorithm.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBBase.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SheenBidi.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBConfig.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SheenBidi.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBAlgorithm.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBBase.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/__stddef_header_macro.h \
@@ -44,22 +44,22 @@ extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juc
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_uintptr_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_intmax_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_types/_uintmax_t.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBBidiType.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBCodepointSequence.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBCodepoint.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBGeneralCategory.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBScript.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBParagraph.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBLine.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBRun.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBMirrorLocator.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBScriptLocator.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiChain.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBBase.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiChain.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiTypeLookup.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiTypeLookup.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BracketQueue.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBBidiType.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBCodepointSequence.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBCodepoint.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBGeneralCategory.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBScript.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBParagraph.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBLine.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBRun.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBMirrorLocator.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Headers/SBScriptLocator.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiChain.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBBase.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiChain.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiTypeLookup.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BidiTypeLookup.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BracketQueue.c \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/__stddef_rsize_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/stdlib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_stdlib.h \
@@ -109,41 +109,41 @@ extras/Build/juceaide/CMakeFiles/juceaide.dir/__/__/__/modules/juce_graphics/juc
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_abort.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_dev_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_mode_t.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBAssert.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBAssert.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/assert.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/_static_assert.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BracketQueue.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/GeneralCategoryLookup.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/GeneralCategoryLookup.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/IsolatingRun.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BracketType.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/LevelRun.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunExtrema.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunKind.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/PairingLookup.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLog.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/IsolatingRun.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBCodepointSequence.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/LevelRun.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/PairingLookup.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunQueue.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunQueue.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBAlgorithm.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBParagraph.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBAlgorithm.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBBase.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptLookup.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBCodepointSequence.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLine.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLine.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLog.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBMirrorLocator.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBMirrorLocator.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBParagraph.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/StatusStack.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBScriptLocator.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptStack.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBScriptLocator.h \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptLookup.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptStack.c \
-  /Users/kris/Dev/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/StatusStack.c
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BracketQueue.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/GeneralCategoryLookup.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/GeneralCategoryLookup.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/IsolatingRun.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/BracketType.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/LevelRun.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunExtrema.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunKind.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/PairingLookup.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLog.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/IsolatingRun.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBCodepointSequence.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/LevelRun.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/PairingLookup.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunQueue.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/RunQueue.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBAlgorithm.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBParagraph.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBAlgorithm.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBBase.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptLookup.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBCodepointSequence.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLine.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLine.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBLog.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBMirrorLocator.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBMirrorLocator.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBParagraph.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/StatusStack.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBScriptLocator.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptStack.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/SBScriptLocator.h \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptLookup.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/ScriptStack.c \
+  /Users/kris/Dev/ProTune/JUCE/modules/juce_graphics/unicode/sheenbidi/Source/StatusStack.c

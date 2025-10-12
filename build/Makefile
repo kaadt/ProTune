@@ -240,6 +240,783 @@ VST3Probe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/build
 .PHONY : VST3Probe/fast
 
+JUCE/modules/juce_audio_basics/juce_audio_basics.o: JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
+.PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.o
+
+# target to build an object file
+JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
+.PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
+
+JUCE/modules/juce_audio_basics/juce_audio_basics.i: JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
+.PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
+.PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
+
+JUCE/modules/juce_audio_basics/juce_audio_basics.s: JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
+.PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
+.PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
+
+JUCE/modules/juce_audio_devices/juce_audio_devices.o: JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
+.PHONY : JUCE/modules/juce_audio_devices/juce_audio_devices.o
+
+# target to build an object file
+JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
+.PHONY : JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
+
+JUCE/modules/juce_audio_devices/juce_audio_devices.i: JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
+.PHONY : JUCE/modules/juce_audio_devices/juce_audio_devices.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
+.PHONY : JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
+
+JUCE/modules/juce_audio_devices/juce_audio_devices.s: JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
+.PHONY : JUCE/modules/juce_audio_devices/juce_audio_devices.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
+.PHONY : JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
+
+JUCE/modules/juce_audio_formats/juce_audio_formats.o: JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
+.PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.o
+
+# target to build an object file
+JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
+.PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
+
+JUCE/modules/juce_audio_formats/juce_audio_formats.i: JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
+.PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
+.PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
+
+JUCE/modules/juce_audio_formats/juce_audio_formats.s: JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
+.PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
+.PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
+
+JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.o: JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
+
+JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.i: JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
+
+JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.s: JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.o: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.o
+
+# target to build an object file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.i: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
+
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.s: JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
+.PHONY : JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
+
+JUCE/modules/juce_audio_processors/juce_audio_processors.o: JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors.o
+
+# target to build an object file
+JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
+
+JUCE/modules/juce_audio_processors/juce_audio_processors.i: JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
+
+JUCE/modules/juce_audio_processors/juce_audio_processors.s: JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
+
+JUCE/modules/juce_audio_processors/juce_audio_processors_ara.o: JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_ara.o
+
+# target to build an object file
+JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
+
+JUCE/modules/juce_audio_processors/juce_audio_processors_ara.i: JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_ara.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
+
+JUCE/modules/juce_audio_processors/juce_audio_processors_ara.s: JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_ara.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
+
+JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.o: JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.o
+
+# target to build an object file
+JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
+
+JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.i: JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
+
+JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.s: JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
+.PHONY : JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
+
+JUCE/modules/juce_audio_utils/juce_audio_utils.o: JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
+.PHONY : JUCE/modules/juce_audio_utils/juce_audio_utils.o
+
+# target to build an object file
+JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
+.PHONY : JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
+
+JUCE/modules/juce_audio_utils/juce_audio_utils.i: JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
+.PHONY : JUCE/modules/juce_audio_utils/juce_audio_utils.i
+
+# target to preprocess a source file
+JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
+.PHONY : JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
+
+JUCE/modules/juce_audio_utils/juce_audio_utils.s: JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
+.PHONY : JUCE/modules/juce_audio_utils/juce_audio_utils.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
+.PHONY : JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
+
+JUCE/modules/juce_core/juce_core.o: JUCE/modules/juce_core/juce_core.mm.o
+.PHONY : JUCE/modules/juce_core/juce_core.o
+
+# target to build an object file
+JUCE/modules/juce_core/juce_core.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core.mm.o
+.PHONY : JUCE/modules/juce_core/juce_core.mm.o
+
+JUCE/modules/juce_core/juce_core.i: JUCE/modules/juce_core/juce_core.mm.i
+.PHONY : JUCE/modules/juce_core/juce_core.i
+
+# target to preprocess a source file
+JUCE/modules/juce_core/juce_core.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core.mm.i
+.PHONY : JUCE/modules/juce_core/juce_core.mm.i
+
+JUCE/modules/juce_core/juce_core.s: JUCE/modules/juce_core/juce_core.mm.s
+.PHONY : JUCE/modules/juce_core/juce_core.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_core/juce_core.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core.mm.s
+.PHONY : JUCE/modules/juce_core/juce_core.mm.s
+
+JUCE/modules/juce_core/juce_core_CompilationTime.o: JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
+.PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.o
+
+# target to build an object file
+JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
+.PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
+
+JUCE/modules/juce_core/juce_core_CompilationTime.i: JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
+.PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.i
+
+# target to preprocess a source file
+JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
+.PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
+
+JUCE/modules/juce_core/juce_core_CompilationTime.s: JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
+.PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
+.PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
+
+JUCE/modules/juce_data_structures/juce_data_structures.o: JUCE/modules/juce_data_structures/juce_data_structures.mm.o
+.PHONY : JUCE/modules/juce_data_structures/juce_data_structures.o
+
+# target to build an object file
+JUCE/modules/juce_data_structures/juce_data_structures.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
+.PHONY : JUCE/modules/juce_data_structures/juce_data_structures.mm.o
+
+JUCE/modules/juce_data_structures/juce_data_structures.i: JUCE/modules/juce_data_structures/juce_data_structures.mm.i
+.PHONY : JUCE/modules/juce_data_structures/juce_data_structures.i
+
+# target to preprocess a source file
+JUCE/modules/juce_data_structures/juce_data_structures.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
+.PHONY : JUCE/modules/juce_data_structures/juce_data_structures.mm.i
+
+JUCE/modules/juce_data_structures/juce_data_structures.s: JUCE/modules/juce_data_structures/juce_data_structures.mm.s
+.PHONY : JUCE/modules/juce_data_structures/juce_data_structures.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_data_structures/juce_data_structures.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
+.PHONY : JUCE/modules/juce_data_structures/juce_data_structures.mm.s
+
+JUCE/modules/juce_dsp/juce_dsp.o: JUCE/modules/juce_dsp/juce_dsp.mm.o
+.PHONY : JUCE/modules/juce_dsp/juce_dsp.o
+
+# target to build an object file
+JUCE/modules/juce_dsp/juce_dsp.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o
+.PHONY : JUCE/modules/juce_dsp/juce_dsp.mm.o
+
+JUCE/modules/juce_dsp/juce_dsp.i: JUCE/modules/juce_dsp/juce_dsp.mm.i
+.PHONY : JUCE/modules/juce_dsp/juce_dsp.i
+
+# target to preprocess a source file
+JUCE/modules/juce_dsp/juce_dsp.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.i
+.PHONY : JUCE/modules/juce_dsp/juce_dsp.mm.i
+
+JUCE/modules/juce_dsp/juce_dsp.s: JUCE/modules/juce_dsp/juce_dsp.mm.s
+.PHONY : JUCE/modules/juce_dsp/juce_dsp.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_dsp/juce_dsp.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.s
+.PHONY : JUCE/modules/juce_dsp/juce_dsp.mm.s
+
+JUCE/modules/juce_events/juce_events.o: JUCE/modules/juce_events/juce_events.mm.o
+.PHONY : JUCE/modules/juce_events/juce_events.o
+
+# target to build an object file
+JUCE/modules/juce_events/juce_events.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_events/juce_events.mm.o
+.PHONY : JUCE/modules/juce_events/juce_events.mm.o
+
+JUCE/modules/juce_events/juce_events.i: JUCE/modules/juce_events/juce_events.mm.i
+.PHONY : JUCE/modules/juce_events/juce_events.i
+
+# target to preprocess a source file
+JUCE/modules/juce_events/juce_events.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_events/juce_events.mm.i
+.PHONY : JUCE/modules/juce_events/juce_events.mm.i
+
+JUCE/modules/juce_events/juce_events.s: JUCE/modules/juce_events/juce_events.mm.s
+.PHONY : JUCE/modules/juce_events/juce_events.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_events/juce_events.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_events/juce_events.mm.s
+.PHONY : JUCE/modules/juce_events/juce_events.mm.s
+
+JUCE/modules/juce_graphics/juce_graphics.o: JUCE/modules/juce_graphics/juce_graphics.mm.o
+.PHONY : JUCE/modules/juce_graphics/juce_graphics.o
+
+# target to build an object file
+JUCE/modules/juce_graphics/juce_graphics.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o
+.PHONY : JUCE/modules/juce_graphics/juce_graphics.mm.o
+
+JUCE/modules/juce_graphics/juce_graphics.i: JUCE/modules/juce_graphics/juce_graphics.mm.i
+.PHONY : JUCE/modules/juce_graphics/juce_graphics.i
+
+# target to preprocess a source file
+JUCE/modules/juce_graphics/juce_graphics.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i
+.PHONY : JUCE/modules/juce_graphics/juce_graphics.mm.i
+
+JUCE/modules/juce_graphics/juce_graphics.s: JUCE/modules/juce_graphics/juce_graphics.mm.s
+.PHONY : JUCE/modules/juce_graphics/juce_graphics.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_graphics/juce_graphics.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s
+.PHONY : JUCE/modules/juce_graphics/juce_graphics.mm.s
+
+JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o: JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o
+
+# target to build an object file
+JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
+
+JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i: JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i
+
+# target to preprocess a source file
+JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
+
+JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s: JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
+
+JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o: JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o
+
+# target to build an object file
+JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
+
+JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i: JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i
+
+# target to preprocess a source file
+JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
+
+JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s: JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
+.PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
+
+JUCE/modules/juce_gui_basics/juce_gui_basics.o: JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
+.PHONY : JUCE/modules/juce_gui_basics/juce_gui_basics.o
+
+# target to build an object file
+JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
+.PHONY : JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
+
+JUCE/modules/juce_gui_basics/juce_gui_basics.i: JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
+.PHONY : JUCE/modules/juce_gui_basics/juce_gui_basics.i
+
+# target to preprocess a source file
+JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
+.PHONY : JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
+
+JUCE/modules/juce_gui_basics/juce_gui_basics.s: JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
+.PHONY : JUCE/modules/juce_gui_basics/juce_gui_basics.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
+.PHONY : JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
+
+JUCE/modules/juce_gui_extra/juce_gui_extra.o: JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
+.PHONY : JUCE/modules/juce_gui_extra/juce_gui_extra.o
+
+# target to build an object file
+JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
+.PHONY : JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
+
+JUCE/modules/juce_gui_extra/juce_gui_extra.i: JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
+.PHONY : JUCE/modules/juce_gui_extra/juce_gui_extra.i
+
+# target to preprocess a source file
+JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
+.PHONY : JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
+
+JUCE/modules/juce_gui_extra/juce_gui_extra.s: JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
+.PHONY : JUCE/modules/juce_gui_extra/juce_gui_extra.s
+
+# target to generate assembly for a file
+JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
+.PHONY : JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
+
 Source/PitchCorrectionEngine.o: Source/PitchCorrectionEngine.cpp.o
 .PHONY : Source/PitchCorrectionEngine.o
 
@@ -336,783 +1113,6 @@ Tools/VST3Probe.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Tools/VST3Probe.cpp.s
 .PHONY : Tools/VST3Probe.cpp.s
 
-Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.o: Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.i: Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.s: Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.o: Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.i: Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.s: Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.o: Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.i: Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.s: Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.o: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.i: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.s: Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.o: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.i: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.s: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.o: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.i: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.s: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.o: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.i: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.s: Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.o: Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.i: Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.s: Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_core/juce_core.o: Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_core/juce_core.i: Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_core/juce_core.s: Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.o: Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.i: Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.s: Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.o: Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.i: Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.s: Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.o: Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.i: Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.s: Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_events/juce_events.o: Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_events/juce_events.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_events/juce_events.i: Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_events/juce_events.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_events/juce_events.s: Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_events/juce_events.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_events/juce_events.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.o: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.i: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.s: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
-
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s: Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
-
-Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.o: Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.i: Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.s: Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.mm.s
-
-Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.o: Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.o
-
-# target to build an object file
-Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.o
-
-Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.i: Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.i
-
-# target to preprocess a source file
-Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.i
-
-Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.s: Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.s
-
-# target to generate assembly for a file
-Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
-.PHONY : Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.mm.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1131,6 +1131,93 @@ help:
 	@echo "... ProTune_VST3"
 	@echo "... ProTune_vst3_helper"
 	@echo "... VST3Probe"
+	@echo "... JUCE/modules/juce_audio_basics/juce_audio_basics.o"
+	@echo "... JUCE/modules/juce_audio_basics/juce_audio_basics.i"
+	@echo "... JUCE/modules/juce_audio_basics/juce_audio_basics.s"
+	@echo "... JUCE/modules/juce_audio_devices/juce_audio_devices.o"
+	@echo "... JUCE/modules/juce_audio_devices/juce_audio_devices.i"
+	@echo "... JUCE/modules/juce_audio_devices/juce_audio_devices.s"
+	@echo "... JUCE/modules/juce_audio_formats/juce_audio_formats.o"
+	@echo "... JUCE/modules/juce_audio_formats/juce_audio_formats.i"
+	@echo "... JUCE/modules/juce_audio_formats/juce_audio_formats.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.s"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.o"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.i"
+	@echo "... JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.s"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors.o"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors.i"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors.s"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors_ara.o"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors_ara.i"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors_ara.s"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.o"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.i"
+	@echo "... JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.s"
+	@echo "... JUCE/modules/juce_audio_utils/juce_audio_utils.o"
+	@echo "... JUCE/modules/juce_audio_utils/juce_audio_utils.i"
+	@echo "... JUCE/modules/juce_audio_utils/juce_audio_utils.s"
+	@echo "... JUCE/modules/juce_core/juce_core.o"
+	@echo "... JUCE/modules/juce_core/juce_core.i"
+	@echo "... JUCE/modules/juce_core/juce_core.s"
+	@echo "... JUCE/modules/juce_core/juce_core_CompilationTime.o"
+	@echo "... JUCE/modules/juce_core/juce_core_CompilationTime.i"
+	@echo "... JUCE/modules/juce_core/juce_core_CompilationTime.s"
+	@echo "... JUCE/modules/juce_data_structures/juce_data_structures.o"
+	@echo "... JUCE/modules/juce_data_structures/juce_data_structures.i"
+	@echo "... JUCE/modules/juce_data_structures/juce_data_structures.s"
+	@echo "... JUCE/modules/juce_dsp/juce_dsp.o"
+	@echo "... JUCE/modules/juce_dsp/juce_dsp.i"
+	@echo "... JUCE/modules/juce_dsp/juce_dsp.s"
+	@echo "... JUCE/modules/juce_events/juce_events.o"
+	@echo "... JUCE/modules/juce_events/juce_events.i"
+	@echo "... JUCE/modules/juce_events/juce_events.s"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics.o"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics.i"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics.s"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i"
+	@echo "... JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s"
+	@echo "... JUCE/modules/juce_gui_basics/juce_gui_basics.o"
+	@echo "... JUCE/modules/juce_gui_basics/juce_gui_basics.i"
+	@echo "... JUCE/modules/juce_gui_basics/juce_gui_basics.s"
+	@echo "... JUCE/modules/juce_gui_extra/juce_gui_extra.o"
+	@echo "... JUCE/modules/juce_gui_extra/juce_gui_extra.i"
+	@echo "... JUCE/modules/juce_gui_extra/juce_gui_extra.s"
 	@echo "... Source/PitchCorrectionEngine.o"
 	@echo "... Source/PitchCorrectionEngine.i"
 	@echo "... Source/PitchCorrectionEngine.s"
@@ -1143,93 +1230,6 @@ help:
 	@echo "... Tools/VST3Probe.o"
 	@echo "... Tools/VST3Probe.i"
 	@echo "... Tools/VST3Probe.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_basics/juce_audio_basics.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_devices/juce_audio_devices.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_formats/juce_audio_formats.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AAX_utils.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_ARA.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_1.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AU_2.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_AUv3.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_LV2.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Standalone.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_Unity.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST2.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_plugin_client/juce_audio_plugin_client_VST3.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_ara.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_processors/juce_audio_processors_lv2_libs.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_audio_utils/juce_audio_utils.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_core/juce_core.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_core/juce_core.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_core/juce_core.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_core/juce_core_CompilationTime.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_data_structures/juce_data_structures.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_dsp/juce_dsp.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_events/juce_events.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_events/juce_events.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_events/juce_events.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_gui_basics/juce_gui_basics.s"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.o"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.i"
-	@echo "... Users/kris/Dev/JUCE/modules/juce_gui_extra/juce_gui_extra.s"
 .PHONY : help
 
 
