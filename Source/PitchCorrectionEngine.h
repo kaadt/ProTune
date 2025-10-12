@@ -34,10 +34,11 @@ public:
 
     [[nodiscard]] float getLastDetectedFrequency() const noexcept { return lastDetectedFrequency; }
     [[nodiscard]] float getLastTargetFrequency() const noexcept { return lastTargetFrequency; }
+    [[nodiscard]] float getLastDetectionConfidence() const noexcept { return lastDetectionConfidence; }
 
 private:
     void analyseBlock (const float* samples, int numSamples);
-    float estimatePitchFromSpectrum();
+    float estimatePitchFromAutocorrelation (const float* frame, int frameSize, float& confidenceOut);
     float chooseTargetFrequency (float detectedFrequency);
     void updateAnalysisResources();
     [[nodiscard]] int getAnalysisFftSize() const noexcept { return 1 << analysisFftOrder; }
@@ -57,14 +58,15 @@ private:
 
     Parameters params;
 
-    std::unique_ptr<juce::dsp::FFT> analysisFft;
     juce::AudioBuffer<float> analysisBuffer;
     juce::AudioBuffer<float> windowedBuffer;
-    juce::HeapBlock<juce::dsp::Complex<float>> fftBuffer;
+    juce::AudioBuffer<float> analysisFrame;
+    juce::HeapBlock<float> autocorrelationBuffer;
     int analysisWritePosition = 0;
 
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;
+    float lastDetectionConfidence = 0.0f;
 
     float lastLoggedDetected = 0.0f;
     float lastLoggedTarget = 0.0f;

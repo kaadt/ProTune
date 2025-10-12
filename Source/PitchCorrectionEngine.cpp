@@ -55,6 +55,7 @@ void PitchCorrectionEngine::reset()
     detectionSmoother.setCurrentAndTargetValue (0.0f);
     lastDetectedFrequency = 0.0f;
     lastTargetFrequency = 0.0f;
+    lastDetectionConfidence = 0.0f;
     lastLoggedDetected = 0.0f;
     lastLoggedTarget = 0.0f;
     heldMidiNote = std::numeric_limits<float>::quiet_NaN();
@@ -192,9 +193,6 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
 
 void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
 {
-    if (analysisFft == nullptr)
-        return;
-
     auto fftSize = getAnalysisFftSize();
     auto* writePtr = analysisBuffer.getWritePointer (0);
 
@@ -204,94 +202,118 @@ void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
         analysisWritePosition = (analysisWritePosition + 1) % fftSize;
     }
 
-    juce::AudioBuffer<float> frame (1, fftSize);
-    auto* framePtr = frame.getWritePointer (0);
+    analysisFrame.setSize (1, fftSize, false, false, true);
+    auto* framePtr = analysisFrame.getWritePointer (0);
     for (int i = 0; i < fftSize; ++i)
     {
         auto index = (analysisWritePosition + i) % fftSize;
         framePtr[i] = writePtr[index] * windowedBuffer.getSample (0, i);
     }
 
-    auto* fftData = reinterpret_cast<float*> (fftBuffer.get());
-    juce::FloatVectorOperations::copy (fftData, framePtr, fftSize);
-    juce::FloatVectorOperations::clear (fftData + fftSize, fftSize);
+    float mean = 0.0f;
+    for (int i = 0; i < fftSize; ++i)
+        mean += framePtr[i];
+    mean /= (float) juce::jmax (fftSize, 1);
 
-    if (analysisFft != nullptr)
-        analysisFft->performRealOnlyForwardTransform (fftData);
+    for (int i = 0; i < fftSize; ++i)
+        framePtr[i] -= mean;
 
-    lastDetectedFrequency = estimatePitchFromSpectrum();
-    if (lastDetectedFrequency > 0.0f)
+    float confidence = 0.0f;
+    lastDetectedFrequency = estimatePitchFromAutocorrelation (framePtr, fftSize, confidence);
+    lastDetectionConfidence = confidence;
+
+    if (lastDetectedFrequency > 0.0f && confidence >= 0.15f)
         detectionSmoother.setTargetValue (lastDetectedFrequency);
+    else if (confidence < 0.05f)
+        detectionSmoother.setTargetValue (0.0f);
 }
 
-float PitchCorrectionEngine::estimatePitchFromSpectrum()
+float PitchCorrectionEngine::estimatePitchFromAutocorrelation (const float* frame, int frameSize, float& confidenceOut)
 {
-    auto* complexData = fftBuffer.get();
-    if (complexData == nullptr)
+    confidenceOut = 0.0f;
+
+    if (frame == nullptr || frameSize <= 0)
         return 0.0f;
 
-    auto* fftData = reinterpret_cast<float*> (complexData);
+    auto safeHigh = juce::jmax (params.rangeHighHz, 1.0f);
+    auto safeLow = juce::jmax (params.rangeLowHz, 1.0f);
 
-    auto fftSize = getAnalysisFftSize();
+    int minLag = (int) std::floor (currentSampleRate / safeHigh);
+    int maxLag = (int) std::ceil (currentSampleRate / safeLow);
 
-    int binLow = (int) std::floor (params.rangeLowHz * fftSize / currentSampleRate);
-    int binHigh = (int) std::ceil (params.rangeHighHz * fftSize / currentSampleRate);
-    binLow = juce::jlimit (1, fftSize / 2, binLow);
-    binHigh = juce::jlimit (binLow + 1, fftSize / 2, binHigh);
+    minLag = juce::jlimit (1, frameSize / 2 - 1, minLag);
+    maxLag = juce::jlimit (minLag + 1, frameSize / 2, maxLag);
 
-    float bestMagnitude = 0.0f;
-    int bestBin = binLow;
+    if (maxLag <= minLag)
+        return 0.0f;
 
-    for (int bin = binLow; bin < binHigh; ++bin)
+    if (autocorrelationBuffer.get() == nullptr)
+        return 0.0f;
+
+    double energy = 0.0;
+    for (int i = 0; i < frameSize; ++i)
+        energy += (double) frame[i] * (double) frame[i];
+
+    if (energy <= std::numeric_limits<double>::epsilon())
+        return 0.0f;
+
+    float bestCorrelation = 0.0f;
+    int bestLag = 0;
+
+    auto* correlationValues = autocorrelationBuffer.get();
+
+    for (int lag = minLag; lag <= maxLag; ++lag)
     {
-        auto real = fftData[bin * 2];
-        auto imag = fftData[bin * 2 + 1];
-        auto mag = real * real + imag * imag;
-        if (mag > bestMagnitude)
+        double sum = 0.0;
+        const int limit = frameSize - lag;
+        for (int i = 0; i < limit; ++i)
+            sum += (double) frame[i] * (double) frame[i + lag];
+
+        auto normalised = (float) (sum / energy);
+        correlationValues[lag] = normalised;
+
+        if (normalised > bestCorrelation)
         {
-            bestMagnitude = mag;
-            bestBin = bin;
+            bestCorrelation = normalised;
+            bestLag = lag;
         }
     }
 
-    if (bestMagnitude <= 0.0f)
+    if (bestLag <= 0 || bestCorrelation <= 0.0f)
         return 0.0f;
 
-    if (bestBin > 0 && bestBin < fftSize / 2 - 1)
-    {
-        auto magnitude = [fftData] (int binIndex)
-        {
-            auto real = fftData[binIndex * 2];
-            auto imag = fftData[binIndex * 2 + 1];
-            return juce::Decibels::gainToDecibels (juce::jmax (1.0e-6f, real * real + imag * imag));
-        };
+    confidenceOut = juce::jlimit (0.0f, 1.0f, bestCorrelation);
 
-        auto left = magnitude (bestBin - 1);
-        auto center = magnitude (bestBin);
-        auto right = magnitude (bestBin + 1);
-        auto denominator = left - 2.0f * center + right;
+    float refinedLag = (float) bestLag;
+
+    if (bestLag > minLag && bestLag < maxLag)
+    {
+        auto left = correlationValues[bestLag - 1];
+        auto center = correlationValues[bestLag];
+        auto right = correlationValues[bestLag + 1];
+        auto denominator = 2.0f * center - left - right;
         if (std::abs (denominator) > 1.0e-6f)
         {
-            auto delta = 0.5f * (left - right) / denominator;
-            bestBin += juce::jlimit (-1.0f, 1.0f, delta);
+            auto offset = 0.5f * (left - right) / denominator;
+            refinedLag += juce::jlimit (-1.0f, 1.0f, offset);
         }
     }
 
-    auto frequency = (bestBin * currentSampleRate) / (float) fftSize;
-    lastDetectedFrequency = frequency;
-    return frequency;
+    if (refinedLag <= 0.0f)
+        return 0.0f;
+
+    return currentSampleRate / refinedLag;
 }
 
 void PitchCorrectionEngine::updateAnalysisResources()
 {
     auto fftSize = getAnalysisFftSize();
 
-    analysisFft = std::make_unique<juce::dsp::FFT> (analysisFftOrder);
-
     analysisBuffer.setSize (1, fftSize);
     analysisBuffer.clear();
     windowedBuffer = createHannWindow (fftSize);
-    fftBuffer.allocate ((size_t) fftSize, true);
+    analysisFrame.setSize (1, fftSize);
+    autocorrelationBuffer.allocate ((size_t) fftSize, true);
     analysisWritePosition = 0;
 }
 
