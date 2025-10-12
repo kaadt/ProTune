@@ -133,7 +133,7 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     midiAttachment = std::make_unique<ButtonAttachment> (vts, "midiEnabled", midiButton);
     forceCorrectionAttachment = std::make_unique<ButtonAttachment> (vts, "forceCorrection", forceCorrectionButton);
 
-    setSize (820, 480);
+    setSize (820, 520);
     startTimerHz (30);
 }
 
@@ -232,15 +232,15 @@ void ProTuneAudioProcessorEditor::resized()
     auto secondRow = controlArea;
 
     auto firstColumnWidth = firstRow.getWidth() / 4;
-    speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    vibratoSlider.setBounds (firstRow.reduced (12));
+    speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
+    transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
+    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
+    vibratoSlider.setBounds (firstRow.reduced (12, 6));
 
     auto secondColumnWidth = secondRow.getWidth() / 3;
-    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12));
-    rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12));
-    rangeHighSlider.setBounds (secondRow.reduced (12));
+    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 6));
+    rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 6));
+    rangeHighSlider.setBounds (secondRow.reduced (12, 6));
 }
 
 void ProTuneAudioProcessorEditor::timerCallback()
