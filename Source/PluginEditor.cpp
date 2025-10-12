@@ -37,44 +37,15 @@ juce::String frequencyToNoteName (float frequency)
 ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor& p)
     : juce::AudioProcessorEditor (&p), processor (p)
 {
-    configureSlider (speedSlider, "Retune Speed");
-    configureSlider (transitionSlider, "Humanize");
+    configureSlider (speedSlider, "Speed");
+    configureSlider (transitionSlider, "Note Transition");
     configureSlider (toleranceSlider, "Tolerance");
     configureSlider (formantSlider, "Formant");
     configureSlider (vibratoSlider, "Vibrato");
-    configureSlider (rangeLowSlider, "Range Low", false);
-    configureSlider (rangeHighSlider, "Range High", false);
+    configureSlider (rangeLowSlider, "Low Hz");
+    configureSlider (rangeHighSlider, "High Hz");
 
-    toleranceSlider.setTextValueSuffix (" cents");
-    rangeLowSlider.setTextValueSuffix (" Hz");
-    rangeHighSlider.setTextValueSuffix (" Hz");
-
-    auto configureLabel = [] (juce::Label& label)
-    {
-        label.setJustificationType (juce::Justification::centredLeft);
-        label.setFont (makeFont (13.0f, juce::Font::bold));
-        label.setColour (juce::Label::textColourId, juce::Colours::lightgrey);
-    };
-
-    configureLabel (scaleLabel);
-    addAndMakeVisible (scaleLabel);
-    configureLabel (keyLabel);
-    addAndMakeVisible (keyLabel);
-
-    scaleSelector.addItemList ({ "Chromatic", "Major", "Minor" }, 1);
-    scaleSelector.setJustificationType (juce::Justification::centred);
-    scaleSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
-    scaleSelector.setColour (juce::ComboBox::backgroundColourId, juce::Colours::dimgrey.withAlpha (0.35f));
-    scaleSelector.setSelectedId (1);
-    addAndMakeVisible (scaleSelector);
-
-    keySelector.addItemList ({ "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" }, 1);
-    keySelector.setJustificationType (juce::Justification::centred);
-    keySelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
-    keySelector.setColour (juce::ComboBox::backgroundColourId, juce::Colours::dimgrey.withAlpha (0.35f));
-    keySelector.setSelectedId (1);
-    addAndMakeVisible (keySelector);
-
+    addAndMakeVisible (chromaticButton);
     addAndMakeVisible (midiButton);
     addAndMakeVisible (forceCorrectionButton);
 
@@ -125,13 +96,7 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
     auto background = juce::Colour::fromRGB (8, 12, 20);
     g.fillAll (background);
 
-    constexpr float headerHeight = 70.0f;
-    constexpr float margin = 24.0f;
-    constexpr float meterColumnWidth = 300.0f;
-    constexpr float meterSectionHeight = 280.0f;
-    constexpr float meterDiameter = 240.0f;
-
-    juce::Rectangle<float> header (0.0f, 0.0f, (float) getWidth(), headerHeight);
+    juce::Rectangle<float> header (0.0f, 0.0f, (float) getWidth(), 70.0f);
     juce::ColourGradient gradient (juce::Colour::fromRGB (6, 60, 120), header.getTopLeft(),
                                    juce::Colour::fromRGB (26, 30, 60), header.getBottomRight(), false);
     g.setGradientFill (gradient);
@@ -144,11 +109,9 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
     g.drawFittedText ("Auto pitch correction inspired by Hildebrandt", header.toNearestInt().reduced (16, 0),
                       juce::Justification::centredRight, 1);
 
-    auto content = getLocalBounds().toFloat().reduced (margin);
-    content.removeFromTop (headerHeight);
-
-    auto leftColumn = content.removeFromLeft (meterColumnWidth);
-    auto meterArea = leftColumn.removeFromTop (meterSectionHeight).withSizeKeepingCentre (meterDiameter, meterDiameter);
+    auto meterBounds = getLocalBounds().toFloat().reduced (24.0f);
+    meterBounds.removeFromTop (70.0f);
+    auto meterArea = meterBounds.removeFromTop (240.0f).withSizeKeepingCentre (240.0f, 240.0f);
 
     auto rimColour = juce::Colour::fromRGB (12, 24, 40);
     g.setColour (rimColour);
@@ -165,7 +128,7 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
         g.drawEllipse (meterArea.reduced (6.0f), confidenceWidth);
     }
 
-    if (displayedDetectedHz > 0.0f && displayedTargetHz > 0.0f && displayedConfidence > 0.05f)
+    if (displayedDetectedHz > 0.0f && displayedTargetHz > 0.0f)
     {
         auto deltaSemitones = 12.0f * std::log2 (displayedDetectedHz / displayedTargetHz);
         deltaSemitones = juce::jlimit (-2.0f, 2.0f, deltaSemitones);
@@ -192,61 +155,40 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
 
 void ProTuneAudioProcessorEditor::resized()
 {
-    constexpr int margin = 24;
-    constexpr int headerHeight = 70;
-    constexpr int meterColumnWidth = 300;
-    constexpr int meterSectionHeight = 280;
-    constexpr int meterDiameter = 240;
+    auto bounds = getLocalBounds().reduced (24);
+    bounds.removeFromTop (70);
 
-    auto bounds = getLocalBounds().reduced (margin);
-    bounds.removeFromTop (headerHeight);
-
-    auto leftColumn = bounds.removeFromLeft (meterColumnWidth);
-    auto meterSection = leftColumn.removeFromTop (meterSectionHeight);
-    auto meterArea = meterSection.withSizeKeepingCentre (meterDiameter, meterDiameter).toNearestInt();
+    auto meterStrip = bounds.removeFromTop (240);
+    auto meterArea = meterStrip.withSizeKeepingCentre (240, 240);
     auto innerArea = meterArea.reduced (70);
-    auto freqArea = innerArea.removeFromBottom (52);
+    auto freqArea = innerArea.removeFromBottom (48);
     centralNoteLabel.setBounds (innerArea);
     centralFreqLabel.setBounds (freqArea);
 
-    auto confidenceArea = leftColumn.removeFromTop (32);
-    confidenceLabel.setBounds (confidenceArea.reduced (4, 0));
+    auto confidenceArea = meterStrip.removeFromBottom (30);
+    confidenceLabel.setBounds (confidenceArea);
 
-    auto readouts = leftColumn;
-    auto detectedArea = readouts.removeFromTop (readouts.getHeight() / 2);
-    detectedLabel.setBounds (detectedArea.reduced (6));
-    targetLabel.setBounds (readouts.reduced (6));
+    auto readouts = bounds.removeFromTop (70);
+    detectedLabel.setBounds (readouts.removeFromLeft (readouts.getWidth() / 2).reduced (8));
+    targetLabel.setBounds (readouts.reduced (8));
 
-    auto controlColumn = bounds;
-
-    auto comboRow = controlColumn.removeFromTop (70);
-    auto keyArea = comboRow.removeFromLeft (comboRow.getWidth() / 2);
-    auto scaleArea = comboRow;
-
-    auto keyLabelArea = keyArea.removeFromTop (24);
-    keyLabel.setBounds (keyLabelArea);
-    keySelector.setBounds (keyArea.reduced (8, 0));
-
-    auto scaleLabelArea = scaleArea.removeFromTop (24);
-    scaleLabel.setBounds (scaleLabelArea);
-    scaleSelector.setBounds (scaleArea.reduced (8, 0));
-
-    auto toggleArea = controlColumn.removeFromBottom (110).reduced (8, 4);
+    auto controlArea = bounds;
+    auto toggleArea = controlArea.removeFromRight (200);
+    chromaticButton.setBounds (toggleArea.removeFromTop (36));
     midiButton.setBounds (toggleArea.removeFromTop (36));
     forceCorrectionButton.setBounds (toggleArea.removeFromTop (36));
 
-    auto knobArea = controlColumn;
-    auto firstRow = knobArea.removeFromTop (knobArea.getHeight() / 2);
-    auto secondRow = knobArea;
+    auto firstRow = controlArea.removeFromTop (controlArea.getHeight() / 2);
+    auto secondRow = controlArea;
 
     auto firstColumnWidth = firstRow.getWidth() / 4;
     speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
     transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    vibratoSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
-    formantSlider.setBounds (firstRow.reduced (12));
+    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12));
+    vibratoSlider.setBounds (firstRow.reduced (12));
 
     auto secondColumnWidth = secondRow.getWidth() / 3;
-    toleranceSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12));
+    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12));
     rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12));
     rangeHighSlider.setBounds (secondRow.reduced (12));
 }
@@ -277,10 +219,10 @@ void ProTuneAudioProcessorEditor::timerCallback()
     detectedLabel.setText ("Detected: " + detectedText, juce::dontSendNotification);
     targetLabel.setText ("Target: " + targetText, juce::dontSendNotification);
 
-    if (displayedTargetHz > 0.0f && displayedConfidence > 0.05f)
+    if (target > 0.0f)
     {
-        centralNoteLabel.setText (frequencyToNoteName (displayedTargetHz), juce::dontSendNotification);
-        centralFreqLabel.setText (juce::String (displayedTargetHz, 1) + " Hz", juce::dontSendNotification);
+        centralNoteLabel.setText (frequencyToNoteName (target), juce::dontSendNotification);
+        centralFreqLabel.setText (juce::String (target, 1) + " Hz", juce::dontSendNotification);
     }
     else
     {
@@ -288,7 +230,12 @@ void ProTuneAudioProcessorEditor::timerCallback()
         centralFreqLabel.setText ("-- Hz", juce::dontSendNotification);
     }
 
-    confidenceLabel.setText ("Confidence " + juce::String (displayedConfidence * 100.0f, 1) + "%", juce::dontSendNotification);
+    auto confidence = processor.getLastDetectionConfidence();
+    confidenceLabel.setText ("Confidence " + juce::String (confidence * 100.0f, 1) + "%", juce::dontSendNotification);
+
+    displayedDetectedHz = detected;
+    displayedTargetHz = target;
+    displayedConfidence = juce::jlimit (0.0f, 1.0f, confidence);
 
     repaint();
 }
