@@ -31,6 +31,7 @@ private:
     juce::ComboBox keySelector;
     juce::Label scaleLabel { {}, "Scale" };
     juce::Label keyLabel { {}, "Key" };
+    juce::ToggleButton chromaticButton { "Chromatic" };
     juce::ToggleButton midiButton { "MIDI Control" };
     juce::ToggleButton forceCorrectionButton { "Force Correction" };
 

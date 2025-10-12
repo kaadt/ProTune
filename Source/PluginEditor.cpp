@@ -208,8 +208,8 @@ void ProTuneAudioProcessorEditor::timerCallback()
     displayedDetectedHz = smooth (displayedDetectedHz, juce::jmax (0.0f, detected), smoothing);
     displayedTargetHz = smooth (displayedTargetHz, juce::jmax (0.0f, target), smoothing);
 
-    auto confidence = juce::jlimit (0.0f, 1.0f, processor.getLastDetectionConfidence());
-    displayedConfidence = smooth (displayedConfidence, confidence, smoothing);
+    auto limitedConfidence = juce::jlimit (0.0f, 1.0f, processor.getLastDetectionConfidence());
+    displayedConfidence = smooth (displayedConfidence, limitedConfidence, smoothing);
 
     auto detectedText = juce::String (displayedDetectedHz > 0.0f ? juce::String (displayedDetectedHz, 2) + " Hz" : "--")
                         + " (" + frequencyToNoteName (displayedDetectedHz) + ")";
@@ -230,12 +230,7 @@ void ProTuneAudioProcessorEditor::timerCallback()
         centralFreqLabel.setText ("-- Hz", juce::dontSendNotification);
     }
 
-    auto confidence = processor.getLastDetectionConfidence();
-    confidenceLabel.setText ("Confidence " + juce::String (confidence * 100.0f, 1) + "%", juce::dontSendNotification);
-
-    displayedDetectedHz = detected;
-    displayedTargetHz = target;
-    displayedConfidence = juce::jlimit (0.0f, 1.0f, confidence);
+    confidenceLabel.setText ("Confidence " + juce::String (limitedConfidence * 100.0f, 1) + "%", juce::dontSendNotification);
 
     repaint();
 }

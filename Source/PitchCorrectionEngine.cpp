@@ -78,8 +78,6 @@ void PitchCorrectionEngine::reset()
 
 void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 {
-    auto previousMode = params.scaleMode;
-    auto previousRoot = params.scaleRoot;
     params = newParams;
 
     baseRatioGlideTime = juce::jmap (params.speed, 0.0f, 1.0f, 0.005f, 0.3f);
@@ -521,7 +519,7 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
     auto rawMidi = frequencyToMidiNote (detectedFrequency);
     const bool usingMidi = params.midiEnabled && ! std::isnan (heldMidiNote);
 
-    auto candidateMidi = usingMidi ? heldMidiNote : snapNoteToScale (rawMidi, params.chromaticScale);
+    auto candidateMidi = usingMidi ? heldMidiNote : snapNoteToScale (rawMidi, params.scaleRoot, params.scaleMode);
     candidateMidi = clampMidiToRange (candidateMidi);
 
     if (usingMidi)
@@ -589,65 +587,6 @@ float PitchCorrectionEngine::snapNoteToScale (float midiNote, int rootNote, Para
     return octave * 12.0f + (float) root + bestInterval;
 }
 
-float PitchCorrectionEngine::computeDynamicRatioTime (float detectedFrequency, float targetFrequency) const
-{
-    auto time = baseRatioGlideTime;
-    if (detectedFrequency <= 0.0f || targetFrequency <= 0.0f)
-        return juce::jlimit (0.001f, 0.35f, time);
-
-    auto detectedMidi = frequencyToMidiNote (detectedFrequency);
-    auto targetMidi = frequencyToMidiNote (targetFrequency);
-    auto semitoneDelta = std::abs (targetMidi - detectedMidi);
-
-    auto vibratoFactor = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 1.35f, 0.6f);
-    auto distanceFactor = juce::jmap (juce::jlimit (0.0f, 4.0f, semitoneDelta), 0.0f, 4.0f, 1.4f, 0.35f);
-    auto combined = juce::jlimit (0.3f, 1.6f, vibratoFactor * distanceFactor);
-
-    return juce::jlimit (0.001f, 0.35f, time * combined);
-}
-
-float PitchCorrectionEngine::computeDynamicTransitionTime (float detectedFrequency, float targetFrequency) const
-{
-    juce::ignoreUnused (detectedFrequency);
-
-    auto time = baseTargetTransitionTime;
-    if (targetFrequency <= 0.0f)
-        return juce::jlimit (0.001f, 0.4f, time);
-
-    auto previousTarget = lastTargetFrequency > 0.0f ? lastTargetFrequency : targetFrequency;
-    auto semitoneJump = std::abs (frequencyToMidiNote (targetFrequency) - frequencyToMidiNote (previousTarget));
-
-    auto distanceFactor = juce::jmap (juce::jlimit (0.0f, 7.0f, semitoneJump), 0.0f, 7.0f, 1.3f, 0.4f);
-    return juce::jlimit (0.001f, 0.4f, time * juce::jlimit (0.35f, 1.5f, distanceFactor));
-}
-
-float PitchCorrectionEngine::applyTargetHysteresis (float candidateMidi, float rawMidi)
-{
-    auto hysteresis = juce::jmap (params.transition, 0.0f, 1.0f, 0.05f, 0.45f);
-
-    if (std::isnan (activeTargetMidi))
-    {
-        activeTargetMidi = candidateMidi;
-        return activeTargetMidi;
-    }
-
-    auto deltaFromActive = std::abs (rawMidi - activeTargetMidi);
-    if (deltaFromActive < hysteresis)
-        return activeTargetMidi;
-
-    activeTargetMidi = candidateMidi;
-    return activeTargetMidi;
-}
-
-float PitchCorrectionEngine::clampMidiToRange (float midi) const noexcept
-{
-    return juce::jlimit (frequencyToMidiNote (params.rangeLowHz), frequencyToMidiNote (params.rangeHighHz), midi);
-}
-
-float PitchCorrectionEngine::minimumConfidenceForLock() const noexcept
-{
-    return juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 0.18f, 0.06f);
-}
 
 float PitchCorrectionEngine::computeDynamicRatioTime (float detectedFrequency, float targetFrequency) const
 {
