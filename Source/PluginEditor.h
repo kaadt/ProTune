@@ -29,6 +29,8 @@ private:
 
     juce::ComboBox scaleSelector;
     juce::ComboBox keySelector;
+    juce::Label retuneLabel { {}, "Retune Speed" };
+    juce::Label humanizeLabel { {}, "Humanize" };
     juce::Label scaleLabel { {}, "Scale" };
     juce::Label keyLabel { {}, "Key" };
     juce::ToggleButton chromaticButton { "Chromatic" };
