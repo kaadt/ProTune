@@ -46,6 +46,8 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     configureSlider (rangeHighSlider, "High Hz");
 
     addAndMakeVisible (chromaticButton);
+    chromaticButton.setClickingTogglesState (true);
+    chromaticButton.setTooltip ("Lock correction to the chromatic scale");
     addAndMakeVisible (midiButton);
     addAndMakeVisible (forceCorrectionButton);
 
@@ -95,6 +97,41 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     keySelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
     keySelector.setTooltip ("Choose the key signature root note");
 
+    scaleSelector.onChange = [this]
+    {
+        if (isUpdatingScaleControls)
+            return;
+
+        juce::ScopedValueSetter<bool> guard (isUpdatingScaleControls, true);
+        auto selectedId = scaleSelector.getSelectedId();
+
+        if (selectedId > 1)
+            lastNonChromaticScaleId = selectedId;
+
+        auto isChromatic = selectedId == 1;
+        chromaticButton.setToggleState (isChromatic, juce::dontSendNotification);
+        scaleSelector.setEnabled (! isChromatic);
+        keySelector.setEnabled (! isChromatic);
+    };
+
+    chromaticButton.onClick = [this]
+    {
+        if (isUpdatingScaleControls)
+            return;
+
+        if (chromaticButton.getToggleState())
+        {
+            if (scaleSelector.getSelectedId() > 1)
+                lastNonChromaticScaleId = scaleSelector.getSelectedId();
+
+            scaleSelector.setSelectedId (1, juce::sendNotificationSync);
+        }
+        else
+        {
+            scaleSelector.setSelectedId (lastNonChromaticScaleId, juce::sendNotificationSync);
+        }
+    };
+
     detectedLabel.setJustificationType (juce::Justification::centred);
     detectedLabel.setFont (makeFont (16.0f, juce::Font::bold));
     addAndMakeVisible (detectedLabel);
@@ -132,6 +169,8 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     keyAttachment = std::make_unique<ComboBoxAttachment> (vts, "scaleRoot", keySelector);
     midiAttachment = std::make_unique<ButtonAttachment> (vts, "midiEnabled", midiButton);
     forceCorrectionAttachment = std::make_unique<ButtonAttachment> (vts, "forceCorrection", forceCorrectionButton);
+
+    scaleSelector.onChange();
 
     setSize (820, 520);
     startTimerHz (30);
