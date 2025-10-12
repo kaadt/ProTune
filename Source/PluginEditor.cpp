@@ -224,20 +224,11 @@ void ProTuneAudioProcessorEditor::resized()
     midiButton.setBounds (toggleArea.removeFromTop (36));
     forceCorrectionButton.setBounds (toggleArea.removeFromTop (36));
 
-    juce::FlexBox selectorBox;
-    selectorBox.flexDirection = juce::FlexBox::Direction::column;
-    selectorBox.justifyContent = juce::FlexBox::JustifyContent::flexStart;
-    selectorBox.alignContent = juce::FlexBox::AlignContent::stretch;
+    auto selectorHeight = 44;
+    scaleSelector.setBounds (toggleArea.removeFromTop (selectorHeight).reduced (0, 6));
+    keySelector.setBounds (toggleArea.removeFromTop (selectorHeight).reduced (0, 6));
 
-    auto comboMargin = juce::FlexItem::Margin (6.0f, 0.0f, 6.0f, 0.0f);
-    selectorBox.items.add (juce::FlexItem (scaleSelector).withMinHeight (40.0f).withFlex (1.0f).withMargin (comboMargin));
-    selectorBox.items.add (juce::FlexItem (keySelector).withMinHeight (40.0f).withFlex (1.0f).withMargin (comboMargin));
-
-    auto comboArea = toggleArea.toFloat();
-    selectorBox.performLayout (comboArea);
-
-    auto firstRowHeight = juce::jmin (juce::roundToInt (juce::jmax (72.0f, controlArea.getHeight() / 2.0f)), controlArea.getHeight());
-    auto firstRow = controlArea.removeFromTop (firstRowHeight);
+    auto firstRow = controlArea.removeFromTop (controlArea.getHeight() / 2);
     auto secondRow = controlArea;
 
     auto firstColumnWidth = firstRow.getWidth() / 4;
