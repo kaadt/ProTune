@@ -29,6 +29,7 @@ private:
 
     juce::ToggleButton chromaticButton { "Chromatic" };
     juce::ToggleButton midiButton { "MIDI Control" };
+    juce::ToggleButton forceCorrectionButton { "Force Correction" };
 
     juce::Label detectedLabel { {}, "Detected" };
     juce::Label targetLabel { {}, "Target" };
@@ -46,6 +47,7 @@ private:
 
     std::unique_ptr<ButtonAttachment> chromaticAttachment;
     std::unique_ptr<ButtonAttachment> midiAttachment;
+    std::unique_ptr<ButtonAttachment> forceCorrectionAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProTuneAudioProcessorEditor)
 };

@@ -47,6 +47,7 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
 
     addAndMakeVisible (chromaticButton);
     addAndMakeVisible (midiButton);
+    addAndMakeVisible (forceCorrectionButton);
 
     detectedLabel.setJustificationType (juce::Justification::centred);
     detectedLabel.setFont (makeFont (16.0f, juce::Font::bold));
@@ -68,6 +69,7 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
 
     chromaticAttachment = std::make_unique<ButtonAttachment> (vts, "chromatic", chromaticButton);
     midiAttachment = std::make_unique<ButtonAttachment> (vts, "midiEnabled", midiButton);
+    forceCorrectionAttachment = std::make_unique<ButtonAttachment> (vts, "forceCorrection", forceCorrectionButton);
 
     setSize (680, 360);
     startTimerHz (30);
@@ -112,9 +114,10 @@ void ProTuneAudioProcessorEditor::resized()
     vibratoSlider.setBounds (controlArea.reduced (10));
 
     auto bottomArea = bounds;
-    auto toggleArea = bottomArea.removeFromRight (200);
+    auto toggleArea = bottomArea.removeFromRight (220);
     chromaticButton.setBounds (toggleArea.removeFromTop (30));
     midiButton.setBounds (toggleArea.removeFromTop (30));
+    forceCorrectionButton.setBounds (toggleArea.removeFromTop (30));
 
     auto rangeArea = bottomArea;
     rangeLowSlider.setBounds (rangeArea.removeFromLeft (rangeArea.getWidth() / 2).reduced (10));
