@@ -71,3 +71,17 @@ target_link_libraries(VST3Probe PRIVATE
     juce::juce_audio_utils
     juce::juce_core
 )
+
+add_executable(EngineSmokeTest
+    Tools/EngineSmokeTest.cpp
+    Source/PitchCorrectionEngine.cpp
+)
+
+target_link_libraries(EngineSmokeTest PRIVATE
+    juce::juce_core
+    juce::juce_audio_basics
+    juce::juce_graphics
+    juce::juce_dsp
+)
+
+target_compile_definitions(EngineSmokeTest PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)
