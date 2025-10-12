@@ -54,6 +54,9 @@ private:
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;
 
+    float lastLoggedDetected = 0.0f;
+    float lastLoggedTarget = 0.0f;
+
     juce::SmoothedValue<float> ratioSmoother;
     juce::SmoothedValue<float> pitchSmoother;
 

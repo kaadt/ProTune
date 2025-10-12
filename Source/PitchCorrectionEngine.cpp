@@ -61,6 +61,8 @@ void PitchCorrectionEngine::reset()
     detectionSmoother.setCurrentAndTargetValue (0.0f);
     lastDetectedFrequency = 0.0f;
     lastTargetFrequency = 0.0f;
+    lastLoggedDetected = 0.0f;
+    lastLoggedTarget = 0.0f;
     heldMidiNote = std::numeric_limits<float>::quiet_NaN();
     dryBuffer.clear();
 
@@ -139,6 +141,31 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
         pitchChannels[(size_t) ch].processSamples (buffer.getWritePointer (ch), numSamples, ratioValues.get(), pitchFft);
 
     lastTargetFrequency = finalTarget;
+
+    if (detected > 0.0f && finalTarget > 0.0f)
+    {
+        auto differenceDetected = std::abs (detected - lastLoggedDetected);
+        auto differenceTarget = std::abs (finalTarget - lastLoggedTarget);
+        constexpr float logThreshold = 0.5f; // Hz change before printing again
+
+        if (differenceDetected >= logThreshold || differenceTarget >= logThreshold)
+        {
+            juce::String message ("PitchCorrectionEngine: detected "
+                                  + juce::String (detected, 2) + " Hz -> target "
+                                  + juce::String (finalTarget, 2) + " Hz");
+
+            if (params.midiEnabled && ! std::isnan (heldMidiNote))
+            {
+                auto forcedFrequency = midiNoteToFrequency (heldMidiNote);
+                message += " (MIDI override " + juce::String (forcedFrequency, 2) + " Hz)";
+            }
+
+            DBG (message);
+
+            lastLoggedDetected = detected;
+            lastLoggedTarget = finalTarget;
+        }
+    }
 
     if (params.formantPreserve > 0.0f)
     {
@@ -424,12 +451,16 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
                                          frequencyToMidiNote (params.rangeHighHz),
                                          targetMidi);
 
-    auto toleranceSemitones = params.toleranceCents / 100.0f;
-    if (toleranceSemitones > 0.0f)
+    constexpr bool bypassToleranceForDebugging = true;
+    if (! bypassToleranceForDebugging)
     {
-        auto deltaSemitones = constrainedMidi - rawMidi;
-        auto correctionMix = juce::jlimit (0.0f, 1.0f, std::abs (deltaSemitones) / toleranceSemitones);
-        constrainedMidi = rawMidi + deltaSemitones * correctionMix;
+        auto toleranceSemitones = params.toleranceCents / 100.0f;
+        if (toleranceSemitones > 0.0f)
+        {
+            auto deltaSemitones = constrainedMidi - rawMidi;
+            auto correctionMix = juce::jlimit (0.0f, 1.0f, std::abs (deltaSemitones) / toleranceSemitones);
+            constrainedMidi = rawMidi + deltaSemitones * correctionMix;
+        }
     }
 
     return midiNoteToFrequency (constrainedMidi);
