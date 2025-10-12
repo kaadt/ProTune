@@ -16,9 +16,6 @@ build/
 *~
 .DS_Store
 
-# JUCE framework (should be installed separately or as a git submodule)
-JUCE/
-
 # Projucer generated files
 Builds/
 JuceLibraryCode/
