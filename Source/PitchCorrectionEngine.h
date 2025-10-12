@@ -1,6 +1,9 @@
 #pragma once
 
-#include <JuceHeader.h>
+#include <juce_core/juce_core.h>
+#include <juce_audio_basics/juce_audio_basics.h>
+#include <juce_audio_processors/juce_audio_processors.h>
+#include <juce_dsp/juce_dsp.h>
 #include <limits>
 #include <memory>
 #include <vector>
@@ -13,7 +16,7 @@ public:
         float speed = 0.85f;
         float transition = 0.2f;
         float toleranceCents = 2.0f;
-        float formantPreserve = 0.5f;
+        float formantPreserve = 0.0f;
         float vibratoTracking = 0.5f;
         float rangeLowHz = 80.0f;
         float rangeHighHz = 1000.0f;

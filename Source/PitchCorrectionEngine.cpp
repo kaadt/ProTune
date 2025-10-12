@@ -175,8 +175,12 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
 
     if (params.formantPreserve > 0.0f)
     {
-        auto dryMix = juce::jlimit (0.0f, 1.0f, params.formantPreserve);
-        auto wetMix = 1.0f - dryMix;
+        auto dryAmount = juce::jlimit (0.0f, 1.0f, params.formantPreserve);
+
+        // Equal-power crossfade keeps the perceived loudness stable while
+        // allowing the user to re-introduce the dry timbre.
+        auto wetGain = std::sqrt (juce::jlimit (0.0f, 1.0f, 1.0f - dryAmount));
+        auto dryGain = std::sqrt (dryAmount);
 
         for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
         {
@@ -184,7 +188,7 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
             auto* dry = dryBuffer.getReadPointer (ch);
             for (int i = 0; i < numSamples; ++i)
             {
-                auto mixed = wetMix * data[i] + dryMix * dry[i];
+                auto mixed = wetGain * data[i] + dryGain * dry[i];
                 data[i] = juce::jlimit (-1.0f, 1.0f, mixed);
             }
         }
@@ -402,12 +406,13 @@ void PitchCorrectionEngine::PitchShiftChannel::processSamples (float* samples, i
             ratioSampleCount = 0;
 
             inFifoIndex = frameSize - hopSize;
-            outFifoIndex = frameSize - hopSize;
+            const int tailStart = frameSize - hopSize;
 
             std::memmove (inFifo.get(), inFifo.get() + hopSize, sizeof (float) * (size_t) inFifoIndex);
-            std::memmove (outFifo.get(), outFifo.get() + hopSize, sizeof (float) * (size_t) outFifoIndex);
-            std::fill (inFifo.get() + inFifoIndex, inFifo.get() + frameSize, 0.0f);
-            std::fill (outFifo.get() + outFifoIndex, outFifo.get() + frameSize, 0.0f);
+            std::memmove (outFifo.get(), outFifo.get() + hopSize, sizeof (float) * (size_t) tailStart);
+            std::fill (inFifo.get() + tailStart, inFifo.get() + frameSize, 0.0f);
+            std::fill (outFifo.get() + tailStart, outFifo.get() + frameSize, 0.0f);
+            outFifoIndex = 0;
         }
     }
 }
@@ -478,11 +483,11 @@ void PitchCorrectionEngine::PitchShiftChannel::processFrame (float ratio, juce::
 
     fft.performRealOnlyInverseTransform (fftData);
 
-    const float normalisation = 1.0f / (float) frameSize;
-    const float gain = 2.0f / (float) oversampling;
+    const float gain = (float) oversampling * (2.0f / 3.0f);
 
     for (int i = 0; i < frameSize; ++i)
-        outFifo[i] += fftData[2 * i] * normalisation * gain * window[i];
+        outFifo[i] += fftData[2 * i] * gain * window[i];
+
 }
 
 float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)

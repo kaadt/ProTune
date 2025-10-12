@@ -121,7 +121,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ProTuneAudioProcessor::creat
         juce::NormalisableRange<float> (0.0f, 100.0f, 0.1f, 0.5f), 2.0f));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("formant", "Formant Preserve",
-        juce::NormalisableRange<float> (0.0f, 1.0f, 0.0f, 1.0f), 0.5f));
+        juce::NormalisableRange<float> (0.0f, 1.0f, 0.0f, 1.0f), 0.0f));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("vibrato", "Vibrato Tracking",
         juce::NormalisableRange<float> (0.0f, 1.0f, 0.0f, 1.0f), 0.5f));
