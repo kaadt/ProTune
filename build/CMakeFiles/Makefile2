@@ -68,6 +68,7 @@ all: CMakeFiles/ProTune_Standalone.dir/all
 all: CMakeFiles/ProTune_VST3.dir/all
 all: CMakeFiles/ProTune_vst3_helper.dir/all
 all: CMakeFiles/VST3Probe.dir/all
+all: CMakeFiles/EngineSmokeTest.dir/all
 all: juce/all
 .PHONY : all
 
@@ -77,6 +78,7 @@ codegen: CMakeFiles/ProTune_Standalone.dir/codegen
 codegen: CMakeFiles/ProTune_VST3.dir/codegen
 codegen: CMakeFiles/ProTune_vst3_helper.dir/codegen
 codegen: CMakeFiles/VST3Probe.dir/codegen
+codegen: CMakeFiles/EngineSmokeTest.dir/codegen
 codegen: juce/codegen
 .PHONY : codegen
 
@@ -91,6 +93,7 @@ clean: CMakeFiles/ProTune_Standalone.dir/clean
 clean: CMakeFiles/ProTune_VST3.dir/clean
 clean: CMakeFiles/ProTune_vst3_helper.dir/clean
 clean: CMakeFiles/VST3Probe.dir/clean
+clean: CMakeFiles/EngineSmokeTest.dir/clean
 clean: juce/clean
 .PHONY : clean
 
@@ -181,7 +184,7 @@ juce/modules/clean:
 CMakeFiles/ProTune.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 "Built target ProTune"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34 "Built target ProTune"
 .PHONY : CMakeFiles/ProTune.dir/all
 
 # Build rule for subdir invocation for target.
@@ -198,7 +201,7 @@ ProTune: CMakeFiles/ProTune.dir/rule
 # codegen rule for target.
 CMakeFiles/ProTune.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 "Finished codegen for target ProTune"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34 "Finished codegen for target ProTune"
 .PHONY : CMakeFiles/ProTune.dir/codegen
 
 # clean rule for target.
@@ -247,7 +250,7 @@ CMakeFiles/ProTune_All.dir/clean:
 CMakeFiles/ProTune_Standalone.dir/all: CMakeFiles/ProTune.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33,34,35 "Built target ProTune_Standalone"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=35,36,37,38,39,40,41,42,43,44,45,46,47 "Built target ProTune_Standalone"
 .PHONY : CMakeFiles/ProTune_Standalone.dir/all
 
 # Build rule for subdir invocation for target.
@@ -264,7 +267,7 @@ ProTune_Standalone: CMakeFiles/ProTune_Standalone.dir/rule
 # codegen rule for target.
 CMakeFiles/ProTune_Standalone.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_Standalone.dir/build.make CMakeFiles/ProTune_Standalone.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=23,24,25,26,27,28,29,30,31,32,33,34,35 "Finished codegen for target ProTune_Standalone"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=35,36,37,38,39,40,41,42,43,44,45,46,47 "Finished codegen for target ProTune_Standalone"
 .PHONY : CMakeFiles/ProTune_Standalone.dir/codegen
 
 # clean rule for target.
@@ -280,7 +283,7 @@ CMakeFiles/ProTune_VST3.dir/all: CMakeFiles/ProTune.dir/all
 CMakeFiles/ProTune_VST3.dir/all: CMakeFiles/ProTune_vst3_helper.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=36,37,38,39,40,41,42,43,44,45,46,47,48 "Built target ProTune_VST3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=48,49,50,51,52,53,54,55,56,57,58,59,60 "Built target ProTune_VST3"
 .PHONY : CMakeFiles/ProTune_VST3.dir/all
 
 # Build rule for subdir invocation for target.
@@ -297,7 +300,7 @@ ProTune_VST3: CMakeFiles/ProTune_VST3.dir/rule
 # codegen rule for target.
 CMakeFiles/ProTune_VST3.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_VST3.dir/build.make CMakeFiles/ProTune_VST3.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=36,37,38,39,40,41,42,43,44,45,46,47,48 "Finished codegen for target ProTune_VST3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=48,49,50,51,52,53,54,55,56,57,58,59,60 "Finished codegen for target ProTune_VST3"
 .PHONY : CMakeFiles/ProTune_VST3.dir/codegen
 
 # clean rule for target.
@@ -312,7 +315,7 @@ CMakeFiles/ProTune_VST3.dir/clean:
 CMakeFiles/ProTune_vst3_helper.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=49,50 "Built target ProTune_vst3_helper"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=61,62 "Built target ProTune_vst3_helper"
 .PHONY : CMakeFiles/ProTune_vst3_helper.dir/all
 
 # Build rule for subdir invocation for target.
@@ -329,7 +332,7 @@ ProTune_vst3_helper: CMakeFiles/ProTune_vst3_helper.dir/rule
 # codegen rule for target.
 CMakeFiles/ProTune_vst3_helper.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune_vst3_helper.dir/build.make CMakeFiles/ProTune_vst3_helper.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=49,50 "Finished codegen for target ProTune_vst3_helper"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=61,62 "Finished codegen for target ProTune_vst3_helper"
 .PHONY : CMakeFiles/ProTune_vst3_helper.dir/codegen
 
 # clean rule for target.
@@ -344,7 +347,7 @@ CMakeFiles/ProTune_vst3_helper.dir/clean:
 CMakeFiles/VST3Probe.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68 "Built target VST3Probe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80 "Built target VST3Probe"
 .PHONY : CMakeFiles/VST3Probe.dir/all
 
 # Build rule for subdir invocation for target.
@@ -361,13 +364,45 @@ VST3Probe: CMakeFiles/VST3Probe.dir/rule
 # codegen rule for target.
 CMakeFiles/VST3Probe.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68 "Finished codegen for target VST3Probe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80 "Finished codegen for target VST3Probe"
 .PHONY : CMakeFiles/VST3Probe.dir/codegen
 
 # clean rule for target.
 CMakeFiles/VST3Probe.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/clean
 .PHONY : CMakeFiles/VST3Probe.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/EngineSmokeTest.dir
+
+# All Build rule for target.
+CMakeFiles/EngineSmokeTest.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target EngineSmokeTest"
+.PHONY : CMakeFiles/EngineSmokeTest.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/EngineSmokeTest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kris/Dev/ProTune/build/CMakeFiles 12
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/EngineSmokeTest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/kris/Dev/ProTune/build/CMakeFiles 0
+.PHONY : CMakeFiles/EngineSmokeTest.dir/rule
+
+# Convenience name for target.
+EngineSmokeTest: CMakeFiles/EngineSmokeTest.dir/rule
+.PHONY : EngineSmokeTest
+
+# codegen rule for target.
+CMakeFiles/EngineSmokeTest.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/kris/Dev/ProTune/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Finished codegen for target EngineSmokeTest"
+.PHONY : CMakeFiles/EngineSmokeTest.dir/codegen
+
+# clean rule for target.
+CMakeFiles/EngineSmokeTest.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/clean
+.PHONY : CMakeFiles/EngineSmokeTest.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

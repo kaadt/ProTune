@@ -240,6 +240,19 @@ VST3Probe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/build
 .PHONY : VST3Probe/fast
 
+#=============================================================================
+# Target rules for targets named EngineSmokeTest
+
+# Build rule for target.
+EngineSmokeTest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 EngineSmokeTest
+.PHONY : EngineSmokeTest
+
+# fast build rule for target.
+EngineSmokeTest/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/build
+.PHONY : EngineSmokeTest/fast
+
 JUCE/modules/juce_audio_basics/juce_audio_basics.o: JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
 .PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.o
 
@@ -247,6 +260,7 @@ JUCE/modules/juce_audio_basics/juce_audio_basics.o: JUCE/modules/juce_audio_basi
 JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
 .PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.mm.o
 
 JUCE/modules/juce_audio_basics/juce_audio_basics.i: JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
@@ -256,6 +270,7 @@ JUCE/modules/juce_audio_basics/juce_audio_basics.i: JUCE/modules/juce_audio_basi
 JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
 .PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.mm.i
 
 JUCE/modules/juce_audio_basics/juce_audio_basics.s: JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
@@ -265,6 +280,7 @@ JUCE/modules/juce_audio_basics/juce_audio_basics.s: JUCE/modules/juce_audio_basi
 JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
 .PHONY : JUCE/modules/juce_audio_basics/juce_audio_basics.mm.s
 
 JUCE/modules/juce_audio_devices/juce_audio_devices.o: JUCE/modules/juce_audio_devices/juce_audio_devices.mm.o
@@ -301,6 +317,7 @@ JUCE/modules/juce_audio_formats/juce_audio_formats.o: JUCE/modules/juce_audio_fo
 JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
 .PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.mm.o
 
 JUCE/modules/juce_audio_formats/juce_audio_formats.i: JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
@@ -310,6 +327,7 @@ JUCE/modules/juce_audio_formats/juce_audio_formats.i: JUCE/modules/juce_audio_fo
 JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
 .PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.mm.i
 
 JUCE/modules/juce_audio_formats/juce_audio_formats.s: JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
@@ -319,6 +337,7 @@ JUCE/modules/juce_audio_formats/juce_audio_formats.s: JUCE/modules/juce_audio_fo
 JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
 .PHONY : JUCE/modules/juce_audio_formats/juce_audio_formats.mm.s
 
 JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.o: JUCE/modules/juce_audio_plugin_client/VST3/juce_VST3ManifestHelper.mm.o
@@ -757,6 +776,7 @@ JUCE/modules/juce_core/juce_core.o: JUCE/modules/juce_core/juce_core.mm.o
 JUCE/modules/juce_core/juce_core.mm.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_core/juce_core.mm.o
 .PHONY : JUCE/modules/juce_core/juce_core.mm.o
 
 JUCE/modules/juce_core/juce_core.i: JUCE/modules/juce_core/juce_core.mm.i
@@ -766,6 +786,7 @@ JUCE/modules/juce_core/juce_core.i: JUCE/modules/juce_core/juce_core.mm.i
 JUCE/modules/juce_core/juce_core.mm.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_core/juce_core.mm.i
 .PHONY : JUCE/modules/juce_core/juce_core.mm.i
 
 JUCE/modules/juce_core/juce_core.s: JUCE/modules/juce_core/juce_core.mm.s
@@ -775,6 +796,7 @@ JUCE/modules/juce_core/juce_core.s: JUCE/modules/juce_core/juce_core.mm.s
 JUCE/modules/juce_core/juce_core.mm.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core.mm.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_core/juce_core.mm.s
 .PHONY : JUCE/modules/juce_core/juce_core.mm.s
 
 JUCE/modules/juce_core/juce_core_CompilationTime.o: JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
@@ -784,6 +806,7 @@ JUCE/modules/juce_core/juce_core_CompilationTime.o: JUCE/modules/juce_core/juce_
 JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
 .PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.cpp.o
 
 JUCE/modules/juce_core/juce_core_CompilationTime.i: JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
@@ -793,6 +816,7 @@ JUCE/modules/juce_core/juce_core_CompilationTime.i: JUCE/modules/juce_core/juce_
 JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
 .PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.cpp.i
 
 JUCE/modules/juce_core/juce_core_CompilationTime.s: JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
@@ -802,6 +826,7 @@ JUCE/modules/juce_core/juce_core_CompilationTime.s: JUCE/modules/juce_core/juce_
 JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
 .PHONY : JUCE/modules/juce_core/juce_core_CompilationTime.cpp.s
 
 JUCE/modules/juce_data_structures/juce_data_structures.o: JUCE/modules/juce_data_structures/juce_data_structures.mm.o
@@ -837,6 +862,7 @@ JUCE/modules/juce_dsp/juce_dsp.o: JUCE/modules/juce_dsp/juce_dsp.mm.o
 # target to build an object file
 JUCE/modules/juce_dsp/juce_dsp.mm.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_dsp/juce_dsp.mm.o
 .PHONY : JUCE/modules/juce_dsp/juce_dsp.mm.o
 
 JUCE/modules/juce_dsp/juce_dsp.i: JUCE/modules/juce_dsp/juce_dsp.mm.i
@@ -845,6 +871,7 @@ JUCE/modules/juce_dsp/juce_dsp.i: JUCE/modules/juce_dsp/juce_dsp.mm.i
 # target to preprocess a source file
 JUCE/modules/juce_dsp/juce_dsp.mm.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_dsp/juce_dsp.mm.i
 .PHONY : JUCE/modules/juce_dsp/juce_dsp.mm.i
 
 JUCE/modules/juce_dsp/juce_dsp.s: JUCE/modules/juce_dsp/juce_dsp.mm.s
@@ -853,6 +880,7 @@ JUCE/modules/juce_dsp/juce_dsp.s: JUCE/modules/juce_dsp/juce_dsp.mm.s
 # target to generate assembly for a file
 JUCE/modules/juce_dsp/juce_dsp.mm.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_dsp/juce_dsp.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_dsp/juce_dsp.mm.s
 .PHONY : JUCE/modules/juce_dsp/juce_dsp.mm.s
 
 JUCE/modules/juce_events/juce_events.o: JUCE/modules/juce_events/juce_events.mm.o
@@ -862,6 +890,7 @@ JUCE/modules/juce_events/juce_events.o: JUCE/modules/juce_events/juce_events.mm.
 JUCE/modules/juce_events/juce_events.mm.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_events/juce_events.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_events/juce_events.mm.o
 .PHONY : JUCE/modules/juce_events/juce_events.mm.o
 
 JUCE/modules/juce_events/juce_events.i: JUCE/modules/juce_events/juce_events.mm.i
@@ -871,6 +900,7 @@ JUCE/modules/juce_events/juce_events.i: JUCE/modules/juce_events/juce_events.mm.
 JUCE/modules/juce_events/juce_events.mm.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_events/juce_events.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_events/juce_events.mm.i
 .PHONY : JUCE/modules/juce_events/juce_events.mm.i
 
 JUCE/modules/juce_events/juce_events.s: JUCE/modules/juce_events/juce_events.mm.s
@@ -880,6 +910,7 @@ JUCE/modules/juce_events/juce_events.s: JUCE/modules/juce_events/juce_events.mm.
 JUCE/modules/juce_events/juce_events.mm.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_events/juce_events.mm.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_events/juce_events.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_events/juce_events.mm.s
 .PHONY : JUCE/modules/juce_events/juce_events.mm.s
 
 JUCE/modules/juce_graphics/juce_graphics.o: JUCE/modules/juce_graphics/juce_graphics.mm.o
@@ -889,6 +920,7 @@ JUCE/modules/juce_graphics/juce_graphics.o: JUCE/modules/juce_graphics/juce_grap
 JUCE/modules/juce_graphics/juce_graphics.mm.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics.mm.o
 .PHONY : JUCE/modules/juce_graphics/juce_graphics.mm.o
 
 JUCE/modules/juce_graphics/juce_graphics.i: JUCE/modules/juce_graphics/juce_graphics.mm.i
@@ -898,6 +930,7 @@ JUCE/modules/juce_graphics/juce_graphics.i: JUCE/modules/juce_graphics/juce_grap
 JUCE/modules/juce_graphics/juce_graphics.mm.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics.mm.i
 .PHONY : JUCE/modules/juce_graphics/juce_graphics.mm.i
 
 JUCE/modules/juce_graphics/juce_graphics.s: JUCE/modules/juce_graphics/juce_graphics.mm.s
@@ -907,6 +940,7 @@ JUCE/modules/juce_graphics/juce_graphics.s: JUCE/modules/juce_graphics/juce_grap
 JUCE/modules/juce_graphics/juce_graphics.mm.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics.mm.s
 .PHONY : JUCE/modules/juce_graphics/juce_graphics.mm.s
 
 JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o: JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
@@ -916,6 +950,7 @@ JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.o: JUCE/modules/juce_graphics/
 JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
 .PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.o
 
 JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i: JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
@@ -925,6 +960,7 @@ JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.i: JUCE/modules/juce_graphics/
 JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
 .PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.i
 
 JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s: JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
@@ -934,6 +970,7 @@ JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.s: JUCE/modules/juce_graphics/
 JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
 .PHONY : JUCE/modules/juce_graphics/juce_graphics_Harfbuzz.cpp.s
 
 JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o: JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
@@ -943,6 +980,7 @@ JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.o: JUCE/modules/juce_graphics
 JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
 .PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.o
 
 JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i: JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
@@ -952,6 +990,7 @@ JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.i: JUCE/modules/juce_graphics
 JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
 .PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.i
 
 JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s: JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
@@ -961,6 +1000,7 @@ JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.s: JUCE/modules/juce_graphics
 JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VST3Probe.dir/build.make CMakeFiles/VST3Probe.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
 .PHONY : JUCE/modules/juce_graphics/juce_graphics_Sheenbidi.c.s
 
 JUCE/modules/juce_gui_basics/juce_gui_basics.o: JUCE/modules/juce_gui_basics/juce_gui_basics.mm.o
@@ -1023,6 +1063,7 @@ Source/PitchCorrectionEngine.o: Source/PitchCorrectionEngine.cpp.o
 # target to build an object file
 Source/PitchCorrectionEngine.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/Source/PitchCorrectionEngine.cpp.o
 .PHONY : Source/PitchCorrectionEngine.cpp.o
 
 Source/PitchCorrectionEngine.i: Source/PitchCorrectionEngine.cpp.i
@@ -1031,6 +1072,7 @@ Source/PitchCorrectionEngine.i: Source/PitchCorrectionEngine.cpp.i
 # target to preprocess a source file
 Source/PitchCorrectionEngine.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/Source/PitchCorrectionEngine.cpp.i
 .PHONY : Source/PitchCorrectionEngine.cpp.i
 
 Source/PitchCorrectionEngine.s: Source/PitchCorrectionEngine.cpp.s
@@ -1039,6 +1081,7 @@ Source/PitchCorrectionEngine.s: Source/PitchCorrectionEngine.cpp.s
 # target to generate assembly for a file
 Source/PitchCorrectionEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Source/PitchCorrectionEngine.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/Source/PitchCorrectionEngine.cpp.s
 .PHONY : Source/PitchCorrectionEngine.cpp.s
 
 Source/PluginEditor.o: Source/PluginEditor.cpp.o
@@ -1089,6 +1132,30 @@ Source/PluginProcessor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProTune.dir/build.make CMakeFiles/ProTune.dir/Source/PluginProcessor.cpp.s
 .PHONY : Source/PluginProcessor.cpp.s
 
+Tools/EngineSmokeTest.o: Tools/EngineSmokeTest.cpp.o
+.PHONY : Tools/EngineSmokeTest.o
+
+# target to build an object file
+Tools/EngineSmokeTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/Tools/EngineSmokeTest.cpp.o
+.PHONY : Tools/EngineSmokeTest.cpp.o
+
+Tools/EngineSmokeTest.i: Tools/EngineSmokeTest.cpp.i
+.PHONY : Tools/EngineSmokeTest.i
+
+# target to preprocess a source file
+Tools/EngineSmokeTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/Tools/EngineSmokeTest.cpp.i
+.PHONY : Tools/EngineSmokeTest.cpp.i
+
+Tools/EngineSmokeTest.s: Tools/EngineSmokeTest.cpp.s
+.PHONY : Tools/EngineSmokeTest.s
+
+# target to generate assembly for a file
+Tools/EngineSmokeTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EngineSmokeTest.dir/build.make CMakeFiles/EngineSmokeTest.dir/Tools/EngineSmokeTest.cpp.s
+.PHONY : Tools/EngineSmokeTest.cpp.s
+
 Tools/VST3Probe.o: Tools/VST3Probe.cpp.o
 .PHONY : Tools/VST3Probe.o
 
@@ -1126,6 +1193,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... ProTune_All"
+	@echo "... EngineSmokeTest"
 	@echo "... ProTune"
 	@echo "... ProTune_Standalone"
 	@echo "... ProTune_VST3"
@@ -1227,6 +1295,9 @@ help:
 	@echo "... Source/PluginProcessor.o"
 	@echo "... Source/PluginProcessor.i"
 	@echo "... Source/PluginProcessor.s"
+	@echo "... Tools/EngineSmokeTest.o"
+	@echo "... Tools/EngineSmokeTest.i"
+	@echo "... Tools/EngineSmokeTest.s"
 	@echo "... Tools/VST3Probe.o"
 	@echo "... Tools/VST3Probe.i"
 	@echo "... Tools/VST3Probe.s"

@@ -4,6 +4,7 @@
 /Users/kris/Dev/ProTune/build/CMakeFiles/ProTune_VST3.dir
 /Users/kris/Dev/ProTune/build/CMakeFiles/ProTune_vst3_helper.dir
 /Users/kris/Dev/ProTune/build/CMakeFiles/VST3Probe.dir
+/Users/kris/Dev/ProTune/build/CMakeFiles/EngineSmokeTest.dir
 /Users/kris/Dev/ProTune/build/CMakeFiles/edit_cache.dir
 /Users/kris/Dev/ProTune/build/CMakeFiles/rebuild_cache.dir
 /Users/kris/Dev/ProTune/build/CMakeFiles/list_install_components.dir
