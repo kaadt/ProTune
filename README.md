@@ -61,6 +61,10 @@ The standalone build output lives under `Builds/<Exporter>/<Configuration>/ProTu
 2. In FL Studio, run **Options → Manage plugins** and refresh the plugin list.
 3. Load ProTune from the Effects section and fine-tune the parameters to match your vocalist and desired effect.
 
+### Dialing in the “Auto-Tune” sound
+
+If you are not hearing an obvious correction effect, follow the [Auto-Tune Style Setup Guide](docs/AUTOTUNE_GUIDE.md). It walks through input preparation, recommended parameter ranges, and debugging steps that map directly to the DSP engine so you can confirm each stage is working as expected. For a development-oriented action plan, see [Next Steps Toward an Audible Auto-Tune Effect](docs/NEXT_STEPS.md).
+
 ## MIDI Control
 
 Enable the **MIDI Control** toggle to drive pitch correction from incoming MIDI notes. When active, held MIDI notes determine the target pitch instead of the automatic scale snapping, enabling expressive live performance control.
