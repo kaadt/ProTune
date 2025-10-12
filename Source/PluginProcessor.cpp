@@ -17,7 +17,8 @@ ProTuneAudioProcessor::ProTuneAudioProcessor()
     vibratoParam = parameters.getRawParameterValue ("vibrato");
     rangeLowParam = parameters.getRawParameterValue ("rangeLow");
     rangeHighParam = parameters.getRawParameterValue ("rangeHigh");
-    chromaticParam = parameters.getRawParameterValue ("chromatic");
+    scaleModeParam = parameters.getRawParameterValue ("scaleMode");
+    scaleRootParam = parameters.getRawParameterValue ("scaleRoot");
     midiParam = parameters.getRawParameterValue ("midiEnabled");
     forceCorrectionParam = parameters.getRawParameterValue ("forceCorrection");
 }
@@ -62,6 +63,7 @@ void ProTuneAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 
     lastDetectedFrequency = engine.getLastDetectedFrequency();
     lastTargetFrequency = engine.getLastTargetFrequency();
+    lastDetectionConfidence = engine.getLastDetectionConfidence();
 }
 
 juce::AudioProcessorEditor* ProTuneAudioProcessor::createEditor()
@@ -96,7 +98,13 @@ void ProTuneAudioProcessor::updateEngineParameters()
     engineParameters.vibratoTracking = vibratoParam->load();
     engineParameters.rangeLowHz = rangeLowParam->load();
     engineParameters.rangeHighHz = rangeHighParam->load();
-    engineParameters.chromaticScale = chromaticParam->load() > 0.5f;
+    auto scaleModeIndex = juce::roundToInt (scaleModeParam->load());
+    scaleModeIndex = juce::jlimit (0, 2, scaleModeIndex);
+    engineParameters.scaleMode = static_cast<PitchCorrectionEngine::Parameters::ScaleMode> (scaleModeIndex);
+
+    auto rootIndex = juce::roundToInt (scaleRootParam->load());
+    rootIndex = (rootIndex % 12 + 12) % 12;
+    engineParameters.scaleRoot = rootIndex;
     engineParameters.midiEnabled = midiParam->load() > 0.5f;
     engineParameters.forceCorrection = forceCorrectionParam->load() > 0.5f;
 
@@ -132,7 +140,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout ProTuneAudioProcessor::creat
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("rangeHigh", "Range High (Hz)",
         juce::NormalisableRange<float> (120.0f, 2000.0f, 0.01f, 0.5f), 800.0f));
 
-    params.push_back (std::make_unique<juce::AudioParameterBool> ("chromatic", "Chromatic Scale", true));
+    juce::StringArray scaleModes { "Chromatic", "Major", "Minor" };
+    params.push_back (std::make_unique<juce::AudioParameterChoice> ("scaleMode", "Scale", scaleModes, 0));
+
+    juce::StringArray keyChoices { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+    params.push_back (std::make_unique<juce::AudioParameterChoice> ("scaleRoot", "Key", keyChoices, 0));
     params.push_back (std::make_unique<juce::AudioParameterBool> ("midiEnabled", "MIDI Control", false));
     params.push_back (std::make_unique<juce::AudioParameterBool> ("forceCorrection", "Force Correction", true));
 

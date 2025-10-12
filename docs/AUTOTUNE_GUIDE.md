@@ -21,15 +21,16 @@ This guide walks through the practical steps required to get an audible "hard tu
 
 ## 4. Force fast, aggressive correction
 
-1. Dial **Speed** fully clockwise. This lowers the smoothing ramp in `ratioSmoother` to ~5 ms so ratios snap almost instantly.【F:Source/PitchCorrectionEngine.cpp†L45-L62】
-2. Increase **Transition** so the `pitchSmoother` follows targets quickly (1–5 ms).【F:Source/PitchCorrectionEngine.cpp†L45-L62】
+1. Dial **Retune Speed** fully clockwise. This lowers the smoothing ramp in `ratioSmoother` to ~5 ms so ratios snap almost instantly.【F:Source/PitchCorrectionEngine.cpp†L45-L62】
+2. Keep **Humanize** near zero for the robotic sound. Lower values minimise hysteresis so the `pitchSmoother` chases new targets immediately, while higher values add gentle lag for natural phrasing.【F:Source/PitchCorrectionEngine.cpp†L45-L62】
 3. Set **Vibrato Tracking** near zero if you want vibrato flattened; higher values let the detector glide instead of locking to the scale.【F:Source/PitchCorrectionEngine.cpp†L45-L62】
-4. Disable MIDI mode unless you are actively holding notes. When `params.midiEnabled` is true and a key is held, the engine locks to that MIDI note, so stray note-ons can prevent automatic snapping.【F:Source/PitchCorrectionEngine.cpp†L190-L218】 Use the **Force Correction** toggle if you want to hear instant correction regardless of the tolerance slider while debugging.【F:Source/PitchCorrectionEngine.cpp†L206-L229】【F:Source/PluginEditor.cpp†L24-L92】
+4. Disable MIDI mode unless you are actively holding notes. When `params.midiEnabled` is true and a key is held, the engine locks to that MIDI note, so stray note-ons can prevent automatic snapping.【F:Source/PitchCorrectionEngine.cpp†L190-L218】 Use the **Force Correction** toggle if you want to hear instant correction regardless of the tolerance slider while debugging.【F:Source/PitchCorrectionEngine.cpp†L206-L229】【F:Source/PluginEditor.cpp†L24-L198】
+5. The retune speed now adapts to how far you are from the snapped note: large errors trigger near-instant correction, while smaller deviations keep some vibrato for musicality, mirroring Hildebrandt’s patent guidance.【F:Source/PitchCorrectionEngine.cpp†L45-L229】
 
 ## 5. Snap to the desired scale
 
-1. Leave **Chromatic** enabled for hard Auto-Tune style correction. Disabling it restricts snapping to the major scale defined in `snapNoteToScale`, which may skip accidentals you expect to hear.【F:Source/PitchCorrectionEngine.cpp†L224-L233】
-2. If you need diatonic control in other modes, extend `majorScale` in `snapNoteToScale` or add alternate scales (minor, custom) and surface them as parameters.
+1. Set the **Scale** selector to **Chromatic** for hard Auto-Tune style correction. Choosing **Major** or **Minor** restricts snapping to the diatonic notes in the selected key.【F:Source/PitchCorrectionEngine.cpp†L200-L234】
+2. Adjust the **Key** selector to match the song’s tonic so major/minor modes snap to the right accidentals. For more exotic modes, extend the interval tables in `snapNoteToScale` and surface them via additional scale choices.【F:Source/PitchCorrectionEngine.cpp†L200-L234】
 
 ## 6. Blend formants for realism
 
@@ -40,7 +41,7 @@ This guide walks through the practical steps required to get an audible "hard tu
 
 1. Use logging or a debugger to inspect `lastDetectedFrequency` and `lastTargetFrequency` after each block. Both are exposed via getters and updated during `process`. Values near zero mean detection failed, so revisit the FFT size, range, or input level.【F:Source/PitchCorrectionEngine.cpp†L102-L151】
 2. Confirm that `ratioValues` contains numbers other than 1.0. If the ratio never deviates, either detection equals the target (tolerance too high) or MIDI input pins the pitch.【F:Source/PitchCorrectionEngine.cpp†L114-L151】
-3. Step through `PitchShiftChannel::processFrame` to ensure bins are remapped. If the `targetBin` calculation exceeds `spectrumSize`, the content will be dropped; check that `ratio` remains between 0.25 and 4.0 (already enforced by `juce::jlimit`).【F:Source/PitchCorrectionEngine.cpp†L243-L330】
+3. Step through `PitchShiftChannel::processFrame` to ensure bins are remapped. If the `targetBin` calculation exceeds `spectrumSize`, the content will be dropped; check that `ratio` remains between 0.25 and 4.0 (already enforced by `juce::jlimit`).【F:Source/PitchCorrectionEngine.cpp†L243-L336】
 
 ## 8. Extending toward a commercial-grade effect
 

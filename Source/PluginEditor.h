@@ -27,15 +27,22 @@ private:
     juce::Slider rangeLowSlider;
     juce::Slider rangeHighSlider;
 
-    juce::ToggleButton chromaticButton { "Chromatic" };
+    juce::ComboBox scaleSelector;
+    juce::ComboBox keySelector;
+    juce::Label scaleLabel { {}, "Scale" };
+    juce::Label keyLabel { {}, "Key" };
     juce::ToggleButton midiButton { "MIDI Control" };
     juce::ToggleButton forceCorrectionButton { "Force Correction" };
 
     juce::Label detectedLabel { {}, "Detected" };
     juce::Label targetLabel { {}, "Target" };
+    juce::Label centralNoteLabel;
+    juce::Label centralFreqLabel;
+    juce::Label confidenceLabel;
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     using ButtonAttachment = juce::AudioProcessorValueTreeState::ButtonAttachment;
+    using ComboBoxAttachment = juce::AudioProcessorValueTreeState::ComboBoxAttachment;
 
     std::unique_ptr<SliderAttachment> speedAttachment;
     std::unique_ptr<SliderAttachment> transitionAttachment;
@@ -45,9 +52,14 @@ private:
     std::unique_ptr<SliderAttachment> rangeLowAttachment;
     std::unique_ptr<SliderAttachment> rangeHighAttachment;
 
-    std::unique_ptr<ButtonAttachment> chromaticAttachment;
+    std::unique_ptr<ComboBoxAttachment> scaleAttachment;
+    std::unique_ptr<ComboBoxAttachment> keyAttachment;
     std::unique_ptr<ButtonAttachment> midiAttachment;
     std::unique_ptr<ButtonAttachment> forceCorrectionAttachment;
+
+    float displayedDetectedHz = 0.0f;
+    float displayedTargetHz = 0.0f;
+    float displayedConfidence = 0.0f;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProTuneAudioProcessorEditor)
 };

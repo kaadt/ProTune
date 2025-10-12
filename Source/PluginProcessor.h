@@ -40,6 +40,7 @@ public:
 
     float getLastDetectedFrequency() const noexcept { return lastDetectedFrequency; }
     float getLastTargetFrequency() const noexcept { return lastTargetFrequency; }
+    float getLastDetectionConfidence() const noexcept { return lastDetectionConfidence; }
 
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
@@ -58,12 +59,14 @@ private:
     std::atomic<float>* vibratoParam = nullptr;
     std::atomic<float>* rangeLowParam = nullptr;
     std::atomic<float>* rangeHighParam = nullptr;
-    std::atomic<float>* chromaticParam = nullptr;
+    std::atomic<float>* scaleModeParam = nullptr;
+    std::atomic<float>* scaleRootParam = nullptr;
     std::atomic<float>* midiParam = nullptr;
     std::atomic<float>* forceCorrectionParam = nullptr;
 
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;
+    float lastDetectionConfidence = 0.0f;
 };
 
 class ProTuneAudioProcessorEditor;

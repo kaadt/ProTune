@@ -26,7 +26,7 @@
 
 ## Correction Policy and Musical Mapping
 - Converts detected pitch to MIDI space, optionally overridden by held MIDI notes.
-- Applies chromatic or diatonic snapping with tolerance gating so near-perfect intonation passes through unchanged.
+- Applies chromatic, major, or minor snapping anchored to the selected key with tolerance gating so near-perfect intonation passes through unchanged.
 - Clamps the final target to the configured range and converts it back to Hz for shifting.
 
 ## Pitch Shifting and Resynthesis
@@ -38,7 +38,7 @@
 - Maintaining a separate dry buffer enables crossfades for formant correction without allocations inside the callback.
 
 ## GUI and Parameter Management
-- The editor exposes rotary controls for speed, transitions, tolerance, formant mix, vibrato tracking, and range, plus toggles for chromatic snapping and MIDI control.
+- The editor exposes rotary controls for retune speed, humanize, tolerance, formant mix, vibrato tracking, and range along with key/scale selectors and MIDI/force-correction toggles.
 - Labels display live detected and target pitches derived from processor caches, providing real-time feedback.
 
 ## Performance Considerations
