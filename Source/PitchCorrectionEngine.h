@@ -9,9 +9,9 @@ class PitchCorrectionEngine
 public:
     struct Parameters
     {
-        float speed = 0.5f;
-        float transition = 0.5f;
-        float toleranceCents = 5.0f;
+        float speed = 0.85f;
+        float transition = 0.2f;
+        float toleranceCents = 2.0f;
         float formantPreserve = 0.5f;
         float vibratoTracking = 0.5f;
         float rangeLowHz = 80.0f;

@@ -412,20 +412,25 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
     if (detectedFrequency <= 0.0f)
         return 0.0f;
 
-    auto midiNote = frequencyToMidiNote (detectedFrequency);
+    auto rawMidi = frequencyToMidiNote (detectedFrequency);
+    auto targetMidi = rawMidi;
 
     if (! std::isnan (heldMidiNote) && params.midiEnabled)
-        midiNote = heldMidiNote;
+        targetMidi = heldMidiNote;
     else
-        midiNote = snapNoteToScale (midiNote, params.chromaticScale);
-
-    auto deltaCents = 100.0f * (midiNote - frequencyToMidiNote (detectedFrequency));
-    if (std::abs (deltaCents) < params.toleranceCents)
-        return detectedFrequency;
+        targetMidi = snapNoteToScale (rawMidi, params.chromaticScale);
 
     auto constrainedMidi = juce::jlimit (frequencyToMidiNote (params.rangeLowHz),
                                          frequencyToMidiNote (params.rangeHighHz),
-                                         midiNote);
+                                         targetMidi);
+
+    auto toleranceSemitones = params.toleranceCents / 100.0f;
+    if (toleranceSemitones > 0.0f)
+    {
+        auto deltaSemitones = constrainedMidi - rawMidi;
+        auto correctionMix = juce::jlimit (0.0f, 1.0f, std::abs (deltaSemitones) / toleranceSemitones);
+        constrainedMidi = rawMidi + deltaSemitones * correctionMix;
+    }
 
     return midiNoteToFrequency (constrainedMidi);
 }
