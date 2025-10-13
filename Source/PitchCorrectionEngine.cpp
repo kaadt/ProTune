@@ -752,8 +752,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
         fftBuffer[(size_t) (2 * n + 1)] = 0.0f;
     }
 
-    auto* fftComplex = reinterpret_cast<juce::dsp::Complex<float>*> (fftBuffer.data());
-    fft->perform (fftComplex, fftComplex, false);
+    fft->perform (fftBuffer.data(), fftBuffer.data(), false);
 
     for (int k = 0; k <= numBins; ++k)
     {
@@ -830,8 +829,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
         outputSpectrum[(size_t) (2 * (fftSize - k) + 1)] = -imag;
     }
 
-    auto* outputComplex = reinterpret_cast<juce::dsp::Complex<float>*> (outputSpectrum.data());
-    fft->perform (outputComplex, outputComplex, true);
+    fft->perform (outputSpectrum.data(), outputSpectrum.data(), true);
 
     const float normalisation = 1.0f / (float) fftSize;
     for (int n = 0; n < fftSize; ++n)
