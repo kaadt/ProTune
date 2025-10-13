@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
-#include <cstring>
 #include <numeric>
 
 namespace
@@ -181,9 +180,8 @@ void PitchCorrectionEngine::prepare (double sampleRate, int samplesPerBlock)
 
     dryBuffer.setSize (2, samplesPerBlock);
 
-    ensurePitchShiftChannels (2);
-    for (auto& channel : pitchChannels)
-        channel.prepare (pitchFftSize, pitchOversampling, currentSampleRate);
+    updateResamplerResources();
+    ensureCycleResamplers (2);
 }
 
 void PitchCorrectionEngine::reset()
@@ -202,7 +200,7 @@ void PitchCorrectionEngine::reset()
     activeTargetMidi = std::numeric_limits<float>::quiet_NaN();
     dryBuffer.clear();
 
-    for (auto& channel : pitchChannels)
+    for (auto& channel : cycleResamplers)
         channel.reset();
 }
 
@@ -220,6 +218,8 @@ void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 
     auto detectionTime = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 0.2f, 0.01f);
     detectionSmoother.reset (currentSampleRate, detectionTime);
+
+    updateResamplerResources();
 }
 
 void PitchCorrectionEngine::setAnalysisWindowOrder (int newOrder)
@@ -264,7 +264,10 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
     auto target = chooseTargetFrequency (detected);
 
     if (detected <= 0.0f || target <= 0.0f)
+    {
+        lastTargetFrequency = 0.0f;
         return;
+    }
 
     auto ratio = target / juce::jmax (detected, 1.0f);
     ratioSmoother.reset (currentSampleRate, computeDynamicRatioTime (detected, target));
@@ -272,24 +275,44 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
     pitchSmoother.reset (currentSampleRate, computeDynamicTransitionTime (detected, target));
     pitchSmoother.setTargetValue (target);
 
-    ensurePitchShiftChannels (buffer.getNumChannels());
+    ensureCycleResamplers (buffer.getNumChannels());
 
     dryBuffer.setSize (buffer.getNumChannels(), buffer.getNumSamples(), false, false, true);
     for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
         dryBuffer.copyFrom (ch, 0, buffer, ch, 0, buffer.getNumSamples());
 
     juce::HeapBlock<float> ratioValues;
+    juce::HeapBlock<float> periodValues;
+    juce::HeapBlock<float> desiredPeriodValues;
     ratioValues.allocate ((size_t) numSamples, false);
+    periodValues.allocate ((size_t) numSamples, false);
+    desiredPeriodValues.allocate ((size_t) numSamples, false);
 
-    float finalTarget = target;
+    float ratioValue = ratioSmoother.getCurrentValue();
+    float targetValue = pitchSmoother.getCurrentValue();
+    float finalTarget = targetValue;
+    const float periodSamples = currentSampleRate / juce::jmax (detected, 1.0f);
+
     for (int i = 0; i < numSamples; ++i)
     {
-        ratioValues[i] = juce::jlimit (0.25f, 4.0f, ratioSmoother.getNextValue());
-        finalTarget = pitchSmoother.getNextValue();
+        auto clampedRatio = juce::jlimit (0.25f, 4.0f, ratioValue);
+        ratioValues[i] = clampedRatio;
+        periodValues[i] = periodSamples;
+        desiredPeriodValues[i] = periodSamples / juce::jmax (0.25f, clampedRatio);
+
+        finalTarget = targetValue;
+        ratioValue = ratioSmoother.getNextValue();
+        targetValue = pitchSmoother.getNextValue();
     }
 
     for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
-        pitchChannels[(size_t) ch].processSamples (buffer.getWritePointer (ch), numSamples, ratioValues.get(), pitchFft);
+    {
+        auto* dry = dryBuffer.getReadPointer (ch);
+        auto* out = buffer.getWritePointer (ch);
+        cycleResamplers[(size_t) ch].process (dry, out, numSamples,
+                                              ratioValues.get(), periodValues.get(),
+                                              desiredPeriodValues.get());
+    }
 
     lastTargetFrequency = finalTarget;
 
@@ -405,53 +428,123 @@ float PitchCorrectionEngine::estimatePitchFromAutocorrelation (const float* fram
     if (maxLag <= minLag)
         return 0.0f;
 
-    periodicityScratch.assign ((size_t) (maxLag + 1), {});
-
-    double bestError = std::numeric_limits<double>::infinity();
-    int bestLag = -1;
-
-    for (int lag = minLag; lag <= maxLag; ++lag)
+    auto evaluateWindow = [] (const float* data, int dataSize, int lag) -> PeriodicitySample
     {
+        if (lag <= 1 || lag * 2 >= dataSize)
+            return {};
+
+        const int windowEnd = dataSize;
+        const int windowStart = juce::jmax (0, windowEnd - lag * 2);
+
         double energy = 0.0;
         double correlation = 0.0;
 
-        for (int j = lag; j < downsampledSize; ++j)
+        for (int n = windowStart; n < windowEnd; ++n)
         {
-            const auto a = (double) downsampledFrame[(size_t) j];
-            const auto b = (double) downsampledFrame[(size_t) (j - lag)];
-            correlation += a * b;
-            energy += a * a + b * b;
+            const auto current = (double) data[n];
+            energy += current * current;
+
+            const int prevIndex = n - lag;
+            if (prevIndex >= windowStart)
+                correlation += current * (double) data[prevIndex];
         }
 
-        if (energy <= std::numeric_limits<double>::epsilon())
+        const double error = energy - 2.0 * correlation;
+        return { error, energy, correlation };
+    };
+
+    int coarseBestLag = -1;
+    double coarseBestError = std::numeric_limits<double>::infinity();
+
+    for (int lag = minLag; lag <= maxLag; ++lag)
+    {
+        auto sample = evaluateWindow (downsampledFrame.data(), downsampledSize, lag);
+        if (sample.energy <= 1.0e-9)
             continue;
 
-        const double error = energy - 2.0 * correlation;
-        periodicityScratch[(size_t) lag] = { error, energy, correlation };
-
-        if (error < bestError)
+        if (sample.error < coarseBestError)
         {
-            bestError = error;
+            coarseBestError = sample.error;
+            coarseBestLag = lag;
+        }
+    }
+
+    if (coarseBestLag <= 0)
+        return 0.0f;
+
+    const double fullRate = currentSampleRate;
+    int minFullLag = (int) std::floor (fullRate / safeHigh);
+    int maxFullLag = (int) std::ceil (fullRate / safeLow);
+
+    minFullLag = juce::jlimit (2, frameSize / 4, minFullLag);
+    maxFullLag = juce::jlimit (juce::jmax (minFullLag + 1, 3), frameSize / 2, maxFullLag);
+
+    const int coarseLagFull = juce::jlimit (minFullLag, maxFullLag, coarseBestLag * pitchDetectionDownsample);
+    const int searchRadius = juce::jmax (pitchDetectionDownsample * 2, 6);
+
+    int fineMin = juce::jlimit (minFullLag, maxFullLag - 1, coarseLagFull - searchRadius);
+    int fineMax = juce::jlimit (juce::jmax (fineMin + 2, minFullLag + 2), maxFullLag, coarseLagFull + searchRadius);
+
+    if (fineMax - fineMin < 2)
+        fineMax = juce::jmin (maxFullLag, fineMin + 2);
+
+    periodicityScratch.assign ((size_t) (fineMax + 2), {});
+
+    double bestError = std::numeric_limits<double>::infinity();
+    int bestLag = -1;
+    int secondLag = -1;
+
+    for (int lag = fineMin; lag <= fineMax; ++lag)
+    {
+        auto sample = evaluateWindow (frame, frameSize, lag);
+        periodicityScratch[(size_t) lag] = sample;
+
+        if (sample.energy <= 1.0e-9)
+            continue;
+
+        if (sample.error < bestError)
+        {
+            secondLag = bestLag;
+            bestError = sample.error;
             bestLag = lag;
+        }
+        else if (secondLag < 0 || sample.error < periodicityScratch[(size_t) secondLag].error)
+        {
+            secondLag = lag;
         }
     }
 
     if (bestLag <= 0)
         return 0.0f;
 
-    const auto bestSample = periodicityScratch[(size_t) bestLag];
-    const double energy = juce::jmax (bestSample.energy, 1.0e-9);
-    const double periodicity = 1.0 - juce::jlimit (0.0, 1.0, bestSample.error / energy);
+    auto bestSample = periodicityScratch[(size_t) bestLag];
+    double energy = juce::jmax (bestSample.energy, 1.0e-9);
 
     constexpr double periodicityEps = 0.18;
-    if (std::abs (bestSample.error) > periodicityEps * energy)
+
+    // Handle missing fundamentals by checking whether the second candidate
+    // represents a lower harmonic with substantially better periodicity.
+    if (secondLag > 0 && bestLag >= 2 * secondLag - 2)
+    {
+        auto secondSample = periodicityScratch[(size_t) secondLag];
+        double secondEnergy = juce::jmax (secondSample.energy, 1.0e-9);
+        if (secondSample.error < bestSample.error * 1.15
+            && secondSample.error < periodicityEps * secondEnergy)
+        {
+            bestLag = secondLag;
+            bestSample = secondSample;
+            energy = secondEnergy;
+        }
+    }
+
+    if (bestSample.error > periodicityEps * energy)
         return 0.0f;
 
-    confidenceOut = (float) juce::jlimit (0.0, 1.0, periodicity);
+    confidenceOut = (float) juce::jlimit (0.0, 1.0, 1.0 - bestSample.error / energy);
 
     double refinedLag = (double) bestLag;
 
-    if (bestLag > minLag && bestLag < maxLag)
+    if (bestLag > fineMin && bestLag < fineMax)
     {
         const auto& prev = periodicityScratch[(size_t) (bestLag - 1)];
         const auto& center = periodicityScratch[(size_t) bestLag];
@@ -469,12 +562,12 @@ float PitchCorrectionEngine::estimatePitchFromAutocorrelation (const float* fram
         }
     }
 
-    refinedLag = juce::jlimit (2.0, (double) downsampledSize, refinedLag);
+    refinedLag = juce::jlimit ((double) fineMin, (double) fineMax, refinedLag);
 
     if (refinedLag <= 1.0)
         return 0.0f;
 
-    const auto frequency = downsampledRate / refinedLag;
+    const auto frequency = fullRate / refinedLag;
     return (float) frequency;
 }
 
@@ -500,173 +593,98 @@ void PitchCorrectionEngine::updateDownsamplingResources()
     designDecimationFilter (decimationFilter, decimationTaps, pitchDetectionDownsample);
 }
 
-void PitchCorrectionEngine::ensurePitchShiftChannels (int requiredChannels)
+void PitchCorrectionEngine::ensureCycleResamplers (int requiredChannels)
 {
-    if ((int) pitchChannels.size() < requiredChannels)
+    if (requiredChannels <= 0)
+        return;
+
+    if ((int) cycleResamplers.size() < requiredChannels)
     {
-        auto previousSize = pitchChannels.size();
-        pitchChannels.resize ((size_t) requiredChannels);
-        for (size_t i = previousSize; i < pitchChannels.size(); ++i)
-            pitchChannels[i].prepare (pitchFftSize, pitchOversampling, currentSampleRate);
+        auto previousSize = cycleResamplers.size();
+        cycleResamplers.resize ((size_t) requiredChannels);
+        for (size_t i = previousSize; i < cycleResamplers.size(); ++i)
+            cycleResamplers[i].prepare (currentSampleRate, allocatedMaxPeriodSamples, maxBlockSize);
     }
 }
 
-void PitchCorrectionEngine::PitchShiftChannel::prepare (int frameSizeIn, int oversamplingIn, double sampleRateIn)
+void PitchCorrectionEngine::updateResamplerResources()
 {
-    juce::ignoreUnused (sampleRateIn);
+    const float minimumFrequency = juce::jmax (params.rangeLowHz, 20.0f);
+    allocatedMaxPeriodSamples = (int) std::ceil (currentSampleRate / juce::jmax (minimumFrequency, 1.0f));
+    allocatedMaxPeriodSamples = juce::jlimit (32, 16384, allocatedMaxPeriodSamples);
 
-    frameSize = frameSizeIn;
-    oversampling = oversamplingIn;
-    hopSize = frameSize / oversampling;
-    spectrumSize = frameSize / 2;
+    for (auto& resampler : cycleResamplers)
+        resampler.prepare (currentSampleRate, allocatedMaxPeriodSamples, maxBlockSize);
+}
 
-    inFifo.allocate ((size_t) frameSize, true);
-    outFifo.allocate ((size_t) frameSize, true);
-    window.allocate ((size_t) frameSize, true);
-    analysisMag.allocate ((size_t) (spectrumSize + 1), true);
-    analysisFreq.allocate ((size_t) (spectrumSize + 1), true);
-    synthesisMag.allocate ((size_t) (spectrumSize + 1), true);
-    synthesisFreq.allocate ((size_t) (spectrumSize + 1), true);
-    lastPhase.allocate ((size_t) (spectrumSize + 1), true);
-    sumPhase.allocate ((size_t) (spectrumSize + 1), true);
-    fftBuffer.allocate ((size_t) (frameSize * 2), true);
+void PitchCorrectionEngine::CycleResampler::prepare (double sampleRateIn, int maxPeriodSamplesIn, int maxBlockSizeIn)
+{
+    sampleRate = sampleRateIn;
+    maxPeriodSamples = juce::jmax (maxPeriodSamplesIn, 1);
+    maxBlockSize = juce::jmax (maxBlockSizeIn, 1);
 
-    juce::dsp::WindowingFunction<float>::fillWindowingTables (window.get(), frameSize,
-                                                              juce::dsp::WindowingFunction<float>::hann, false);
-
+    bufferSize = juce::jmax (maxBlockSize + maxPeriodSamples * 4, maxPeriodSamples * 6);
+    buffer.assign ((size_t) bufferSize, 0.0f);
     reset();
 }
 
-void PitchCorrectionEngine::PitchShiftChannel::reset()
+void PitchCorrectionEngine::CycleResampler::reset()
 {
-    if (frameSize == 0)
-        return;
-
-    std::fill (inFifo.get(), inFifo.get() + frameSize, 0.0f);
-    std::fill (outFifo.get(), outFifo.get() + frameSize, 0.0f);
-    std::fill (analysisMag.get(), analysisMag.get() + spectrumSize + 1, 0.0f);
-    std::fill (analysisFreq.get(), analysisFreq.get() + spectrumSize + 1, 0.0f);
-    std::fill (synthesisMag.get(), synthesisMag.get() + spectrumSize + 1, 0.0f);
-    std::fill (synthesisFreq.get(), synthesisFreq.get() + spectrumSize + 1, 0.0f);
-    std::fill (lastPhase.get(), lastPhase.get() + spectrumSize + 1, 0.0f);
-    std::fill (sumPhase.get(), sumPhase.get() + spectrumSize + 1, 0.0f);
-    std::fill (fftBuffer.get(), fftBuffer.get() + frameSize * 2, 0.0f);
-
-    inFifoIndex = 0;
-    outFifoIndex = 0;
-    ratioAccumulator = 0.0f;
-    ratioSampleCount = 0;
+    std::fill (buffer.begin(), buffer.end(), 0.0f);
+    writeHead = 0.0;
+    readHead = - (double) juce::jmax (maxPeriodSamples, 1);
 }
 
-void PitchCorrectionEngine::PitchShiftChannel::processSamples (float* samples, int numSamples,
-                                                               const float* ratios, juce::dsp::FFT& fft)
+void PitchCorrectionEngine::CycleResampler::process (const float* input, float* output, int numSamples,
+                                                     const float* ratioValues, const float* periodValues,
+                                                     const float* desiredPeriodValues)
 {
-    if (frameSize == 0)
+    if (input == nullptr || output == nullptr || numSamples <= 0 || bufferSize <= 0)
         return;
 
     for (int i = 0; i < numSamples; ++i)
     {
-        inFifo[inFifoIndex] = samples[i];
-        samples[i] = outFifo[outFifoIndex];
-        outFifo[outFifoIndex] = 0.0f;
+        const auto writeIndex = positiveModulo ((int) std::floor (writeHead), bufferSize);
+        buffer[(size_t) writeIndex] = input[i];
+        writeHead += 1.0;
 
-        ratioAccumulator += ratios[i];
-        ++ratioSampleCount;
+        const double period = juce::jmax (1.0, (double) periodValues[i]);
+        const double desiredPeriod = juce::jmax (1.0, (double) desiredPeriodValues[i]);
+        const double ratio = juce::jmax (0.25, (double) ratioValues[i]);
 
-        ++inFifoIndex;
-        ++outFifoIndex;
-
-        if (inFifoIndex >= frameSize)
+        if (period <= 1.0 || desiredPeriod <= 1.0 || ! std::isfinite (ratio))
         {
-            auto averageRatio = ratioSampleCount > 0 ? ratioAccumulator / (float) ratioSampleCount : 1.0f;
-            processFrame (juce::jlimit (0.25f, 4.0f, averageRatio), fft);
-
-            ratioAccumulator = 0.0f;
-            ratioSampleCount = 0;
-
-            inFifoIndex = frameSize - hopSize;
-            const int tailStart = frameSize - hopSize;
-
-            std::memmove (inFifo.get(), inFifo.get() + hopSize, sizeof (float) * (size_t) inFifoIndex);
-            std::memmove (outFifo.get(), outFifo.get() + hopSize, sizeof (float) * (size_t) tailStart);
-            std::fill (inFifo.get() + tailStart, inFifo.get() + frameSize, 0.0f);
-            std::fill (outFifo.get() + tailStart, outFifo.get() + frameSize, 0.0f);
-            outFifoIndex = 0;
-        }
-    }
-}
-
-void PitchCorrectionEngine::PitchShiftChannel::processFrame (float ratio, juce::dsp::FFT& fft)
-{
-    auto* fftData = fftBuffer.get();
-
-    for (int i = 0; i < frameSize; ++i)
-    {
-        fftData[2 * i] = inFifo[i] * window[i];
-        fftData[2 * i + 1] = 0.0f;
-    }
-
-    fft.performRealOnlyForwardTransform (fftData);
-
-    const float expectedPhaseAdvance = juce::MathConstants<float>::twoPi * (float) hopSize / (float) frameSize;
-
-    for (int bin = 0; bin <= spectrumSize; ++bin)
-    {
-        auto real = fftData[2 * bin];
-        auto imag = fftData[2 * bin + 1];
-
-        auto magnitude = std::sqrt (real * real + imag * imag);
-        auto phase = std::atan2 (imag, real);
-
-        auto deltaPhase = wrapPhase (phase - lastPhase[bin] - (float) bin * expectedPhaseAdvance);
-        lastPhase[bin] = phase;
-
-        auto binDeviation = deltaPhase / expectedPhaseAdvance;
-
-        analysisMag[bin] = magnitude;
-        analysisFreq[bin] = (float) bin + binDeviation;
-    }
-
-    for (int bin = 0; bin <= spectrumSize; ++bin)
-    {
-        synthesisMag[bin] = 0.0f;
-        synthesisFreq[bin] = (float) bin;
-    }
-
-    for (int bin = 0; bin <= spectrumSize; ++bin)
-    {
-        auto targetBin = (int) std::round ((float) bin * ratio);
-        if (targetBin > spectrumSize)
+            output[i] = input[i];
             continue;
+        }
 
-        synthesisMag[targetBin] += analysisMag[bin];
-        synthesisFreq[targetBin] = analysisFreq[bin] * ratio;
+        if (readHead < -0.5)
+            readHead = writeHead - period;
+
+        const double increment = period / desiredPeriod;
+        readHead += increment;
+
+        const double lag = writeHead - readHead;
+        const double minLag = juce::jmax (period * 0.75, desiredPeriod * 0.65);
+        const double maxLag = juce::jmax (period * 1.35, desiredPeriod * 1.6);
+
+        if (lag < minLag)
+            readHead -= period;
+        else if (lag > maxLag)
+            readHead += period;
+
+        double readIndex = std::fmod (readHead, (double) bufferSize);
+        if (readIndex < 0.0)
+            readIndex += bufferSize;
+
+        const int index0 = (int) std::floor (readIndex);
+        const int index1 = (index0 + 1) % bufferSize;
+        const float frac = (float) (readIndex - (double) index0);
+        const float s0 = buffer[(size_t) index0];
+        const float s1 = buffer[(size_t) index1];
+
+        output[i] = juce::jlimit (-1.0f, 1.0f, s0 + frac * (s1 - s0));
     }
-
-    for (int bin = 0; bin <= spectrumSize; ++bin)
-    {
-        auto phaseIncrement = expectedPhaseAdvance * synthesisFreq[bin];
-        sumPhase[bin] = wrapPhase (sumPhase[bin] + phaseIncrement);
-
-        auto magnitude = synthesisMag[bin];
-        fftData[2 * bin] = magnitude * std::cos (sumPhase[bin]);
-        fftData[2 * bin + 1] = magnitude * std::sin (sumPhase[bin]);
-    }
-
-    for (int bin = spectrumSize + 1; bin < frameSize; ++bin)
-    {
-        auto mirror = frameSize - bin;
-        fftData[2 * bin] = fftData[2 * mirror];
-        fftData[2 * bin + 1] = -fftData[2 * mirror + 1];
-    }
-
-    fft.performRealOnlyInverseTransform (fftData);
-
-    const float gain = (float) oversampling * (2.0f / 3.0f);
-
-    for (int i = 0; i < frameSize; ++i)
-        outFifo[i] += fftData[2 * i] * gain * window[i];
-
 }
 
 float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
