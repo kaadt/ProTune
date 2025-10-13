@@ -57,6 +57,10 @@ PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSetti
             return patternToMask (root, { 0, 2, 4, 5, 7, 9, 11 });
         case Type::NaturalMinor:
             return patternToMask (root, { 0, 2, 3, 5, 7, 8, 10 });
+        case Type::HarmonicMinor:
+            return patternToMask (root, { 0, 2, 3, 5, 7, 8, 11 });
+        case Type::MelodicMinor:
+            return patternToMask (root, { 0, 2, 3, 5, 7, 9, 11 });
         case Type::Dorian:
             return patternToMask (root, { 0, 2, 3, 5, 7, 9, 10 });
         case Type::Phrygian:
@@ -67,6 +71,16 @@ PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSetti
             return patternToMask (root, { 0, 2, 4, 5, 7, 9, 10 });
         case Type::Locrian:
             return patternToMask (root, { 0, 1, 3, 5, 6, 8, 10 });
+        case Type::WholeTone:
+            return patternToMask (root, { 0, 2, 4, 6, 8, 10 });
+        case Type::Blues:
+            return patternToMask (root, { 0, 3, 5, 6, 7, 10 });
+        case Type::MajorPentatonic:
+            return patternToMask (root, { 0, 2, 4, 7, 9 });
+        case Type::MinorPentatonic:
+            return patternToMask (root, { 0, 3, 5, 7, 10 });
+        case Type::Diminished:
+            return patternToMask (root, { 0, 2, 3, 5, 6, 8, 9, 11 });
         case Type::Custom:
         default:
             return customMask & 0x0FFFu;

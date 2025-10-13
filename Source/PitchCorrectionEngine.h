@@ -31,11 +31,18 @@ public:
                 Chromatic = 0,
                 Major,
                 NaturalMinor,
+                HarmonicMinor,
+                MelodicMinor,
                 Dorian,
                 Phrygian,
                 Lydian,
                 Mixolydian,
                 Locrian,
+                WholeTone,
+                Blues,
+                MajorPentatonic,
+                MinorPentatonic,
+                Diminished,
                 Custom
             };
 

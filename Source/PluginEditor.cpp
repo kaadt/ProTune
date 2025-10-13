@@ -62,26 +62,40 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     humanizeLabel.setInterceptsMouseClicks (false, false);
     humanizeLabel.attachToComponent (&transitionSlider, false);
 
+    auto initialiseSelectionLabel = [] (juce::Label& label)
+    {
+        label.setJustificationType (juce::Justification::centredLeft);
+        label.setColour (juce::Label::textColourId, juce::Colours::white);
+        label.setFont (makeFont (12.0f, juce::Font::bold));
+        label.setInterceptsMouseClicks (false, false);
+    };
+
     addAndMakeVisible (scaleLabel);
-    scaleLabel.setJustificationType (juce::Justification::centredLeft);
-    scaleLabel.setColour (juce::Label::textColourId, juce::Colours::white);
-    scaleLabel.setInterceptsMouseClicks (false, false);
-    scaleLabel.attachToComponent (&scaleSelector, true);
+    initialiseSelectionLabel (scaleLabel);
 
     addAndMakeVisible (keyLabel);
-    keyLabel.setJustificationType (juce::Justification::centredLeft);
-    keyLabel.setColour (juce::Label::textColourId, juce::Colours::white);
-    keyLabel.setInterceptsMouseClicks (false, false);
-    keyLabel.attachToComponent (&keySelector, true);
+    initialiseSelectionLabel (keyLabel);
 
     addAndMakeVisible (enharmonicLabel);
-    enharmonicLabel.setJustificationType (juce::Justification::centredLeft);
-    enharmonicLabel.setColour (juce::Label::textColourId, juce::Colours::white);
-    enharmonicLabel.setInterceptsMouseClicks (false, false);
-    enharmonicLabel.attachToComponent (&enharmonicSelector, true);
+    initialiseSelectionLabel (enharmonicLabel);
 
     scaleSelector.addItemList (juce::StringArray {
-        "Chromatic", "Major", "Natural Minor", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Locrian", "Custom"
+        "Chromatic",
+        "Major",
+        "Natural Minor",
+        "Harmonic Minor",
+        "Melodic Minor",
+        "Dorian",
+        "Phrygian",
+        "Lydian",
+        "Mixolydian",
+        "Locrian",
+        "Whole Tone",
+        "Blues",
+        "Major Pentatonic",
+        "Minor Pentatonic",
+        "Diminished",
+        "Custom"
     }, 1);
     scaleSelector.setJustificationType (juce::Justification::centredLeft);
     auto comboBackground = juce::Colour::fromRGB (18, 24, 34);
@@ -106,6 +120,10 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     enharmonicSelector.setColour (juce::ComboBox::arrowColourId, juce::Colours::white);
     enharmonicSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
     enharmonicSelector.setTooltip ("Select whether to display sharps, flats, or automatic enharmonics");
+
+    scaleSelector.setMinimumWidth (150);
+    keySelector.setMinimumWidth (120);
+    enharmonicSelector.setMinimumWidth (120);
 
     scaleSelector.onChange = [this] { handleScaleSelectorChanged(); };
     keySelector.onChange = [this] { handleKeySelectorChanged(); };
@@ -153,6 +171,7 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     scaleSelector.onChange();
     refreshScaleDisplay();
     updateNoteToggleLabels();
+    updateKeySelectorLabels();
 
     setSize (820, 520);
     startTimerHz (30);
@@ -178,6 +197,15 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
 
     auto meterBounds = getLocalBounds().toFloat().reduced (24.0f);
     meterBounds.removeFromTop (70.0f);
+
+    constexpr float selectionStripHeight = 72.0f;
+    auto selectionStrip = meterBounds.removeFromTop (selectionStripHeight);
+    auto selectionBackground = juce::Colour::fromRGB (16, 22, 32);
+    g.setColour (selectionBackground);
+    g.fillRoundedRectangle (selectionStrip, 6.0f);
+    g.setColour (selectionBackground.brighter (0.1f));
+    g.drawRoundedRectangle (selectionStrip, 6.0f, 1.2f);
+
     auto meterArea = meterBounds.removeFromTop (240.0f).withSizeKeepingCentre (240.0f, 240.0f);
 
     auto rimColour = juce::Colour::fromRGB (12, 24, 40);
@@ -225,6 +253,26 @@ void ProTuneAudioProcessorEditor::resized()
     auto bounds = getLocalBounds().reduced (24);
     bounds.removeFromTop (70);
 
+    constexpr int selectionStripHeight = 72;
+    auto selectionStrip = bounds.removeFromTop (selectionStripHeight);
+    auto selectionContent = selectionStrip.reduced (16, 10);
+    auto columnWidth = selectionContent.getWidth() / 3;
+    auto labelHeight = 18;
+    auto comboHeight = 32;
+
+    auto scaleColumn = selectionContent.removeFromLeft (columnWidth).reduced (4, 0);
+    auto keyColumn = selectionContent.removeFromLeft (columnWidth).reduced (4, 0);
+    auto enhColumn = selectionContent.reduced (4, 0);
+
+    scaleLabel.setBounds (scaleColumn.removeFromTop (labelHeight));
+    scaleSelector.setBounds (scaleColumn.removeFromTop (comboHeight));
+
+    keyLabel.setBounds (keyColumn.removeFromTop (labelHeight));
+    keySelector.setBounds (keyColumn.removeFromTop (comboHeight));
+
+    enharmonicLabel.setBounds (enhColumn.removeFromTop (labelHeight));
+    enharmonicSelector.setBounds (enhColumn.removeFromTop (comboHeight));
+
     auto meterStrip = bounds.removeFromTop (240);
     auto meterArea = meterStrip.withSizeKeepingCentre (240, 240);
     auto innerArea = meterArea.reduced (70);
@@ -244,11 +292,6 @@ void ProTuneAudioProcessorEditor::resized()
 
     midiButton.setBounds (rightColumn.removeFromTop (32));
     forceCorrectionButton.setBounds (rightColumn.removeFromTop (32));
-
-    auto selectorHeight = 44;
-    scaleSelector.setBounds (rightColumn.removeFromTop (selectorHeight).reduced (0, 6));
-    keySelector.setBounds (rightColumn.removeFromTop (selectorHeight).reduced (0, 6));
-    enharmonicSelector.setBounds (rightColumn.removeFromTop (selectorHeight).reduced (0, 6));
 
     auto noteArea = rightColumn.reduced (4);
     auto rowHeight = noteArea.getHeight() / 4;
@@ -345,6 +388,7 @@ void ProTuneAudioProcessorEditor::refreshScaleDisplay()
         lastEnharmonicPref = currentPref;
         lastPreferFlats = preferFlats;
         updateNoteToggleLabels();
+        updateKeySelectorLabels();
     }
 }
 
@@ -367,6 +411,14 @@ void ProTuneAudioProcessorEditor::updateNoteToggleLabels()
         noteButtons[i].setButtonText (name);
         noteButtons[i].setTooltip ("Allow note " + name);
     }
+}
+
+void ProTuneAudioProcessorEditor::updateKeySelectorLabels()
+{
+    const auto& names = processor.shouldUseFlatsForDisplay() ? flatNoteNames : sharpNoteNames;
+
+    for (int i = 0; i < keySelector.getNumItems(); ++i)
+        keySelector.changeItemText (i + 1, names[i]);
 }
 
 void ProTuneAudioProcessorEditor::handleScaleSelectorChanged()
