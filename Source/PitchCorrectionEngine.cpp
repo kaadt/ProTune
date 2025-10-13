@@ -778,13 +778,13 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
         if (magnitude <= 0.0f)
             return;
 
+        const float omega = binToOmega * (float) sourceBin;
+
         float previousPhase = destPhases[(size_t) destBin];
         if (phaseInitialised[(size_t) destBin] == 0)
-            previousPhase = phases[(size_t) sourceBin];
+            previousPhase = phases[(size_t) sourceBin] - beta * omega * hopSamples;
 
-        const float omega = binToOmega * (float) sourceBin;
-        const float deltaOmega = (beta - 1.0f) * omega;
-        const float newPhase = wrapPhase (previousPhase + deltaOmega * hopSamples);
+        const float newPhase = wrapPhase (previousPhase + beta * omega * hopSamples);
         destPhases[(size_t) destBin] = newPhase;
         phaseInitialised[(size_t) destBin] = 1;
 
