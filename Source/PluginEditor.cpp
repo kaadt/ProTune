@@ -16,22 +16,8 @@ inline juce::Font makeFont (float height, int style = juce::Font::plain)
     return juce::Font (juce::FontOptions (height, style));
 }
 
-juce::String frequencyToNoteName (float frequency)
-{
-    if (frequency <= 0.0f)
-        return "--";
-
-    constexpr float referenceFrequency = 440.0f;
-    constexpr int referenceMidi = 69;
-
-    auto midi = referenceMidi + 12.0f * std::log2 (frequency / referenceFrequency);
-    auto rounded = (int) std::round (midi);
-    static const juce::StringArray noteNames { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
-    auto noteIndex = positiveModulo (rounded, 12);
-    auto octave = (int) std::floor (rounded / 12.0f) - 1;
-    auto name = noteNames[noteIndex];
-    return juce::String (name + juce::String (octave));
-}
+static const juce::StringArray sharpNoteNames { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+static const juce::StringArray flatNoteNames  { "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" };
 }
 
 ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor& p)
@@ -45,14 +31,22 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     configureSlider (rangeLowSlider, "Low Hz");
     configureSlider (rangeHighSlider, "High Hz");
 
-    addAndMakeVisible (chromaticButton);
-    chromaticButton.setClickingTogglesState (true);
-    chromaticButton.setTooltip ("Lock correction to the chromatic scale");
     addAndMakeVisible (midiButton);
     addAndMakeVisible (forceCorrectionButton);
 
     addAndMakeVisible (scaleSelector);
     addAndMakeVisible (keySelector);
+    addAndMakeVisible (enharmonicSelector);
+
+    for (size_t i = 0; i < noteButtons.size(); ++i)
+    {
+        auto& button = noteButtons[i];
+        button.setClickingTogglesState (true);
+        button.setColour (juce::ToggleButton::textColourId, juce::Colours::white);
+        button.setColour (juce::ToggleButton::tickDisabledColourId, juce::Colours::dimgrey);
+        button.onClick = [this, i]() { handleNoteToggle ((int) i); };
+        addAndMakeVisible (button);
+    }
 
     addAndMakeVisible (retuneLabel);
     retuneLabel.setJustificationType (juce::Justification::centred);
@@ -80,7 +74,15 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     keyLabel.setInterceptsMouseClicks (false, false);
     keyLabel.attachToComponent (&keySelector, true);
 
-    scaleSelector.addItemList (juce::StringArray { "Chromatic", "Major", "Minor" }, 1);
+    addAndMakeVisible (enharmonicLabel);
+    enharmonicLabel.setJustificationType (juce::Justification::centredLeft);
+    enharmonicLabel.setColour (juce::Label::textColourId, juce::Colours::white);
+    enharmonicLabel.setInterceptsMouseClicks (false, false);
+    enharmonicLabel.attachToComponent (&enharmonicSelector, true);
+
+    scaleSelector.addItemList (juce::StringArray {
+        "Chromatic", "Major", "Natural Minor", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Locrian", "Custom"
+    }, 1);
     scaleSelector.setJustificationType (juce::Justification::centredLeft);
     auto comboBackground = juce::Colour::fromRGB (18, 24, 34);
     scaleSelector.setColour (juce::ComboBox::backgroundColourId, comboBackground);
@@ -97,40 +99,17 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     keySelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
     keySelector.setTooltip ("Choose the key signature root note");
 
-    scaleSelector.onChange = [this]
-    {
-        if (isUpdatingScaleControls)
-            return;
+    enharmonicSelector.addItemList (juce::StringArray { "Auto", "Sharps", "Flats" }, 1);
+    enharmonicSelector.setJustificationType (juce::Justification::centredLeft);
+    enharmonicSelector.setColour (juce::ComboBox::backgroundColourId, comboBackground);
+    enharmonicSelector.setColour (juce::ComboBox::textColourId, juce::Colours::white);
+    enharmonicSelector.setColour (juce::ComboBox::arrowColourId, juce::Colours::white);
+    enharmonicSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
+    enharmonicSelector.setTooltip ("Select whether to display sharps, flats, or automatic enharmonics");
 
-        juce::ScopedValueSetter<bool> guard (isUpdatingScaleControls, true);
-        auto selectedId = scaleSelector.getSelectedId();
-
-        if (selectedId > 1)
-            lastNonChromaticScaleId = selectedId;
-
-        auto isChromatic = selectedId == 1;
-        chromaticButton.setToggleState (isChromatic, juce::dontSendNotification);
-        scaleSelector.setEnabled (! isChromatic);
-        keySelector.setEnabled (! isChromatic);
-    };
-
-    chromaticButton.onClick = [this]
-    {
-        if (isUpdatingScaleControls)
-            return;
-
-        if (chromaticButton.getToggleState())
-        {
-            if (scaleSelector.getSelectedId() > 1)
-                lastNonChromaticScaleId = scaleSelector.getSelectedId();
-
-            scaleSelector.setSelectedId (1, juce::sendNotificationSync);
-        }
-        else
-        {
-            scaleSelector.setSelectedId (lastNonChromaticScaleId, juce::sendNotificationSync);
-        }
-    };
+    scaleSelector.onChange = [this] { handleScaleSelectorChanged(); };
+    keySelector.onChange = [this] { handleKeySelectorChanged(); };
+    enharmonicSelector.onChange = [this] { refreshScaleDisplay(); };
 
     detectedLabel.setJustificationType (juce::Justification::centred);
     detectedLabel.setFont (makeFont (16.0f, juce::Font::bold));
@@ -167,10 +146,13 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
 
     scaleAttachment = std::make_unique<ComboBoxAttachment> (vts, "scaleMode", scaleSelector);
     keyAttachment = std::make_unique<ComboBoxAttachment> (vts, "scaleRoot", keySelector);
+    enharmonicAttachment = std::make_unique<ComboBoxAttachment> (vts, "enharmonicPref", enharmonicSelector);
     midiAttachment = std::make_unique<ButtonAttachment> (vts, "midiEnabled", midiButton);
     forceCorrectionAttachment = std::make_unique<ButtonAttachment> (vts, "forceCorrection", forceCorrectionButton);
 
     scaleSelector.onChange();
+    refreshScaleDisplay();
+    updateNoteToggleLabels();
 
     setSize (820, 520);
     startTimerHz (30);
@@ -258,14 +240,35 @@ void ProTuneAudioProcessorEditor::resized()
     targetLabel.setBounds (readouts.reduced (8));
 
     auto controlArea = bounds;
-    auto toggleArea = controlArea.removeFromRight (200);
-    chromaticButton.setBounds (toggleArea.removeFromTop (36));
-    midiButton.setBounds (toggleArea.removeFromTop (36));
-    forceCorrectionButton.setBounds (toggleArea.removeFromTop (36));
+    auto rightColumn = controlArea.removeFromRight (240);
+
+    midiButton.setBounds (rightColumn.removeFromTop (32));
+    forceCorrectionButton.setBounds (rightColumn.removeFromTop (32));
 
     auto selectorHeight = 44;
-    scaleSelector.setBounds (toggleArea.removeFromTop (selectorHeight).reduced (0, 6));
-    keySelector.setBounds (toggleArea.removeFromTop (selectorHeight).reduced (0, 6));
+    scaleSelector.setBounds (rightColumn.removeFromTop (selectorHeight).reduced (0, 6));
+    keySelector.setBounds (rightColumn.removeFromTop (selectorHeight).reduced (0, 6));
+    enharmonicSelector.setBounds (rightColumn.removeFromTop (selectorHeight).reduced (0, 6));
+
+    auto noteArea = rightColumn.reduced (4);
+    auto rowHeight = noteArea.getHeight() / 4;
+    auto columnWidth = noteArea.getWidth() / 3;
+
+    for (int row = 0; row < 4; ++row)
+    {
+        auto rowBounds = noteArea.removeFromTop (rowHeight);
+        auto rowSlice = rowBounds;
+
+        for (int col = 0; col < 3; ++col)
+        {
+            auto index = row * 3 + col;
+            if (index >= (int) noteButtons.size())
+                break;
+
+            auto cell = rowSlice.removeFromLeft (columnWidth);
+            noteButtons[(size_t) index].setBounds (cell.reduced (4));
+        }
+    }
 
     auto firstRow = controlArea.removeFromTop (controlArea.getHeight() / 2);
     auto secondRow = controlArea;
@@ -284,6 +287,8 @@ void ProTuneAudioProcessorEditor::resized()
 
 void ProTuneAudioProcessorEditor::timerCallback()
 {
+    refreshScaleDisplay();
+
     auto detected = processor.getLastDetectedFrequency();
     auto target = processor.getLastTargetFrequency();
 
@@ -301,16 +306,16 @@ void ProTuneAudioProcessorEditor::timerCallback()
     displayedConfidence = smooth (displayedConfidence, limitedConfidence, smoothing);
 
     auto detectedText = juce::String (displayedDetectedHz > 0.0f ? juce::String (displayedDetectedHz, 2) + " Hz" : "--")
-                        + " (" + frequencyToNoteName (displayedDetectedHz) + ")";
+                        + " (" + frequencyToDisplayName (displayedDetectedHz) + ")";
     auto targetText = juce::String (displayedTargetHz > 0.0f ? juce::String (displayedTargetHz, 2) + " Hz" : "--")
-                      + " (" + frequencyToNoteName (displayedTargetHz) + ")";
+                      + " (" + frequencyToDisplayName (displayedTargetHz) + ")";
 
     detectedLabel.setText ("Detected: " + detectedText, juce::dontSendNotification);
     targetLabel.setText ("Target: " + targetText, juce::dontSendNotification);
 
     if (target > 0.0f)
     {
-        centralNoteLabel.setText (frequencyToNoteName (target), juce::dontSendNotification);
+        centralNoteLabel.setText (frequencyToDisplayName (target), juce::dontSendNotification);
         centralFreqLabel.setText (juce::String (target, 1) + " Hz", juce::dontSendNotification);
     }
     else
@@ -322,6 +327,126 @@ void ProTuneAudioProcessorEditor::timerCallback()
     confidenceLabel.setText ("Confidence " + juce::String (limitedConfidence * 100.0f, 1) + "%", juce::dontSendNotification);
 
     repaint();
+}
+
+void ProTuneAudioProcessorEditor::refreshScaleDisplay()
+{
+    auto mask = processor.getEffectiveScaleMask();
+    if (mask != lastDisplayedMask)
+    {
+        updateNoteToggleStates (mask);
+        lastDisplayedMask = mask;
+    }
+
+    auto currentPref = processor.getEnharmonicPreference();
+    auto preferFlats = processor.shouldUseFlatsForDisplay();
+    if (currentPref != lastEnharmonicPref || preferFlats != lastPreferFlats)
+    {
+        lastEnharmonicPref = currentPref;
+        lastPreferFlats = preferFlats;
+        updateNoteToggleLabels();
+    }
+}
+
+void ProTuneAudioProcessorEditor::updateNoteToggleStates (ProTuneAudioProcessor::AllowedMask mask)
+{
+    juce::ScopedValueSetter<bool> guard (isUpdatingNoteButtons, true);
+
+    for (size_t i = 0; i < noteButtons.size(); ++i)
+    {
+        auto enabled = (mask & (ProTuneAudioProcessor::AllowedMask) (1u << (int) i)) != 0;
+        noteButtons[i].setToggleState (enabled, juce::dontSendNotification);
+    }
+}
+
+void ProTuneAudioProcessorEditor::updateNoteToggleLabels()
+{
+    for (size_t i = 0; i < noteButtons.size(); ++i)
+    {
+        auto name = pitchClassName ((int) i);
+        noteButtons[i].setButtonText (name);
+        noteButtons[i].setTooltip ("Allow note " + name);
+    }
+}
+
+void ProTuneAudioProcessorEditor::handleScaleSelectorChanged()
+{
+    if (isUpdatingScaleControls)
+        return;
+
+    juce::ScopedValueSetter<bool> guard (isUpdatingScaleControls, true);
+
+    auto settings = processor.getScaleSettings();
+    if (settings.type != ProTuneAudioProcessor::ScaleSettings::Type::Custom)
+        processor.setScaleMaskFromUI (processor.getEffectiveScaleMask());
+
+    refreshScaleDisplay();
+}
+
+void ProTuneAudioProcessorEditor::handleKeySelectorChanged()
+{
+    if (isUpdatingScaleControls)
+        return;
+
+    juce::ScopedValueSetter<bool> guard (isUpdatingScaleControls, true);
+
+    auto settings = processor.getScaleSettings();
+    if (settings.type != ProTuneAudioProcessor::ScaleSettings::Type::Custom)
+        processor.setScaleMaskFromUI (processor.getEffectiveScaleMask());
+
+    refreshScaleDisplay();
+}
+
+void ProTuneAudioProcessorEditor::handleNoteToggle (int pitchClass)
+{
+    if (isUpdatingNoteButtons)
+        return;
+
+    auto mask = processor.getEffectiveScaleMask();
+    auto bit = (ProTuneAudioProcessor::AllowedMask) (1u << positiveModulo (pitchClass, 12));
+
+    if (noteButtons[(size_t) positiveModulo (pitchClass, 12)].getToggleState())
+        mask |= bit;
+    else
+        mask &= ~bit;
+
+    if (mask == 0)
+    {
+        mask |= bit;
+        juce::ScopedValueSetter<bool> guardButtons (isUpdatingNoteButtons, true);
+        noteButtons[(size_t) positiveModulo (pitchClass, 12)].setToggleState (true, juce::dontSendNotification);
+    }
+
+    processor.setScaleMaskFromUI (mask);
+
+    auto settings = processor.getScaleSettings();
+    if (settings.type != ProTuneAudioProcessor::ScaleSettings::Type::Custom)
+        processor.setScaleModeFromUI (ProTuneAudioProcessor::ScaleSettings::Type::Custom);
+
+    lastDisplayedMask = mask;
+    refreshScaleDisplay();
+}
+
+juce::String ProTuneAudioProcessorEditor::pitchClassName (int pitchClass) const
+{
+    auto index = positiveModulo (pitchClass, 12);
+    auto useFlats = processor.shouldUseFlatsForDisplay();
+    return useFlats ? flatNoteNames[index] : sharpNoteNames[index];
+}
+
+juce::String ProTuneAudioProcessorEditor::frequencyToDisplayName (float frequency) const
+{
+    if (frequency <= 0.0f)
+        return "--";
+
+    constexpr float referenceFrequency = 440.0f;
+    constexpr int referenceMidi = 69;
+
+    auto midi = referenceMidi + 12.0f * std::log2 (frequency / referenceFrequency);
+    auto rounded = (int) std::round (midi);
+    auto noteIndex = positiveModulo (rounded, 12);
+    auto octave = (int) std::floor (rounded / 12.0f) - 1;
+    return pitchClassName (noteIndex) + juce::String (octave);
 }
 
 void ProTuneAudioProcessorEditor::configureSlider (juce::Slider& slider, const juce::String& name, bool isVertical)

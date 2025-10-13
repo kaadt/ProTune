@@ -19,6 +19,47 @@ juce::AudioBuffer<float> createHannWindow (int size)
     return buffer;
 }
 
+PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSettings::patternToMask (int root,
+                                                                                                   std::initializer_list<int> pattern) noexcept
+{
+    AllowedMask mask = 0;
+    for (auto interval : pattern)
+    {
+        auto pitchClass = positiveModulo (root + interval, 12);
+        mask |= (AllowedMask) (1u << pitchClass);
+    }
+
+    return mask;
+}
+
+PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSettings::maskForType (Type type,
+                                                                                                  int root,
+                                                                                                  AllowedMask customMask) noexcept
+{
+    switch (type)
+    {
+        case Type::Chromatic:
+            return 0x0FFFu;
+        case Type::Major:
+            return patternToMask (root, { 0, 2, 4, 5, 7, 9, 11 });
+        case Type::NaturalMinor:
+            return patternToMask (root, { 0, 2, 3, 5, 7, 8, 10 });
+        case Type::Dorian:
+            return patternToMask (root, { 0, 2, 3, 5, 7, 9, 10 });
+        case Type::Phrygian:
+            return patternToMask (root, { 0, 1, 3, 5, 7, 8, 10 });
+        case Type::Lydian:
+            return patternToMask (root, { 0, 2, 4, 6, 7, 9, 11 });
+        case Type::Mixolydian:
+            return patternToMask (root, { 0, 2, 4, 5, 7, 9, 10 });
+        case Type::Locrian:
+            return patternToMask (root, { 0, 1, 3, 5, 6, 8, 10 });
+        case Type::Custom:
+        default:
+            return customMask & 0x0FFFu;
+    }
+}
+
 inline float wrapPhase (float value)
 {
     return value - juce::MathConstants<float>::twoPi * std::floor ((value + juce::MathConstants<float>::pi)
@@ -519,7 +560,7 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
     auto rawMidi = frequencyToMidiNote (detectedFrequency);
     const bool usingMidi = params.midiEnabled && ! std::isnan (heldMidiNote);
 
-    auto candidateMidi = usingMidi ? heldMidiNote : snapNoteToScale (rawMidi, params.scaleRoot, params.scaleMode);
+    auto candidateMidi = usingMidi ? heldMidiNote : snapNoteToMask (rawMidi, params.scale.mask);
     candidateMidi = clampMidiToRange (candidateMidi);
 
     if (usingMidi)
@@ -556,35 +597,34 @@ float PitchCorrectionEngine::midiNoteToFrequency (float midiNote)
     return referenceFrequency * std::pow (2.0f, (midiNote - referenceMidiNote) / 12.0f);
 }
 
-float PitchCorrectionEngine::snapNoteToScale (float midiNote, int rootNote, Parameters::ScaleMode mode)
+float PitchCorrectionEngine::snapNoteToMask (float midiNote, AllowedMask mask)
 {
-    if (mode == Parameters::ScaleMode::Chromatic)
+    if (mask == 0)
         return std::round (midiNote);
 
-    static constexpr std::array<int, 7> majorScale { 0, 2, 4, 5, 7, 9, 11 };
-    static constexpr std::array<int, 7> minorScale { 0, 2, 3, 5, 7, 8, 10 };
-
-    const auto& intervals = (mode == Parameters::ScaleMode::Minor) ? minorScale : majorScale;
-
-    auto root = positiveModulo (rootNote, 12);
-    auto normalised = midiNote - (float) root;
-    auto octave = std::floor (normalised / 12.0f);
-    auto noteInOctave = normalised - octave * 12.0f;
-
-    float bestInterval = (float) intervals.front();
+    auto searchCenter = (int) std::floor (midiNote + 0.5f);
+    float bestMidi = (float) searchCenter;
     float bestDistance = std::numeric_limits<float>::max();
 
-    for (auto interval : intervals)
+    for (int delta = -24; delta <= 24; ++delta)
     {
-        auto distance = std::abs (noteInOctave - (float) interval);
+        auto candidate = searchCenter + delta;
+        auto pitchClass = positiveModulo (candidate, 12);
+        if ((mask & (AllowedMask) (1u << pitchClass)) == 0)
+            continue;
+
+        auto distance = std::abs ((float) candidate - midiNote);
         if (distance < bestDistance)
         {
             bestDistance = distance;
-            bestInterval = (float) interval;
+            bestMidi = (float) candidate;
         }
     }
 
-    return octave * 12.0f + (float) root + bestInterval;
+    if (bestDistance == std::numeric_limits<float>::max())
+        return std::round (midiNote);
+
+    return bestMidi;
 }
 
 

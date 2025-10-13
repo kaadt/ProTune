@@ -38,9 +38,20 @@ public:
 
     juce::AudioProcessorValueTreeState& getValueTreeState() { return parameters; }
 
+    using AllowedMask = PitchCorrectionEngine::AllowedMask;
+    using ScaleSettings = PitchCorrectionEngine::Parameters::ScaleSettings;
+
     float getLastDetectedFrequency() const noexcept { return lastDetectedFrequency; }
     float getLastTargetFrequency() const noexcept { return lastTargetFrequency; }
     float getLastDetectionConfidence() const noexcept { return lastDetectionConfidence; }
+
+    ScaleSettings getScaleSettings() const;
+    AllowedMask getEffectiveScaleMask() const;
+    AllowedMask getCustomScaleMask() const;
+    void setScaleMaskFromUI (AllowedMask mask);
+    void setScaleModeFromUI (ScaleSettings::Type type);
+    ScaleSettings::EnharmonicPreference getEnharmonicPreference() const;
+    bool shouldUseFlatsForDisplay() const;
 
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
@@ -61,6 +72,8 @@ private:
     std::atomic<float>* rangeHighParam = nullptr;
     std::atomic<float>* scaleModeParam = nullptr;
     std::atomic<float>* scaleRootParam = nullptr;
+    std::atomic<float>* scaleMaskParam = nullptr;
+    std::atomic<float>* enharmonicParam = nullptr;
     std::atomic<float>* midiParam = nullptr;
     std::atomic<float>* forceCorrectionParam = nullptr;
 

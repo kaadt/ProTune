@@ -7,10 +7,14 @@
 #include <limits>
 #include <memory>
 #include <vector>
+#include <cstdint>
+#include <initializer_list>
 
 class PitchCorrectionEngine
 {
 public:
+    using AllowedMask = std::uint16_t;
+
     struct Parameters
     {
         float speed = 0.85f;
@@ -20,14 +24,38 @@ public:
         float vibratoTracking = 0.5f;
         float rangeLowHz = 80.0f;
         float rangeHighHz = 1000.0f;
-        enum class ScaleMode
+        struct ScaleSettings
         {
-            Chromatic = 0,
-            Major,
-            Minor
+            enum class Type
+            {
+                Chromatic = 0,
+                Major,
+                NaturalMinor,
+                Dorian,
+                Phrygian,
+                Lydian,
+                Mixolydian,
+                Locrian,
+                Custom
+            };
+
+            enum class EnharmonicPreference
+            {
+                Auto = 0,
+                Sharps,
+                Flats
+            };
+
+            Type type = Type::Chromatic;
+            int root = 0;
+            AllowedMask mask = 0x0FFFu;
+            EnharmonicPreference enharmonicPreference = EnharmonicPreference::Auto;
+
+            static AllowedMask patternToMask (int root, std::initializer_list<int> pattern) noexcept;
+            static AllowedMask maskForType (Type type, int root, AllowedMask customMask) noexcept;
         };
-        ScaleMode scaleMode = ScaleMode::Chromatic;
-        int scaleRoot = 0;
+
+        ScaleSettings scale;
         bool midiEnabled = false;
         bool forceCorrection = true;
     };
@@ -60,7 +88,7 @@ private:
 
     static float frequencyToMidiNote (float freq);
     static float midiNoteToFrequency (float midiNote);
-    static float snapNoteToScale (float midiNote, int rootNote, Parameters::ScaleMode mode);
+    static float snapNoteToMask (float midiNote, AllowedMask mask);
 
     static constexpr int minAnalysisFftOrder = 9;
     static constexpr int maxAnalysisFftOrder = 12;

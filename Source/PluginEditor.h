@@ -1,6 +1,8 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include <array>
+#include <limits>
 #include "PluginProcessor.h"
 
 class ProTuneAudioProcessorEditor : public juce::AudioProcessorEditor,
@@ -29,13 +31,16 @@ private:
 
     juce::ComboBox scaleSelector;
     juce::ComboBox keySelector;
+    juce::ComboBox enharmonicSelector;
     juce::Label retuneLabel { {}, "Retune Speed" };
     juce::Label humanizeLabel { {}, "Humanize" };
     juce::Label scaleLabel { {}, "Scale" };
     juce::Label keyLabel { {}, "Key" };
-    juce::ToggleButton chromaticButton { "Chromatic" };
+    juce::Label enharmonicLabel { {}, "Enharmonics" };
     juce::ToggleButton midiButton { "MIDI Control" };
     juce::ToggleButton forceCorrectionButton { "Force Correction" };
+
+    std::array<juce::ToggleButton, 12> noteButtons;
 
     juce::Label detectedLabel { {}, "Detected" };
     juce::Label targetLabel { {}, "Target" };
@@ -57,6 +62,7 @@ private:
 
     std::unique_ptr<ComboBoxAttachment> scaleAttachment;
     std::unique_ptr<ComboBoxAttachment> keyAttachment;
+    std::unique_ptr<ComboBoxAttachment> enharmonicAttachment;
     std::unique_ptr<ButtonAttachment> midiAttachment;
     std::unique_ptr<ButtonAttachment> forceCorrectionAttachment;
 
@@ -64,8 +70,21 @@ private:
     float displayedTargetHz = 0.0f;
     float displayedConfidence = 0.0f;
 
-    int lastNonChromaticScaleId = 2;
     bool isUpdatingScaleControls = false;
+    bool isUpdatingNoteButtons = false;
+    ProTuneAudioProcessor::AllowedMask lastDisplayedMask = std::numeric_limits<ProTuneAudioProcessor::AllowedMask>::max();
+    ProTuneAudioProcessor::ScaleSettings::EnharmonicPreference lastEnharmonicPref
+        = ProTuneAudioProcessor::ScaleSettings::EnharmonicPreference::Auto;
+    bool lastPreferFlats = true;
+
+    void refreshScaleDisplay();
+    void updateNoteToggleStates (ProTuneAudioProcessor::AllowedMask mask);
+    void updateNoteToggleLabels();
+    void handleScaleSelectorChanged();
+    void handleKeySelectorChanged();
+    void handleNoteToggle (int pitchClass);
+    juce::String pitchClassName (int pitchClass) const;
+    juce::String frequencyToDisplayName (float frequency) const;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProTuneAudioProcessorEditor)
 };
