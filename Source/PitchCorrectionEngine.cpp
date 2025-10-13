@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <complex>
 #include <cmath>
 #include <cstring>
 #include <numeric>
@@ -659,8 +660,8 @@ void PitchCorrectionEngine::SpectralPeakVocoder::prepare (double sampleRateIn, i
     outputAccum.assign ((size_t) fftSize, 0.0f);
     outputQueue.clear();
 
-    fftBuffer.assign ((size_t) (2 * fftSize), 0.0f);
-    outputSpectrum.assign ((size_t) (2 * fftSize), 0.0f);
+    fftBuffer.assign ((size_t) fftSize, juce::dsp::Complex<float>());
+    outputSpectrum.assign ((size_t) fftSize, juce::dsp::Complex<float>());
     magnitudes.assign ((size_t) (fftSize / 2 + 1), 0.0f);
     phases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
     destPhases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
@@ -744,25 +745,25 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
 
     const int numBins = fftSize / 2;
 
-    std::fill (fftBuffer.begin(), fftBuffer.end(), 0.0f);
+    std::fill (fftBuffer.begin(), fftBuffer.end(), juce::dsp::Complex<float>());
     for (int n = 0; n < fftSize; ++n)
     {
         auto windowed = analysisFifo[(size_t) n] * analysisWindow[(size_t) n];
-        fftBuffer[(size_t) (2 * n)] = windowed;
-        fftBuffer[(size_t) (2 * n + 1)] = 0.0f;
+        fftBuffer[(size_t) n] = juce::dsp::Complex<float> (windowed, 0.0f);
     }
 
     fft->perform (fftBuffer.data(), fftBuffer.data(), false);
 
     for (int k = 0; k <= numBins; ++k)
     {
-        const float real = fftBuffer[(size_t) (2 * k)];
-        const float imag = fftBuffer[(size_t) (2 * k + 1)];
+        const auto bin = fftBuffer[(size_t) k];
+        const float real = bin.real();
+        const float imag = bin.imag();
         magnitudes[(size_t) k] = std::sqrt (real * real + imag * imag);
         phases[(size_t) k] = std::atan2 (imag, real);
     }
 
-    std::fill (outputSpectrum.begin(), outputSpectrum.end(), 0.0f);
+    std::fill (outputSpectrum.begin(), outputSpectrum.end(), juce::dsp::Complex<float>());
 
     const float binToOmega = juce::MathConstants<float>::twoPi / (float) fftSize;
     const float hopSamples = (float) hopSize;
@@ -787,8 +788,8 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
         destPhases[(size_t) destBin] = newPhase;
         phaseInitialised[(size_t) destBin] = 1;
 
-        outputSpectrum[(size_t) (2 * destBin)] += magnitude * std::cos (newPhase);
-        outputSpectrum[(size_t) (2 * destBin + 1)] += magnitude * std::sin (newPhase);
+        outputSpectrum[(size_t) destBin] += juce::dsp::Complex<float> (magnitude * std::cos (newPhase),
+                                                                       magnitude * std::sin (newPhase));
     };
 
     for (int k = 1; k < numBins; ++k)
@@ -816,17 +817,13 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
         }
     }
 
-    outputSpectrum[0] = fftBuffer[0];
-    outputSpectrum[1] = 0.0f;
-    outputSpectrum[(size_t) (2 * numBins)] = fftBuffer[(size_t) (2 * numBins)];
-    outputSpectrum[(size_t) (2 * numBins + 1)] = 0.0f;
+    outputSpectrum[0] = juce::dsp::Complex<float> (fftBuffer[0].real(), 0.0f);
+    outputSpectrum[(size_t) numBins] = juce::dsp::Complex<float> (fftBuffer[(size_t) numBins].real(), 0.0f);
 
     for (int k = 1; k < numBins; ++k)
     {
-        const auto real = outputSpectrum[(size_t) (2 * k)];
-        const auto imag = outputSpectrum[(size_t) (2 * k + 1)];
-        outputSpectrum[(size_t) (2 * (fftSize - k))] = real;
-        outputSpectrum[(size_t) (2 * (fftSize - k) + 1)] = -imag;
+        const auto bin = outputSpectrum[(size_t) k];
+        outputSpectrum[(size_t) (fftSize - k)] = std::conj (bin);
     }
 
     fft->perform (outputSpectrum.data(), outputSpectrum.data(), true);
@@ -834,7 +831,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
     const float normalisation = 1.0f / (float) fftSize;
     for (int n = 0; n < fftSize; ++n)
     {
-        float sample = outputSpectrum[(size_t) (2 * n)] * normalisation;
+        float sample = outputSpectrum[(size_t) n].real() * normalisation;
         sample *= synthesisWindow[(size_t) n];
         outputAccum[(size_t) n] += sample;
     }

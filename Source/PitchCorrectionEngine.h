@@ -174,8 +174,8 @@ private:
         int fifoFill = 0;
         std::vector<float> outputAccum;
         std::deque<float> outputQueue;
-        std::vector<float> fftBuffer;
-        std::vector<float> outputSpectrum;
+        std::vector<juce::dsp::Complex<float>> fftBuffer;
+        std::vector<juce::dsp::Complex<float>> outputSpectrum;
         std::vector<float> magnitudes;
         std::vector<float> phases;
         std::vector<float> destPhases;
