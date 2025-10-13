@@ -379,21 +379,6 @@ void ProTuneAudioProcessorEditor::resized()
             noteButtons[(size_t) index].setBounds (cell.reduced (4));
         }
     }
-
-    auto firstRowHeight = juce::jmax (80, juce::roundToInt (controlArea.getHeight() * 0.55f));
-    auto firstRow = controlArea.removeFromTop (firstRowHeight);
-    auto secondRow = controlArea;
-
-    auto firstColumnWidth = firstRow.getWidth() / 4;
-    speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 10));
-    transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 10));
-    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 10));
-    vibratoSlider.setBounds (firstRow.reduced (12, 10));
-
-    auto secondColumnWidth = secondRow.getWidth() / 3;
-    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 10));
-    rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 10));
-    rangeHighSlider.setBounds (secondRow.reduced (12, 10));
 }
 
 void ProTuneAudioProcessorEditor::timerCallback()
