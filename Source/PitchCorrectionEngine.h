@@ -83,7 +83,7 @@ public:
     [[nodiscard]] float getLastDetectionConfidence() const noexcept { return lastDetectionConfidence; }
 
 private:
-    void analyseBlock (const float* samples, int numSamples);
+    void analyseBlock (const juce::AudioBuffer<float>& buffer);
     float estimatePitchFromAutocorrelation (const float* frame, int frameSize, float& confidenceOut);
     float chooseTargetFrequency (float detectedFrequency);
     void updateAnalysisResources();
