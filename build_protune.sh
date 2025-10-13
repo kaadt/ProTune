@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$script_dir"
+
+rm -rf build
+git pull
+cmake -S . -B build -DJUCE_SOURCE_DIR=JUCE
+cmake --build build --target ProTune_VST3

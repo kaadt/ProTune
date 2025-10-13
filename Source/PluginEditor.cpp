@@ -121,10 +121,6 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     enharmonicSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
     enharmonicSelector.setTooltip ("Select whether to display sharps, flats, or automatic enharmonics");
 
-    scaleSelector.setMinimumWidth (150);
-    keySelector.setMinimumWidth (120);
-    enharmonicSelector.setMinimumWidth (120);
-
     scaleSelector.onChange = [this] { handleScaleSelectorChanged(); };
     keySelector.onChange = [this] { handleKeySelectorChanged(); };
     enharmonicSelector.onChange = [this] { refreshScaleDisplay(); };
@@ -256,12 +252,45 @@ void ProTuneAudioProcessorEditor::resized()
     constexpr int selectionStripHeight = 72;
     auto selectionStrip = bounds.removeFromTop (selectionStripHeight);
     auto selectionContent = selectionStrip.reduced (16, 10);
-    auto columnWidth = selectionContent.getWidth() / 3;
     auto labelHeight = 18;
     auto comboHeight = 32;
 
-    auto scaleColumn = selectionContent.removeFromLeft (columnWidth).reduced (4, 0);
-    auto keyColumn = selectionContent.removeFromLeft (columnWidth).reduced (4, 0);
+    constexpr int minScaleWidth = 150;
+    constexpr int minKeyWidth = 120;
+    constexpr int minEnhWidth = 120;
+    constexpr int minTotalWidth = minScaleWidth + minKeyWidth + minEnhWidth;
+
+    const auto totalSelectionWidth = selectionContent.getWidth();
+    int scaleWidth = 0;
+    int keyWidth = 0;
+    int enhWidth = 0;
+
+    if (totalSelectionWidth >= minTotalWidth)
+    {
+        scaleWidth = juce::jmax (minScaleWidth, totalSelectionWidth / 3);
+        scaleWidth = juce::jmin (scaleWidth, totalSelectionWidth - (minKeyWidth + minEnhWidth));
+
+        auto remaining = totalSelectionWidth - scaleWidth;
+        keyWidth = juce::jmax (minKeyWidth, remaining / 2);
+        keyWidth = juce::jmin (keyWidth, remaining - minEnhWidth);
+        enhWidth = remaining - keyWidth;
+    }
+    else
+    {
+        const auto compression = totalSelectionWidth / (float) minTotalWidth;
+        scaleWidth = juce::roundToInt (minScaleWidth * compression);
+        keyWidth = juce::roundToInt (minKeyWidth * compression);
+        enhWidth = totalSelectionWidth - scaleWidth - keyWidth;
+
+        if (enhWidth < 0)
+        {
+            enhWidth = 0;
+            keyWidth = juce::jmax (0, totalSelectionWidth - scaleWidth);
+        }
+    }
+
+    auto scaleColumn = selectionContent.removeFromLeft (scaleWidth).reduced (4, 0);
+    auto keyColumn = selectionContent.removeFromLeft (keyWidth).reduced (4, 0);
     auto enhColumn = selectionContent.reduced (4, 0);
 
     scaleLabel.setBounds (scaleColumn.removeFromTop (labelHeight));
