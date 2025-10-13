@@ -260,7 +260,24 @@ juce::AudioProcessorValueTreeState::ParameterLayout ProTuneAudioProcessor::creat
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("rangeHigh", "Range High (Hz)",
         juce::NormalisableRange<float> (120.0f, 2000.0f, 0.01f, 0.5f), 800.0f));
 
-    juce::StringArray scaleModes { "Chromatic", "Major", "Natural Minor", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Locrian", "Custom" };
+    juce::StringArray scaleModes {
+        "Chromatic",
+        "Major",
+        "Natural Minor",
+        "Harmonic Minor",
+        "Melodic Minor",
+        "Dorian",
+        "Phrygian",
+        "Lydian",
+        "Mixolydian",
+        "Locrian",
+        "Whole Tone",
+        "Blues",
+        "Major Pentatonic",
+        "Minor Pentatonic",
+        "Diminished",
+        "Custom"
+    };
     params.push_back (std::make_unique<juce::AudioParameterChoice> ("scaleMode", "Scale", scaleModes, 0));
 
     juce::StringArray keyChoices { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };

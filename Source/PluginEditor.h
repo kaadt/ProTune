@@ -80,6 +80,7 @@ private:
     void refreshScaleDisplay();
     void updateNoteToggleStates (ProTuneAudioProcessor::AllowedMask mask);
     void updateNoteToggleLabels();
+    void updateKeySelectorLabels();
     void handleScaleSelectorChanged();
     void handleKeySelectorChanged();
     void handleNoteToggle (int pitchClass);

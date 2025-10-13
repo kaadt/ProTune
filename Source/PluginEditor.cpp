@@ -81,7 +81,22 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     enharmonicLabel.attachToComponent (&enharmonicSelector, true);
 
     scaleSelector.addItemList (juce::StringArray {
-        "Chromatic", "Major", "Natural Minor", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Locrian", "Custom"
+        "Chromatic",
+        "Major",
+        "Natural Minor",
+        "Harmonic Minor",
+        "Melodic Minor",
+        "Dorian",
+        "Phrygian",
+        "Lydian",
+        "Mixolydian",
+        "Locrian",
+        "Whole Tone",
+        "Blues",
+        "Major Pentatonic",
+        "Minor Pentatonic",
+        "Diminished",
+        "Custom"
     }, 1);
     scaleSelector.setJustificationType (juce::Justification::centredLeft);
     auto comboBackground = juce::Colour::fromRGB (18, 24, 34);
@@ -153,6 +168,7 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     scaleSelector.onChange();
     refreshScaleDisplay();
     updateNoteToggleLabels();
+    updateKeySelectorLabels();
 
     setSize (820, 520);
     startTimerHz (30);
@@ -345,6 +361,7 @@ void ProTuneAudioProcessorEditor::refreshScaleDisplay()
         lastEnharmonicPref = currentPref;
         lastPreferFlats = preferFlats;
         updateNoteToggleLabels();
+        updateKeySelectorLabels();
     }
 }
 
@@ -367,6 +384,14 @@ void ProTuneAudioProcessorEditor::updateNoteToggleLabels()
         noteButtons[i].setButtonText (name);
         noteButtons[i].setTooltip ("Allow note " + name);
     }
+}
+
+void ProTuneAudioProcessorEditor::updateKeySelectorLabels()
+{
+    const auto& names = processor.shouldUseFlatsForDisplay() ? flatNoteNames : sharpNoteNames;
+
+    for (int i = 0; i < keySelector.getNumItems(); ++i)
+        keySelector.changeItemText (i + 1, names[i]);
 }
 
 void ProTuneAudioProcessorEditor::handleScaleSelectorChanged()
