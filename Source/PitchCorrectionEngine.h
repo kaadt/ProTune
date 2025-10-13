@@ -165,6 +165,7 @@ private:
         int fftSize = 0;
         int hopSize = 0;
         float frameRatio = 1.0f;
+    float olaGain = 1.0f; // normalisation to satisfy COLA for chosen window/hop
 
         std::unique_ptr<juce::dsp::FFT> fft;
         std::vector<float> analysisWindow;

@@ -37,6 +37,7 @@ private:
     juce::Label scaleLabel { {}, "Scale" };
     juce::Label keyLabel { {}, "Key" };
     juce::Label enharmonicLabel { {}, "Enharmonics" };
+    juce::Label formantLabel { {}, "Formant" };
     juce::ToggleButton midiButton { "MIDI Control" };
     juce::ToggleButton forceCorrectionButton { "Force Correction" };
 

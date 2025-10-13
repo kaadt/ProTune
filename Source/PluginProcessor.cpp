@@ -239,8 +239,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout ProTuneAudioProcessor::creat
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("speed", "Speed",
-        juce::NormalisableRange<float> (0.0f, 1.0f, 0.0f, 1.0f), 0.85f,
-        juce::AudioParameterFloatAttributes().withLabel ("")));
+    juce::NormalisableRange<float> (0.0f, 400.0f, 0.1f, 1.0f), 10.0f,
+    juce::AudioParameterFloatAttributes().withLabel ("ms")));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("transition", "Note Transition",
         juce::NormalisableRange<float> (0.0f, 1.0f, 0.0f, 1.0f), 0.2f));

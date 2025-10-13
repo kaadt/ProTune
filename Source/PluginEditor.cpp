@@ -72,6 +72,13 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     humanizeLabel.setInterceptsMouseClicks (false, false);
     humanizeLabel.attachToComponent (&transitionSlider, false);
 
+    addAndMakeVisible (formantLabel);
+    formantLabel.setJustificationType (juce::Justification::centred);
+    formantLabel.setFont (makeFont (14.0f, juce::Font::bold));
+    formantLabel.setColour (juce::Label::textColourId, juce::Colours::white);
+    formantLabel.setInterceptsMouseClicks (false, false);
+    formantLabel.attachToComponent (&formantSlider, false);
+
     auto initialiseSelectionLabel = [] (juce::Label& label)
     {
         label.setJustificationType (juce::Justification::centredLeft);

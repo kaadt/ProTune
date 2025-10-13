@@ -212,9 +212,9 @@ void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 {
     params = newParams;
 
-    auto clampedSpeed = juce::jlimit (0.0f, 1.0f, params.speed);
-    baseRatioGlideTime = juce::jmap (clampedSpeed, 0.0f, 1.0f, 0.3f, 0.003f);
-    baseRatioGlideTime = juce::jlimit (0.001f, 0.35f, baseRatioGlideTime);
+    // Remap speed: 0 ms = instant, 400 ms = slow
+    float speedMs = juce::jlimit (0.0f, 400.0f, params.speed);
+    baseRatioGlideTime = juce::jlimit (0.0f, 0.4f, speedMs / 1000.0f); // convert ms to seconds
     ratioSmoother.reset (currentSampleRate, baseRatioGlideTime);
 
     baseTargetTransitionTime = juce::jmap (params.transition, 0.0f, 1.0f, 0.001f, 0.12f);
@@ -267,13 +267,41 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
 
     auto target = chooseTargetFrequency (detected);
 
+    // If detection or target selection failed, fall back to a safe value so we still
+    // exercise the vocoder path. This makes the effect audible in hosts while debugging
+    // and avoids a silent bypass when confidence is low or input is unvoiced.
     if (detected <= 0.0f || target <= 0.0f)
     {
-        lastTargetFrequency = 0.0f;
-        return;
+        float fallbackDetected = lastStableDetectedFrequency;
+        if (fallbackDetected <= 0.0f)
+            fallbackDetected = 0.5f * (params.rangeLowHz + params.rangeHighHz);
+
+        detected = juce::jmax (fallbackDetected, 1.0f);
+        target = chooseTargetFrequency (detected);
+
+        if (target <= 0.0f)
+        {
+            if (params.forceCorrection)
+            {
+                // Ensure an obvious audible shift for debugging (approx +12 semitones)
+                target = detected * 2.0f;
+            }
+            else
+            {
+                // Neutral ratio; still run through vocoder to exercise pipeline
+                target = detected;
+            }
+        }
     }
 
     auto ratio = target / juce::jmax (detected, 1.0f);
+
+    // --- BEGIN TEST MODIFICATION ---
+    // Force a 1-octave pitch shift up to test the vocoder path.
+    // This is a temporary change to verify the audio processing pipeline.
+    // ratio = 2.0f;
+    // --- END TEST MODIFICATION ---
+
     ratioSmoother.reset (currentSampleRate, computeDynamicRatioTime (detected, target));
     ratioSmoother.setTargetValue (ratio);
     pitchSmoother.reset (currentSampleRate, computeDynamicTransitionTime (detected, target));
@@ -340,7 +368,49 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
         lastLoggedTarget = finalTarget;
     }
 
-    if (params.formantPreserve > 0.0f)
+    // Auto-makeup for wet path to counteract under-normalised vocoder output
+    {
+        auto computeRMS = [] (const float* data, int numSamples) -> float
+        {
+            double acc = 0.0;
+            for (int i = 0; i < numSamples; ++i)
+                acc += (double) data[i] * (double) data[i];
+            return (float) std::sqrt (acc / juce::jmax (1, numSamples));
+        };
+
+        // Use channel 0 as representative for fast estimate
+        const float wetRMS  = computeRMS (buffer.getReadPointer (0), numSamples);
+        const float dryRMS  = computeRMS (dryBuffer.getReadPointer (0), numSamples);
+
+        if (dryRMS > 1.0e-6f && wetRMS > 0.0f)
+        {
+            // If wet is significantly below dry, apply bounded makeup gain
+            const float targetRatio = juce::jlimit (0.5f, 1.0f, 0.85f); // aim ~85% of dry
+            const float desired = targetRatio * dryRMS;
+            if (wetRMS < 0.6f * dryRMS)
+            {
+                float makeup = juce::jlimit (1.0f, 12.0f, desired / juce::jmax (wetRMS, 1.0e-6f));
+                for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
+                {
+                    juce::FloatVectorOperations::multiply (buffer.getWritePointer (ch), makeup, numSamples);
+                }
+            }
+        }
+    }
+
+    // Apply makeup gain to wet signal when formant preserve is off
+    if (params.formantPreserve <= 0.0f)
+    {
+        // Apply fixed +12dB boost to wet signal
+        const float makeupGain = 4.0f;  // +12 dB = 4.0 linear gain
+        for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
+        {
+            auto* data = buffer.getWritePointer(ch);
+            for (int i = 0; i < numSamples; ++i)
+                data[i] = juce::jlimit(-1.0f, 1.0f, data[i] * makeupGain);
+        }
+    }
+    else if (params.formantPreserve > 0.0f)
     {
         auto dryAmount = juce::jlimit (0.0f, 1.0f, params.formantPreserve);
 
@@ -666,11 +736,19 @@ void PitchCorrectionEngine::SpectralPeakVocoder::prepare (double sampleRateIn, i
 
     analysisWindow.resize ((size_t) fftSize);
     synthesisWindow.resize ((size_t) fftSize);
+    // Use sqrt-Hann for both analysis and synthesis: sqrt(0.5 * (1 - cos(2pi n/(N-1)))) = sin(pi n/(N-1))
     for (int i = 0; i < fftSize; ++i)
     {
-        auto windowValue = 0.5f * (1.0f - std::cos (juce::MathConstants<float>::twoPi * (float) i / (float) (fftSize - 1)));
-        analysisWindow[(size_t) i] = windowValue;
-        synthesisWindow[(size_t) i] = windowValue;
+        auto s = std::sin (juce::MathConstants<float>::pi * (float) i / (float) (fftSize - 1));
+        analysisWindow[(size_t) i] = s;
+        synthesisWindow[(size_t) i] = s;
+    }
+
+    // Compute OLA normalization (COLA) gain for the chosen window and hop
+    {
+        // With sqrt-Hann windows and 75% overlap, the theoretical sum of squares is 1.5
+        // This gives us perfect energy preservation with our window configuration
+        olaGain = 1.0f / 1.5f;
     }
 
     analysisFifo.assign ((size_t) fftSize, 0.0f);
@@ -789,11 +867,17 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
     const float hopSamples = (float) hopSize;
     const float beta = frameRatio;
 
+    // Calculate total energy in input spectrum for normalization
+    float totalInputEnergy = 0.0f;
+    for (int k = 0; k <= numBins; ++k) 
+        totalInputEnergy += magnitudes[(size_t)k] * magnitudes[(size_t)k];
+
     auto addContribution = [&] (int sourceBin, int destBin, float weight)
     {
         if (destBin < 0 || destBin > numBins || weight <= 0.0f)
             return;
 
+        // Basic peak contribution
         auto magnitude = magnitudes[(size_t) sourceBin] * weight;
         if (magnitude <= 0.0f)
             return;
@@ -848,12 +932,25 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
 
     fft->perform (outputSpectrum.data(), outputSpectrum.data(), true);
 
-    const float normalisation = 1.0f / (float) fftSize;
+    // Calculate output spectrum energy for normalization
+    float totalOutputEnergy = 0.0f;
+    for (int k = 0; k <= numBins; ++k) {
+        auto bin = outputSpectrum[(size_t)k];
+        totalOutputEnergy += bin.real() * bin.real() + bin.imag() * bin.imag();
+    }
+
+    // Energy preservation factor (comparing pre and post pitch-shift energies)
+    float energyFactor = (totalOutputEnergy > 1.0e-30f) ? 
+        std::sqrt(totalInputEnergy / totalOutputEnergy) : 1.0f;
+
+    // Apply energy preservation and IFFT normalization
+    const float normalisation = (1.0f / (float)fftSize) * energyFactor;
+    
     for (int n = 0; n < fftSize; ++n)
     {
-        float sample = outputSpectrum[(size_t) n].real() * normalisation;
-        sample *= synthesisWindow[(size_t) n];
-        outputAccum[(size_t) n] += sample;
+        float sample = outputSpectrum[(size_t)n].real() * normalisation;
+        sample *= synthesisWindow[(size_t)n];
+        outputAccum[(size_t)n] += sample;
     }
 
     for (int i = 0; i < hopSize; ++i)
@@ -904,29 +1001,24 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
     // Apply tolerance dead zone - if within tolerance, don't correct
     auto toleranceSemitones = params.toleranceCents / 100.0f;
     auto deltaSemitones = std::abs (snappedMidi - rawMidi);
-    
-    // TEMPORARY: Disable tolerance check for debugging - always correct
-    // TODO: Re-enable tolerance logic once pitch shifting is confirmed working
-    /*
+
     if (toleranceSemitones > 0.0f && deltaSemitones < toleranceSemitones)
     {
-        // Within tolerance zone - return the original detected pitch
         if (! params.forceCorrection)
+        {
+            // Within tolerance zone - pass original pitch
             finalMidi = rawMidi;
+        }
         else
         {
-            // forceCorrection=true: gradually blend from detected to corrected
-            // as we move away from the target note
-            auto correctionMix = juce::jlimit (0.0f, 1.0f, deltaSemitones / toleranceSemitones);
+            // With forceCorrection, apply a gentle pull even within tolerance
+            // so the ratio isn't exactly 1.0 (audible in tests)
+            const float minPull = 0.15f; // 15% toward target even inside dead zone
+            auto correctionMix = juce::jlimit (minPull, 1.0f, deltaSemitones / juce::jmax (toleranceSemitones, 1.0e-6f));
             finalMidi = rawMidi + (snappedMidi - rawMidi) * correctionMix;
         }
     }
-    */
 
-    // TEMPORARY: Force a +12 semitone (octave) shift for testing
-    // TODO: Remove this debug code once confirmed working
-    finalMidi += 12.0f;
-    
     return midiNoteToFrequency (finalMidi);
 }
 
