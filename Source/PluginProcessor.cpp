@@ -246,7 +246,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ProTuneAudioProcessor::creat
         juce::NormalisableRange<float> (0.0f, 1.0f, 0.0f, 1.0f), 0.2f));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("tolerance", "Tolerance (cents)",
-        juce::NormalisableRange<float> (0.0f, 100.0f, 0.1f, 0.5f), 2.0f));
+        juce::NormalisableRange<float> (0.0f, 100.0f, 0.1f, 0.5f), 50.0f));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> ("formant", "Formant Preserve",
         juce::NormalisableRange<float> (0.0f, 1.0f, 0.0f, 1.0f), 0.0f));

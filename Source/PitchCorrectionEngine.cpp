@@ -311,17 +311,21 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
 
     lastTargetFrequency = finalTarget;
 
-    if (detected > 0.0f && finalTarget > 0.0f)
+    // ENHANCED DEBUGGING: Log all processing info
+    if (detected > 0.0f || finalTarget > 0.0f)
     {
-        auto differenceDetected = std::abs (detected - lastLoggedDetected);
-        auto differenceTarget = std::abs (finalTarget - lastLoggedTarget);
-        constexpr float logThreshold = 0.5f; // Hz change before printing again
-
-        if (differenceDetected >= logThreshold || differenceTarget >= logThreshold)
+        static int logCount = 0;
+        logCount++;
+        
+        // Log every 100th sample to avoid spam
+        if (logCount % 100 == 0)
         {
-            juce::String message ("PitchCorrectionEngine: detected "
-                                  + juce::String (detected, 2) + " Hz -> target "
-                                  + juce::String (finalTarget, 2) + " Hz");
+            auto ratio = (detected > 0.0f) ? finalTarget / detected : 0.0f;
+            
+            juce::String message ("DEBUG: Block " + juce::String(logCount/100) + 
+                                  " - detected: " + juce::String (detected, 2) + " Hz" +
+                                  " -> target: " + juce::String (finalTarget, 2) + " Hz" +
+                                  " (ratio: " + juce::String (ratio, 3) + ")");
 
             if (params.midiEnabled && ! std::isnan (heldMidiNote))
             {
@@ -330,10 +334,10 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
             }
 
             DBG (message);
-
-            lastLoggedDetected = detected;
-            lastLoggedTarget = finalTarget;
         }
+        
+        lastLoggedDetected = detected;
+        lastLoggedTarget = finalTarget;
     }
 
     if (params.formantPreserve > 0.0f)
@@ -897,17 +901,32 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
 
     float finalMidi = snappedMidi;
 
-    if (! params.forceCorrection)
+    // Apply tolerance dead zone - if within tolerance, don't correct
+    auto toleranceSemitones = params.toleranceCents / 100.0f;
+    auto deltaSemitones = std::abs (snappedMidi - rawMidi);
+    
+    // TEMPORARY: Disable tolerance check for debugging - always correct
+    // TODO: Re-enable tolerance logic once pitch shifting is confirmed working
+    /*
+    if (toleranceSemitones > 0.0f && deltaSemitones < toleranceSemitones)
     {
-        auto toleranceSemitones = params.toleranceCents / 100.0f;
-        if (toleranceSemitones > 0.0f)
+        // Within tolerance zone - return the original detected pitch
+        if (! params.forceCorrection)
+            finalMidi = rawMidi;
+        else
         {
-            auto deltaSemitones = snappedMidi - rawMidi;
-            auto correctionMix = juce::jlimit (0.0f, 1.0f, std::abs (deltaSemitones) / toleranceSemitones);
-            finalMidi = rawMidi + deltaSemitones * correctionMix;
+            // forceCorrection=true: gradually blend from detected to corrected
+            // as we move away from the target note
+            auto correctionMix = juce::jlimit (0.0f, 1.0f, deltaSemitones / toleranceSemitones);
+            finalMidi = rawMidi + (snappedMidi - rawMidi) * correctionMix;
         }
     }
+    */
 
+    // TEMPORARY: Force a +12 semitone (octave) shift for testing
+    // TODO: Remove this debug code once confirmed working
+    finalMidi += 12.0f;
+    
     return midiNoteToFrequency (finalMidi);
 }
 
