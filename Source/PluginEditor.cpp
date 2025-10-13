@@ -121,6 +121,10 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     enharmonicSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
     enharmonicSelector.setTooltip ("Select whether to display sharps, flats, or automatic enharmonics");
 
+    scaleSelector.setMinimumWidth (150);
+    keySelector.setMinimumWidth (120);
+    enharmonicSelector.setMinimumWidth (120);
+
     scaleSelector.onChange = [this] { handleScaleSelectorChanged(); };
     keySelector.onChange = [this] { handleKeySelectorChanged(); };
     enharmonicSelector.onChange = [this] { refreshScaleDisplay(); };
@@ -252,15 +256,13 @@ void ProTuneAudioProcessorEditor::resized()
     constexpr int selectionStripHeight = 72;
     auto selectionStrip = bounds.removeFromTop (selectionStripHeight);
     auto selectionContent = selectionStrip.reduced (16, 10);
-    auto scaleWidth = juce::jmax (150, selectionContent.getWidth() / 3);
-    auto keyWidth = juce::jmax (120, selectionContent.getWidth() / 3);
-    auto enhWidth = juce::jmax (120, selectionContent.getWidth() - scaleWidth - keyWidth);
+    auto columnWidth = selectionContent.getWidth() / 3;
     auto labelHeight = 18;
     auto comboHeight = 32;
 
-    auto scaleColumn = selectionContent.removeFromLeft (scaleWidth).reduced (4, 0);
-    auto keyColumn = selectionContent.removeFromLeft (keyWidth).reduced (4, 0);
-    auto enhColumn = selectionContent.removeFromLeft (enhWidth).reduced (4, 0);
+    auto scaleColumn = selectionContent.removeFromLeft (columnWidth).reduced (4, 0);
+    auto keyColumn = selectionContent.removeFromLeft (columnWidth).reduced (4, 0);
+    auto enhColumn = selectionContent.reduced (4, 0);
 
     scaleLabel.setBounds (scaleColumn.removeFromTop (labelHeight));
     scaleSelector.setBounds (scaleColumn.removeFromTop (comboHeight));
