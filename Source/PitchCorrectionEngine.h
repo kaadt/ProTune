@@ -3,11 +3,13 @@
 #include <juce_core/juce_core.h>
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_audio_processors/juce_audio_processors.h>
+#include <juce_dsp/juce_dsp.h>
 #include <limits>
 #include <memory>
 #include <vector>
 #include <cstdint>
 #include <initializer_list>
+#include <deque>
 
 class PitchCorrectionEngine
 {
@@ -146,27 +148,39 @@ private:
 
     juce::LinearSmoothedValue<float> detectionSmoother { 0.0f };
 
-    struct CycleResampler
+    void ensureVocoderChannels (int requiredChannels);
+    void updateVocoderResources();
+
+    struct SpectralPeakVocoder
     {
-        void prepare (double sampleRateIn, int maxPeriodSamplesIn, int maxBlockSizeIn);
+        void prepare (double sampleRateIn, int fftOrderIn);
         void reset();
-        void process (const float* input, float* output, int numSamples,
-                      const float* ratioValues, const float* periodValues,
-                      const float* desiredPeriodValues);
+        void process (const float* input, float* output, int numSamples, const float* ratioValues);
 
     private:
+        void processFrame();
+
         double sampleRate = 44100.0;
-        int maxPeriodSamples = 0;
-        int maxBlockSize = 0;
-        std::vector<float> buffer;
-        int bufferSize = 0;
-        double writeHead = 0.0;
-        double readHead = 0.0;
+        int fftOrder = defaultAnalysisFftOrder;
+        int fftSize = 0;
+        int hopSize = 0;
+        float frameRatio = 1.0f;
+
+        std::unique_ptr<juce::dsp::FFT> fft;
+        std::vector<float> analysisWindow;
+        std::vector<float> synthesisWindow;
+        std::vector<float> analysisFifo;
+        std::vector<float> ratioFifo;
+        int fifoFill = 0;
+        std::vector<float> outputAccum;
+        std::deque<float> outputQueue;
+        std::vector<float> fftBuffer;
+        std::vector<float> outputSpectrum;
+        std::vector<float> magnitudes;
+        std::vector<float> phases;
+        std::vector<float> destPhases;
+        std::vector<uint8_t> phaseInitialised;
     };
 
-    void ensureCycleResamplers (int requiredChannels);
-    void updateResamplerResources();
-
-    std::vector<CycleResampler> cycleResamplers;
-    int allocatedMaxPeriodSamples = 0;
+    std::vector<SpectralPeakVocoder> vocoderChannels;
 };
