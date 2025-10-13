@@ -4,6 +4,7 @@
 #include <array>
 #include <cmath>
 #include <cstring>
+#include <numeric>
 
 namespace
 {
@@ -29,6 +30,80 @@ inline int positiveModulo (int value, int modulo) noexcept
 {
     auto remainder = value % modulo;
     return remainder < 0 ? remainder + modulo : remainder;
+}
+
+void designDecimationFilter (std::vector<float>& coefficients, int numTaps, int downsampleFactor)
+{
+    numTaps = juce::jmax (numTaps | 1, 3); // ensure odd length >= 3
+    coefficients.resize ((size_t) numTaps);
+
+    const auto m = (float) (numTaps - 1);
+    const float cutoff = 1.0f / (2.0f * (float) downsampleFactor);
+
+    for (int n = 0; n < numTaps; ++n)
+    {
+        const auto centred = (float) n - m * 0.5f;
+        const auto window = 0.5f - 0.5f * std::cos (juce::MathConstants<float>::twoPi * (float) n / m);
+
+        float sinc;
+        if (std::abs (centred) < 1.0e-6f)
+            sinc = 2.0f * cutoff;
+        else
+            sinc = std::sin (juce::MathConstants<float>::twoPi * cutoff * centred)
+                    / (juce::MathConstants<float>::pi * centred);
+
+        coefficients[(size_t) n] = window * sinc;
+    }
+
+    const auto sum = std::accumulate (coefficients.begin(), coefficients.end(), 0.0f);
+    if (std::abs (sum) > 1.0e-6f)
+        for (auto& value : coefficients)
+            value /= sum;
+}
+
+void applyDecimationFilter (const float* input, int inputSize,
+                            const std::vector<float>& filter, int downsampleFactor,
+                            std::vector<float>& filtered, std::vector<float>& downsampled)
+{
+    if (input == nullptr || inputSize <= 0)
+    {
+        downsampled.clear();
+        return;
+    }
+
+    const auto filterSize = (int) filter.size();
+    filtered.assign ((size_t) inputSize, 0.0f);
+
+    if (filterSize == 0)
+    {
+        downsampled.assign (input, input + inputSize);
+        return;
+    }
+
+    for (int n = 0; n < inputSize; ++n)
+    {
+        double acc = 0.0;
+        for (int k = 0; k < filterSize; ++k)
+        {
+            const auto index = n - k;
+            const auto sample = (index >= 0 && index < inputSize) ? input[index] : 0.0f;
+            acc += (double) filter[(size_t) k] * (double) sample;
+        }
+
+        filtered[(size_t) n] = (float) acc;
+    }
+
+    const auto halfDelay = filterSize / 2;
+    const auto firstSample = juce::jmin (halfDelay, inputSize - 1);
+
+    const int estimatedSize = juce::jmax (1, (inputSize - firstSample + downsampleFactor - 1) / downsampleFactor);
+    downsampled.resize ((size_t) estimatedSize);
+
+    int outputIndex = 0;
+    for (int n = firstSample; n < inputSize; n += downsampleFactor)
+        downsampled[(size_t) outputIndex++] = filtered[(size_t) n];
+
+    downsampled.resize ((size_t) outputIndex);
 }
 }
 
@@ -309,74 +384,98 @@ float PitchCorrectionEngine::estimatePitchFromAutocorrelation (const float* fram
     if (frame == nullptr || frameSize <= 0)
         return 0.0f;
 
-    auto safeHigh = juce::jmax (params.rangeHighHz, 1.0f);
-    auto safeLow = juce::jmax (params.rangeLowHz, 1.0f);
+    applyDecimationFilter (frame, frameSize, decimationFilter, pitchDetectionDownsample,
+                           filteredFrame, downsampledFrame);
 
-    int minLag = (int) std::floor (currentSampleRate / safeHigh);
-    int maxLag = (int) std::ceil (currentSampleRate / safeLow);
+    const auto downsampledSize = (int) downsampledFrame.size();
+    if (downsampledSize <= 4)
+        return 0.0f;
 
-    minLag = juce::jlimit (1, frameSize / 2 - 1, minLag);
-    maxLag = juce::jlimit (minLag + 1, frameSize / 2, maxLag);
+    const auto safeHigh = juce::jmax (params.rangeHighHz, 1.0f);
+    const auto safeLow = juce::jmax (params.rangeLowHz, 1.0f);
+
+    const double downsampledRate = currentSampleRate / (double) pitchDetectionDownsample;
+
+    int minLag = (int) std::floor (downsampledRate / safeHigh);
+    int maxLag = (int) std::ceil (downsampledRate / safeLow);
+
+    minLag = juce::jlimit (2, juce::jmax (2, downsampledSize / 2 - 1), minLag);
+    maxLag = juce::jlimit (juce::jmax (minLag + 1, 3), juce::jmin (110, downsampledSize - 2), maxLag);
 
     if (maxLag <= minLag)
         return 0.0f;
 
-    if (autocorrelationBuffer.get() == nullptr)
-        return 0.0f;
+    periodicityScratch.assign ((size_t) (maxLag + 1), {});
 
-    double energy = 0.0;
-    for (int i = 0; i < frameSize; ++i)
-        energy += (double) frame[i] * (double) frame[i];
-
-    if (energy <= std::numeric_limits<double>::epsilon())
-        return 0.0f;
-
-    float bestCorrelation = 0.0f;
-    int bestLag = 0;
-
-    auto* correlationValues = autocorrelationBuffer.get();
+    double bestError = std::numeric_limits<double>::infinity();
+    int bestLag = -1;
 
     for (int lag = minLag; lag <= maxLag; ++lag)
     {
-        double sum = 0.0;
-        const int limit = frameSize - lag;
-        for (int i = 0; i < limit; ++i)
-            sum += (double) frame[i] * (double) frame[i + lag];
+        double energy = 0.0;
+        double correlation = 0.0;
 
-        auto normalised = (float) (sum / energy);
-        correlationValues[lag] = normalised;
-
-        if (normalised > bestCorrelation)
+        for (int j = lag; j < downsampledSize; ++j)
         {
-            bestCorrelation = normalised;
+            const auto a = (double) downsampledFrame[(size_t) j];
+            const auto b = (double) downsampledFrame[(size_t) (j - lag)];
+            correlation += a * b;
+            energy += a * a + b * b;
+        }
+
+        if (energy <= std::numeric_limits<double>::epsilon())
+            continue;
+
+        const double error = energy - 2.0 * correlation;
+        periodicityScratch[(size_t) lag] = { error, energy, correlation };
+
+        if (error < bestError)
+        {
+            bestError = error;
             bestLag = lag;
         }
     }
 
-    if (bestLag <= 0 || bestCorrelation <= 0.0f)
+    if (bestLag <= 0)
         return 0.0f;
 
-    confidenceOut = juce::jlimit (0.0f, 1.0f, bestCorrelation);
+    const auto bestSample = periodicityScratch[(size_t) bestLag];
+    const double energy = juce::jmax (bestSample.energy, 1.0e-9);
+    const double periodicity = 1.0 - juce::jlimit (0.0, 1.0, bestSample.error / energy);
 
-    float refinedLag = (float) bestLag;
+    constexpr double periodicityEps = 0.18;
+    if (std::abs (bestSample.error) > periodicityEps * energy)
+        return 0.0f;
+
+    confidenceOut = (float) juce::jlimit (0.0, 1.0, periodicity);
+
+    double refinedLag = (double) bestLag;
 
     if (bestLag > minLag && bestLag < maxLag)
     {
-        auto left = correlationValues[bestLag - 1];
-        auto center = correlationValues[bestLag];
-        auto right = correlationValues[bestLag + 1];
-        auto denominator = 2.0f * center - left - right;
-        if (std::abs (denominator) > 1.0e-6f)
+        const auto& prev = periodicityScratch[(size_t) (bestLag - 1)];
+        const auto& center = periodicityScratch[(size_t) bestLag];
+        const auto& next = periodicityScratch[(size_t) (bestLag + 1)];
+
+        if (prev.energy > 0.0 && center.energy > 0.0 && next.energy > 0.0)
         {
-            auto offset = 0.5f * (left - right) / denominator;
-            refinedLag += juce::jlimit (-1.0f, 1.0f, offset);
+            const auto v1 = prev.error;
+            const auto v2 = center.error;
+            const auto v3 = next.error;
+            const auto denominator = v1 - 2.0 * v2 + v3;
+
+            if (std::abs (denominator) > 1.0e-9)
+                refinedLag += 0.5 * (v1 - v3) / denominator;
         }
     }
 
-    if (refinedLag <= 0.0f)
+    refinedLag = juce::jlimit (2.0, (double) downsampledSize, refinedLag);
+
+    if (refinedLag <= 1.0)
         return 0.0f;
 
-    return currentSampleRate / refinedLag;
+    const auto frequency = downsampledRate / refinedLag;
+    return (float) frequency;
 }
 
 void PitchCorrectionEngine::updateAnalysisResources()
@@ -387,8 +486,18 @@ void PitchCorrectionEngine::updateAnalysisResources()
     analysisBuffer.clear();
     windowedBuffer = createHannWindow (fftSize);
     analysisFrame.setSize (1, fftSize);
-    autocorrelationBuffer.allocate ((size_t) fftSize, true);
+    updateDownsamplingResources();
     analysisWritePosition = 0;
+}
+
+void PitchCorrectionEngine::updateDownsamplingResources()
+{
+    const auto fftSize = getAnalysisFftSize();
+    filteredFrame.assign ((size_t) fftSize, 0.0f);
+    downsampledFrame.assign ((size_t) juce::jmax (1, fftSize / pitchDetectionDownsample + 2), 0.0f);
+
+    constexpr int decimationTaps = 33;
+    designDecimationFilter (decimationFilter, decimationTaps, pitchDetectionDownsample);
 }
 
 void PitchCorrectionEngine::ensurePitchShiftChannels (int requiredChannels)

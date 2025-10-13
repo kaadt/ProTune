@@ -86,6 +86,7 @@ private:
     float estimatePitchFromAutocorrelation (const float* frame, int frameSize, float& confidenceOut);
     float chooseTargetFrequency (float detectedFrequency);
     void updateAnalysisResources();
+    void updateDownsamplingResources();
     [[nodiscard]] float computeDynamicRatioTime (float detectedFrequency, float targetFrequency) const;
     [[nodiscard]] float computeDynamicTransitionTime (float detectedFrequency, float targetFrequency) const;
     [[nodiscard]] float applyTargetHysteresis (float candidateMidi, float rawMidi);
@@ -100,6 +101,7 @@ private:
     static constexpr int minAnalysisFftOrder = 9;
     static constexpr int maxAnalysisFftOrder = 12;
     static constexpr int defaultAnalysisFftOrder = 11;
+    static constexpr int pitchDetectionDownsample = 8;
 
     double currentSampleRate = 44100.0;
     int maxBlockSize = 0;
@@ -113,7 +115,16 @@ private:
     juce::AudioBuffer<float> analysisBuffer;
     juce::AudioBuffer<float> windowedBuffer;
     juce::AudioBuffer<float> analysisFrame;
-    juce::HeapBlock<float> autocorrelationBuffer;
+    std::vector<float> downsampledFrame;
+    std::vector<float> filteredFrame;
+    std::vector<float> decimationFilter;
+    struct PeriodicitySample
+    {
+        double error = 0.0;
+        double energy = 0.0;
+        double correlation = 0.0;
+    };
+    std::vector<PeriodicitySample> periodicityScratch;
     int analysisWritePosition = 0;
 
     float lastDetectedFrequency = 0.0f;
