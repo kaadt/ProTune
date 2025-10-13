@@ -258,7 +258,7 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
         return;
 
     auto numSamples = buffer.getNumSamples();
-    analyseBlock (buffer.getReadPointer (0), numSamples);
+    analyseBlock (buffer);
 
     auto detected = detectionSmoother.getCurrentValue();
     detectionSmoother.skip (numSamples);
@@ -358,14 +358,30 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
     }
 }
 
-void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
+void PitchCorrectionEngine::analyseBlock (const juce::AudioBuffer<float>& buffer)
 {
+    auto numSamples = buffer.getNumSamples();
+    auto numChannels = buffer.getNumChannels();
+
+    if (numSamples <= 0 || numChannels <= 0)
+        return;
+
     auto fftSize = getAnalysisFftSize();
     auto* writePtr = analysisBuffer.getWritePointer (0);
 
-    for (int i = 0; i < numSamples; ++i)
+    juce::HeapBlock<const float*> channelData ((size_t) numChannels);
+    for (int ch = 0; ch < numChannels; ++ch)
+        channelData[(size_t) ch] = buffer.getReadPointer (ch);
+
+    const float normalisation = 1.0f / (float) numChannels;
+
+    for (int sampleIndex = 0; sampleIndex < numSamples; ++sampleIndex)
     {
-        writePtr[analysisWritePosition] = samples[i];
+        float mixedSample = 0.0f;
+        for (int ch = 0; ch < numChannels; ++ch)
+            mixedSample += channelData[(size_t) ch][sampleIndex];
+
+        writePtr[analysisWritePosition] = mixedSample * normalisation;
         analysisWritePosition = (analysisWritePosition + 1) % fftSize;
     }
 

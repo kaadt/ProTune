@@ -4,7 +4,7 @@ This guide walks through the practical steps required to get an audible "hard tu
 
 ## 1. Confirm the audio path is active
 
-1. Insert ProTune on a **mono vocal track** or ensure that both channels carry the same singer. The current engine analyses the left channel only before mirroring changes to every output channel during the pitch-shift stage.【F:Source/PitchCorrectionEngine.cpp†L70-L90】【F:Source/PitchCorrectionEngine.cpp†L114-L132】
+1. Insert ProTune on a **mono vocal track** or route a stereo track that contains the same vocal on both sides. The engine now averages every available input channel before analysis, so mismatched stereo content (e.g. backing vocals on one side) can still confuse detection even though both channels contribute to the estimate.【F:Source/PitchCorrectionEngine.cpp†L361-L386】
 2. Feed a dry vocal signal with **minimal effects before ProTune**. Compressors or modulation in front of the plugin can break pitch detection.
 3. Verify the plugin meters in your host show activity and that the `process` method is called each block (e.g. use a debugger breakpoint around the dry-buffer copy section while hosting the plugin).【F:Source/PitchCorrectionEngine.cpp†L114-L132】
 
