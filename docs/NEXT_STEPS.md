@@ -15,19 +15,21 @@ iterate methodically.
   reflects the forced target. This confirms the control path and smoothing behave
   correctly.
 
-## 2. Shorten the analysis window for responsiveness
-- The 4096-point FFT produces roughly 93 ms of latency at 44.1 kHz. Consider reducing
-  `fftOrder` in `PitchCorrectionEngine.cpp` to 10 or 11 while testing to hear quicker
-  reaction, even if the low-frequency resolution suffers.
-- After adjustments, re-measure the detected pitch stability to ensure the new window
-  still tracks fundamentals without octave-jumping.
+## 2. Tune the analysis window for responsiveness
+- The 2048-sample Hann window (order 11) adds ~46 ms of look-ahead at 44.1 kHz. When
+  chasing faster transients, experiment with order 10 (1024 samples) and confirm the
+  coarse/fine autocorrelation search still locks without octave-hopping.
+- After each change, log `confidenceOut` to make sure the tighter window has not
+  increased the rejection rate for low-pitched material.
 
-## 3. Harden the phase vocoder shifter
-- **Clamp and denoise the magnitude spectrum** before re-assignment to reduce warbling.
-- **Port a proven implementation** (e.g., JUCE PitchShifterExample or SoundTouch) and
-  feed it the ratio produced by `ratioSmoother` for a known-good baseline.
-- **Tune overlap/hop sizes** (`pitchOversampling`, `pitchFftSize`) to minimise phasing
-  artefacts. Start with 75% overlap (hop = frame/4) and compare other hop sizes.
+## 3. Harden the cycle-resampling shifter
+- **Watch the read/write gap** inside `CycleResampler::process` and ensure the add/drop
+  thresholds (`minLag`, `maxLag`) stay proportional to the detected period, especially
+  when the ratio jumps abruptly.
+- **Audit the interpolation**: linear blending is fast but may smear bright consonants.
+  Swap in a short Lagrange or Hermite interpolator if aliasing becomes audible.
+- **Stress-test at extremes** by driving ratios of 4×/0.25× and verifying the cycle
+  adjustments keep the read head safely behind the write head without glitching.
 
 ## 4. Rebalance wet/dry mixing
 - Currently the `formantPreserve` parameter crossfades back to the dry buffer. For
