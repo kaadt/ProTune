@@ -3,7 +3,6 @@
 #include <juce_core/juce_core.h>
 #include <juce_audio_basics/juce_audio_basics.h>
 #include <juce_audio_processors/juce_audio_processors.h>
-#include <juce_dsp/juce_dsp.h>
 #include <limits>
 #include <memory>
 #include <vector>
@@ -144,42 +143,27 @@ private:
 
     juce::LinearSmoothedValue<float> detectionSmoother { 0.0f };
 
-    struct PitchShiftChannel
+    struct CycleResampler
     {
-        void prepare (int frameSizeIn, int oversamplingIn, double sampleRateIn);
+        void prepare (double sampleRateIn, int maxPeriodSamplesIn, int maxBlockSizeIn);
         void reset();
-        void processSamples (float* samples, int numSamples, const float* ratios, juce::dsp::FFT& fft);
+        void process (const float* input, float* output, int numSamples,
+                      const float* ratioValues, const float* periodValues,
+                      const float* desiredPeriodValues);
 
     private:
-        void processFrame (float ratio, juce::dsp::FFT& fft);
-
-        int frameSize = 0;
-        int oversampling = 0;
-        int hopSize = 0;
-        int spectrumSize = 0;
-        juce::HeapBlock<float> inFifo;
-        juce::HeapBlock<float> outFifo;
-        juce::HeapBlock<float> window;
-        juce::HeapBlock<float> analysisMag;
-        juce::HeapBlock<float> analysisFreq;
-        juce::HeapBlock<float> synthesisMag;
-        juce::HeapBlock<float> synthesisFreq;
-        juce::HeapBlock<float> lastPhase;
-        juce::HeapBlock<float> sumPhase;
-        juce::HeapBlock<float> fftBuffer;
-
-        int inFifoIndex = 0;
-        int outFifoIndex = 0;
-        float ratioAccumulator = 0.0f;
-        int ratioSampleCount = 0;
+        double sampleRate = 44100.0;
+        int maxPeriodSamples = 0;
+        int maxBlockSize = 0;
+        std::vector<float> buffer;
+        int bufferSize = 0;
+        double writeHead = 0.0;
+        double readHead = 0.0;
     };
 
-    void ensurePitchShiftChannels (int requiredChannels);
+    void ensureCycleResamplers (int requiredChannels);
+    void updateResamplerResources();
 
-    static constexpr int pitchFftOrder = 11; // 2048 frame
-    static constexpr int pitchFftSize = 1 << pitchFftOrder;
-    static constexpr int pitchOversampling = 4;
-
-    juce::dsp::FFT pitchFft { pitchFftOrder };
-    std::vector<PitchShiftChannel> pitchChannels;
+    std::vector<CycleResampler> cycleResamplers;
+    int allocatedMaxPeriodSamples = 0;
 };
