@@ -212,15 +212,18 @@ void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 {
     params = newParams;
 
-    // Remap speed: 0 ms = instant, 400 ms = slow
-    float speedMs = juce::jlimit (0.0f, 400.0f, params.speed);
-    baseRatioGlideTime = juce::jlimit (0.0f, 0.4f, speedMs / 1000.0f); // convert ms to seconds
+    // More aggressive speed mapping for that Auto-Tune effect
+    // 0 ms = robotic instant, 200 ms = natural
+    float speedMs = juce::jlimit (0.0f, 200.0f, params.speed * 200.0f);
+    baseRatioGlideTime = juce::jlimit (0.001f, 0.2f, speedMs / 1000.0f);
     ratioSmoother.reset (currentSampleRate, baseRatioGlideTime);
 
-    baseTargetTransitionTime = juce::jmap (params.transition, 0.0f, 1.0f, 0.001f, 0.12f);
+    // Sharper transitions with shorter crossfade
+    baseTargetTransitionTime = juce::jmap (params.transition, 0.0f, 1.0f, 0.001f, 0.08f);
     pitchSmoother.reset (currentSampleRate, baseTargetTransitionTime);
 
-    auto detectionTime = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 0.2f, 0.01f);
+    // More aggressive vibrato suppression
+    auto detectionTime = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 0.25f, 0.005f);
     detectionSmoother.reset (currentSampleRate, detectionTime);
 
 }
@@ -1065,15 +1068,18 @@ float PitchCorrectionEngine::snapNoteToMask (float midiNote, AllowedMask mask)
 
 float PitchCorrectionEngine::computeDynamicRatioTime (float detectedFrequency, float targetFrequency) const
 {
+    // Start with base time but allow for more extreme speed settings
     auto time = baseRatioGlideTime;
     if (detectedFrequency <= 0.0f || targetFrequency <= 0.0f)
-        return juce::jlimit (0.001f, 0.3f, time);
+        return juce::jlimit (0.001f, 0.2f, time);
 
     auto detectedMidi = frequencyToMidiNote (detectedFrequency);
     auto targetMidi = frequencyToMidiNote (targetFrequency);
     auto semitoneDelta = std::abs (targetMidi - detectedMidi);
 
-    auto vibratoFactor = juce::jmap (juce::jlimit (0.0f, 1.0f, params.vibratoTracking), 0.0f, 1.0f, 0.55f, 1.35f);
+    // More aggressive vibrato suppression at low tracking settings
+    auto vibratoFactor = juce::jmap (juce::jlimit (0.0f, 1.0f, params.vibratoTracking), 
+                                    0.0f, 1.0f, 0.35f, 1.5f);
     auto limitedDelta = juce::jlimit (0.0f, 4.0f, semitoneDelta);
     auto distanceFactor = juce::jmap (limitedDelta, 0.0f, 4.0f, 0.5f, 1.35f);
     auto combined = juce::jlimit (0.25f, 1.5f, vibratoFactor * distanceFactor);
