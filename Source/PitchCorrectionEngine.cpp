@@ -135,7 +135,9 @@ void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 {
     params = newParams;
 
-    baseRatioGlideTime = juce::jmap (params.speed, 0.0f, 1.0f, 0.005f, 0.3f);
+    auto clampedSpeed = juce::jlimit (0.0f, 1.0f, params.speed);
+    baseRatioGlideTime = juce::jmap (clampedSpeed, 0.0f, 1.0f, 0.3f, 0.003f);
+    baseRatioGlideTime = juce::jlimit (0.001f, 0.35f, baseRatioGlideTime);
     ratioSmoother.reset (currentSampleRate, baseRatioGlideTime);
 
     baseTargetTransitionTime = juce::jmap (params.transition, 0.0f, 1.0f, 0.001f, 0.12f);
@@ -646,17 +648,18 @@ float PitchCorrectionEngine::computeDynamicRatioTime (float detectedFrequency, f
 {
     auto time = baseRatioGlideTime;
     if (detectedFrequency <= 0.0f || targetFrequency <= 0.0f)
-        return juce::jlimit (0.001f, 0.35f, time);
+        return juce::jlimit (0.001f, 0.3f, time);
 
     auto detectedMidi = frequencyToMidiNote (detectedFrequency);
     auto targetMidi = frequencyToMidiNote (targetFrequency);
     auto semitoneDelta = std::abs (targetMidi - detectedMidi);
 
-    auto vibratoFactor = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 1.35f, 0.6f);
-    auto distanceFactor = juce::jmap (juce::jlimit (0.0f, 4.0f, semitoneDelta), 0.0f, 4.0f, 1.4f, 0.35f);
-    auto combined = juce::jlimit (0.3f, 1.6f, vibratoFactor * distanceFactor);
+    auto vibratoFactor = juce::jmap (juce::jlimit (0.0f, 1.0f, params.vibratoTracking), 0.0f, 1.0f, 0.55f, 1.35f);
+    auto limitedDelta = juce::jlimit (0.0f, 4.0f, semitoneDelta);
+    auto distanceFactor = juce::jmap (limitedDelta, 0.0f, 4.0f, 0.5f, 1.35f);
+    auto combined = juce::jlimit (0.25f, 1.5f, vibratoFactor * distanceFactor);
 
-    return juce::jlimit (0.001f, 0.35f, time * combined);
+    return juce::jlimit (0.001f, 0.3f, time * combined);
 }
 
 float PitchCorrectionEngine::computeDynamicTransitionTime (float detectedFrequency, float targetFrequency) const
@@ -670,7 +673,8 @@ float PitchCorrectionEngine::computeDynamicTransitionTime (float detectedFrequen
     auto previousTarget = lastTargetFrequency > 0.0f ? lastTargetFrequency : targetFrequency;
     auto semitoneJump = std::abs (frequencyToMidiNote (targetFrequency) - frequencyToMidiNote (previousTarget));
 
-    auto distanceFactor = juce::jmap (juce::jlimit (0.0f, 7.0f, semitoneJump), 0.0f, 7.0f, 1.3f, 0.4f);
+    auto limitedJump = juce::jlimit (0.0f, 7.0f, semitoneJump);
+    auto distanceFactor = juce::jmap (limitedJump, 0.0f, 7.0f, 0.45f, 1.35f);
     return juce::jlimit (0.001f, 0.4f, time * juce::jlimit (0.35f, 1.5f, distanceFactor));
 }
 
