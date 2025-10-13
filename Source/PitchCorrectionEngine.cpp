@@ -19,8 +19,21 @@ juce::AudioBuffer<float> createHannWindow (int size)
     return buffer;
 }
 
+inline float wrapPhase (float value)
+{
+    return value - juce::MathConstants<float>::twoPi * std::floor ((value + juce::MathConstants<float>::pi)
+                                                                   / juce::MathConstants<float>::twoPi);
+}
+
+inline int positiveModulo (int value, int modulo) noexcept
+{
+    auto remainder = value % modulo;
+    return remainder < 0 ? remainder + modulo : remainder;
+}
+}
+
 PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSettings::patternToMask (int root,
-                                                                                                   std::initializer_list<int> pattern) noexcept
+                                                                                                    std::initializer_list<int> pattern) noexcept
 {
     AllowedMask mask = 0;
     for (auto interval : pattern)
@@ -33,8 +46,8 @@ PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSetti
 }
 
 PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSettings::maskForType (Type type,
-                                                                                                  int root,
-                                                                                                  AllowedMask customMask) noexcept
+                                                                                                   int root,
+                                                                                                   AllowedMask customMask) noexcept
 {
     switch (type)
     {
@@ -58,19 +71,6 @@ PitchCorrectionEngine::AllowedMask PitchCorrectionEngine::Parameters::ScaleSetti
         default:
             return customMask & 0x0FFFu;
     }
-}
-
-inline float wrapPhase (float value)
-{
-    return value - juce::MathConstants<float>::twoPi * std::floor ((value + juce::MathConstants<float>::pi)
-                                                                   / juce::MathConstants<float>::twoPi);
-}
-
-inline int positiveModulo (int value, int modulo) noexcept
-{
-    auto remainder = value % modulo;
-    return remainder < 0 ? remainder + modulo : remainder;
-}
 }
 
 void PitchCorrectionEngine::prepare (double sampleRate, int samplesPerBlock)
