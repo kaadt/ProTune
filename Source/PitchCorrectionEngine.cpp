@@ -394,10 +394,17 @@ void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
     lastDetectedFrequency = estimatePitchFromAutocorrelation (framePtr, fftSize, confidence);
     lastDetectionConfidence = confidence;
 
-    if (lastDetectedFrequency > 0.0f && confidence >= 0.15f)
-        detectionSmoother.setTargetValue (lastDetectedFrequency);
-    else if (confidence < 0.05f)
+    if (lastDetectedFrequency > 0.0f)
+    {
+        if (confidence >= 0.05f)
+            detectionSmoother.setTargetValue (lastDetectedFrequency);
+        else
+            detectionSmoother.setTargetValue (0.0f);
+    }
+    else
+    {
         detectionSmoother.setTargetValue (0.0f);
+    }
 }
 
 float PitchCorrectionEngine::estimatePitchFromAutocorrelation (const float* frame, int frameSize, float& confidenceOut)
@@ -692,14 +699,6 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
     if (detectedFrequency <= 0.0f)
         return 0.0f;
 
-    if (lastDetectionConfidence < minimumConfidenceForLock())
-    {
-        if (lastTargetFrequency > 0.0f)
-            return lastTargetFrequency;
-
-        return 0.0f;
-    }
-
     auto rawMidi = frequencyToMidiNote (detectedFrequency);
     const bool usingMidi = params.midiEnabled && ! std::isnan (heldMidiNote);
 
@@ -708,6 +707,15 @@ float PitchCorrectionEngine::chooseTargetFrequency (float detectedFrequency)
 
     if (usingMidi)
     {
+        activeTargetMidi = candidateMidi;
+        return midiNoteToFrequency (activeTargetMidi);
+    }
+
+    if (lastDetectionConfidence < minimumConfidenceForLock())
+    {
+        if (lastTargetFrequency > 0.0f)
+            return lastTargetFrequency;
+
         activeTargetMidi = candidateMidi;
         return midiNoteToFrequency (activeTargetMidi);
     }
