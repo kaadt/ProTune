@@ -295,7 +295,7 @@ void ProTuneAudioProcessorEditor::resized()
 
     auto noteArea = rightColumn.reduced (4);
     auto rowHeight = noteArea.getHeight() / 4;
-    auto columnWidth = noteArea.getWidth() / 3;
+    auto noteColumnWidth = noteArea.getWidth() / 3;
 
     for (int row = 0; row < 4; ++row)
     {
@@ -308,7 +308,7 @@ void ProTuneAudioProcessorEditor::resized()
             if (index >= (int) noteButtons.size())
                 break;
 
-            auto cell = rowSlice.removeFromLeft (columnWidth);
+            auto cell = rowSlice.removeFromLeft (noteColumnWidth);
             noteButtons[(size_t) index].setBounds (cell.reduced (4));
         }
     }
