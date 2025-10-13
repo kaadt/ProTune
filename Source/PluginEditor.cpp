@@ -16,6 +16,16 @@ inline juce::Font makeFont (float height, int style = juce::Font::plain)
     return juce::Font (juce::FontOptions (height, style));
 }
 
+constexpr int headerHeight = 70;
+constexpr int selectionStripHeight = 72;
+constexpr int sliderPanelHeight = 160;
+constexpr int meterSectionHeight = 230;
+constexpr int confidenceStripHeight = 28;
+constexpr int rightColumnWidth = 240;
+constexpr float layoutMargin = 24.0f;
+constexpr float sliderPanelCornerRadius = 6.0f;
+constexpr float meterDiameter = 230.0f;
+
 static const juce::StringArray sharpNoteNames { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 static const juce::StringArray flatNoteNames  { "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" };
 }
@@ -169,7 +179,7 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
     updateNoteToggleLabels();
     updateKeySelectorLabels();
 
-    setSize (820, 520);
+    setSize (820, 640);
     startTimerHz (30);
 }
 
@@ -191,18 +201,29 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
     g.drawFittedText ("Auto pitch correction inspired by Hildebrandt", header.toNearestInt().reduced (16, 0),
                       juce::Justification::centredRight, 1);
 
-    auto meterBounds = getLocalBounds().toFloat().reduced (24.0f);
-    meterBounds.removeFromTop (70.0f);
+    auto layoutBounds = getLocalBounds().toFloat().reduced (layoutMargin);
+    layoutBounds.removeFromTop ((float) headerHeight);
 
-    constexpr float selectionStripHeight = 72.0f;
-    auto selectionStrip = meterBounds.removeFromTop (selectionStripHeight);
+    auto selectionStrip = layoutBounds.removeFromTop ((float) selectionStripHeight);
     auto selectionBackground = juce::Colour::fromRGB (16, 22, 32);
     g.setColour (selectionBackground);
     g.fillRoundedRectangle (selectionStrip, 6.0f);
     g.setColour (selectionBackground.brighter (0.1f));
     g.drawRoundedRectangle (selectionStrip, 6.0f, 1.2f);
 
-    auto meterArea = meterBounds.removeFromTop (240.0f).withSizeKeepingCentre (240.0f, 240.0f);
+    auto contentBounds = layoutBounds;
+    auto rightColumn = contentBounds.removeFromRight ((float) rightColumnWidth);
+    juce::ignoreUnused (rightColumn);
+
+    auto sliderPanel = contentBounds.removeFromTop ((float) sliderPanelHeight);
+    auto sliderBackground = juce::Colour::fromRGB (12, 18, 28);
+    g.setColour (sliderBackground);
+    g.fillRoundedRectangle (sliderPanel, sliderPanelCornerRadius);
+    g.setColour (sliderBackground.brighter (0.08f));
+    g.drawRoundedRectangle (sliderPanel, sliderPanelCornerRadius, 1.0f);
+
+    auto meterArea = contentBounds.removeFromTop ((float) meterSectionHeight)
+                        .withSizeKeepingCentre (meterDiameter, meterDiameter);
 
     auto rimColour = juce::Colour::fromRGB (12, 24, 40);
     g.setColour (rimColour);
@@ -246,10 +267,9 @@ void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
 
 void ProTuneAudioProcessorEditor::resized()
 {
-    auto bounds = getLocalBounds().reduced (24);
-    bounds.removeFromTop (70);
+    auto bounds = getLocalBounds().reduced ((int) layoutMargin);
+    bounds.removeFromTop (headerHeight);
 
-    constexpr int selectionStripHeight = 72;
     auto selectionStrip = bounds.removeFromTop (selectionStripHeight);
     auto selectionContent = selectionStrip.reduced (16, 10);
     auto labelHeight = 18;
@@ -302,27 +322,45 @@ void ProTuneAudioProcessorEditor::resized()
     enharmonicLabel.setBounds (enhColumn.removeFromTop (labelHeight));
     enharmonicSelector.setBounds (enhColumn.removeFromTop (comboHeight));
 
-    auto meterStrip = bounds.removeFromTop (240);
-    auto meterArea = meterStrip.withSizeKeepingCentre (240, 240);
+    auto content = bounds;
+    auto rightColumn = content.removeFromRight (rightColumnWidth);
+
+    auto sliderPanel = content.removeFromTop (sliderPanelHeight);
+    auto sliderContent = sliderPanel.reduced (12, 12);
+    auto secondRowHeight = juce::jmax (72, sliderContent.getHeight() / 2);
+    auto firstRowHeight = sliderContent.getHeight() - secondRowHeight;
+    auto firstRow = sliderContent.removeFromTop (firstRowHeight);
+    auto secondRow = sliderContent;
+
+    auto firstColumnWidth = firstRow.getWidth() / 4;
+    speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (10, 8));
+    transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (10, 8));
+    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (10, 8));
+    vibratoSlider.setBounds (firstRow.reduced (10, 8));
+
+    auto secondColumnWidth = secondRow.getWidth() / 3;
+    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (10, 8));
+    rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (10, 8));
+    rangeHighSlider.setBounds (secondRow.reduced (10, 8));
+
+    auto meterStrip = content.removeFromTop (meterSectionHeight);
+    auto meterArea = meterStrip.withSizeKeepingCentre ((int) meterDiameter, (int) meterDiameter);
     auto innerArea = meterArea.reduced (70);
     auto freqArea = innerArea.removeFromBottom (48);
     centralNoteLabel.setBounds (innerArea);
     centralFreqLabel.setBounds (freqArea);
 
-    auto confidenceArea = meterStrip.removeFromBottom (30);
+    auto confidenceArea = content.removeFromTop (confidenceStripHeight);
     confidenceLabel.setBounds (confidenceArea);
 
-    auto readouts = bounds.removeFromTop (70);
+    auto readouts = content;
     detectedLabel.setBounds (readouts.removeFromLeft (readouts.getWidth() / 2).reduced (8));
     targetLabel.setBounds (readouts.reduced (8));
-
-    auto controlArea = bounds;
-    auto rightColumn = controlArea.removeFromRight (240);
 
     midiButton.setBounds (rightColumn.removeFromTop (32));
     forceCorrectionButton.setBounds (rightColumn.removeFromTop (32));
 
-    auto noteArea = rightColumn.reduced (4);
+    auto noteArea = rightColumn.reduced (4, 8);
     auto rowHeight = noteArea.getHeight() / 4;
     auto noteColumnWidth = noteArea.getWidth() / 3;
 
@@ -342,19 +380,6 @@ void ProTuneAudioProcessorEditor::resized()
         }
     }
 
-    auto firstRow = controlArea.removeFromTop (controlArea.getHeight() / 2);
-    auto secondRow = controlArea;
-
-    auto firstColumnWidth = firstRow.getWidth() / 4;
-    speedSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
-    transitionSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
-    toleranceSlider.setBounds (firstRow.removeFromLeft (firstColumnWidth).reduced (12, 6));
-    vibratoSlider.setBounds (firstRow.reduced (12, 6));
-
-    auto secondColumnWidth = secondRow.getWidth() / 3;
-    formantSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 6));
-    rangeLowSlider.setBounds (secondRow.removeFromLeft (secondColumnWidth).reduced (12, 6));
-    rangeHighSlider.setBounds (secondRow.reduced (12, 6));
 }
 
 void ProTuneAudioProcessorEditor::timerCallback()
