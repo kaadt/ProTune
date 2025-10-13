@@ -130,6 +130,9 @@ private:
     float lastTargetFrequency = 0.0f;
     float lastDetectionConfidence = 0.0f;
 
+    float lastStableDetectedFrequency = 0.0f;
+    int lowConfidenceSampleCounter = 0;
+
     float lastLoggedDetected = 0.0f;
     float lastLoggedTarget = 0.0f;
 

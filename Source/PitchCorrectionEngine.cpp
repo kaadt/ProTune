@@ -194,6 +194,8 @@ void PitchCorrectionEngine::reset()
     lastDetectedFrequency = 0.0f;
     lastTargetFrequency = 0.0f;
     lastDetectionConfidence = 0.0f;
+    lastStableDetectedFrequency = 0.0f;
+    lowConfidenceSampleCounter = 0;
     lastLoggedDetected = 0.0f;
     lastLoggedTarget = 0.0f;
     heldMidiNote = std::numeric_limits<float>::quiet_NaN();
@@ -394,17 +396,34 @@ void PitchCorrectionEngine::analyseBlock (const float* samples, int numSamples)
     lastDetectedFrequency = estimatePitchFromAutocorrelation (framePtr, fftSize, confidence);
     lastDetectionConfidence = confidence;
 
-    if (lastDetectedFrequency > 0.0f)
+    constexpr float lowConfidenceHoldSeconds = 0.12f;
+    const int holdSamples = juce::jmax (1, (int) std::round (currentSampleRate * lowConfidenceHoldSeconds));
+
+    const bool hasDetection = lastDetectedFrequency > 0.0f;
+    const bool confidentDetection = hasDetection && confidence >= 0.05f;
+
+    if (confidentDetection)
     {
-        if (confidence >= 0.05f)
-            detectionSmoother.setTargetValue (lastDetectedFrequency);
-        else
-            detectionSmoother.setTargetValue (0.0f);
+        lastStableDetectedFrequency = lastDetectedFrequency;
+        lowConfidenceSampleCounter = 0;
+        detectionSmoother.setTargetValue (lastDetectedFrequency);
+        return;
     }
-    else
+
+    if (lastStableDetectedFrequency > 0.0f)
     {
-        detectionSmoother.setTargetValue (0.0f);
+        lowConfidenceSampleCounter = juce::jmin (lowConfidenceSampleCounter + numSamples, holdSamples);
+
+        if (lowConfidenceSampleCounter < holdSamples)
+        {
+            detectionSmoother.setTargetValue (lastStableDetectedFrequency);
+            return;
+        }
+
+        lastStableDetectedFrequency = 0.0f;
     }
+
+    detectionSmoother.setTargetValue (0.0f);
 }
 
 float PitchCorrectionEngine::estimatePitchFromAutocorrelation (const float* frame, int frameSize, float& confidenceOut)
