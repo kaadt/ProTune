@@ -13,10 +13,11 @@ int main()
 
     PitchCorrectionEngine::Parameters params;
     params.forceCorrection = true;
-    params.scaleMode = PitchCorrectionEngine::Parameters::ScaleMode::Chromatic;
-    params.scaleRoot = 0;
-    params.speed = 1.0f;
+    params.scale.type = PitchCorrectionEngine::Parameters::ScaleSettings::Type::Chromatic;
+    params.scale.root = 0;
+    params.speed = 0.0f;  // Instant correction for testing
     params.transition = 0.0f;
+    params.toleranceCents = 2.0f;  // Low tolerance for aggressive correction
     engine.setParameters (params);
 
     juce::MidiBuffer midi;
