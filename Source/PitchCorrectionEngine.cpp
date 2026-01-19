@@ -212,20 +212,19 @@ void PitchCorrectionEngine::setParameters (const Parameters& newParams)
 {
     params = newParams;
 
-    // More aggressive speed mapping for that Auto-Tune effect
-    // 0 ms = robotic instant, 200 ms = natural
-    float speedMs = juce::jlimit (0.0f, 200.0f, params.speed * 200.0f);
-    baseRatioGlideTime = juce::jlimit (0.001f, 0.2f, speedMs / 1000.0f);
+    // Speed parameter is already in milliseconds (0-400ms from UI)
+    // 0 ms = instant robotic snap, higher values = natural glide
+    float speedMs = juce::jlimit (0.0f, 400.0f, params.speed);
+    baseRatioGlideTime = juce::jlimit (0.0005f, 0.4f, speedMs / 1000.0f);
     ratioSmoother.reset (currentSampleRate, baseRatioGlideTime);
 
-    // Sharper transitions with shorter crossfade
+    // Note transitions: 0 = instant, 1 = smooth
     baseTargetTransitionTime = juce::jmap (params.transition, 0.0f, 1.0f, 0.001f, 0.08f);
     pitchSmoother.reset (currentSampleRate, baseTargetTransitionTime);
 
-    // More aggressive vibrato suppression
+    // Vibrato tracking: 0 = flatten vibrato, 1 = preserve
     auto detectionTime = juce::jmap (params.vibratoTracking, 0.0f, 1.0f, 0.25f, 0.005f);
     detectionSmoother.reset (currentSampleRate, detectionTime);
-
 }
 
 void PitchCorrectionEngine::setAnalysisWindowOrder (int newOrder)
@@ -337,102 +336,13 @@ void PitchCorrectionEngine::process (juce::AudioBuffer<float>& buffer)
     {
         auto* dry = dryBuffer.getReadPointer (ch);
         auto* out = buffer.getWritePointer (ch);
-        vocoderChannels[(size_t) ch].process (dry, out, numSamples, ratioValues.get());
+        vocoderChannels[(size_t) ch].process (dry, out, numSamples, ratioValues.get(), params.formantPreserve);
     }
 
     lastTargetFrequency = finalTarget;
 
-    // ENHANCED DEBUGGING: Log all processing info
-    if (detected > 0.0f || finalTarget > 0.0f)
-    {
-        static int logCount = 0;
-        logCount++;
-        
-        // Log every 100th sample to avoid spam
-        if (logCount % 100 == 0)
-        {
-            auto ratio = (detected > 0.0f) ? finalTarget / detected : 0.0f;
-            
-            juce::String message ("DEBUG: Block " + juce::String(logCount/100) + 
-                                  " - detected: " + juce::String (detected, 2) + " Hz" +
-                                  " -> target: " + juce::String (finalTarget, 2) + " Hz" +
-                                  " (ratio: " + juce::String (ratio, 3) + ")");
-
-            if (params.midiEnabled && ! std::isnan (heldMidiNote))
-            {
-                auto forcedFrequency = midiNoteToFrequency (heldMidiNote);
-                message += " (MIDI override " + juce::String (forcedFrequency, 2) + " Hz)";
-            }
-
-            DBG (message);
-        }
-        
-        lastLoggedDetected = detected;
-        lastLoggedTarget = finalTarget;
-    }
-
-    // Auto-makeup for wet path to counteract under-normalised vocoder output
-    {
-        auto computeRMS = [] (const float* data, int numSamples) -> float
-        {
-            double acc = 0.0;
-            for (int i = 0; i < numSamples; ++i)
-                acc += (double) data[i] * (double) data[i];
-            return (float) std::sqrt (acc / juce::jmax (1, numSamples));
-        };
-
-        // Use channel 0 as representative for fast estimate
-        const float wetRMS  = computeRMS (buffer.getReadPointer (0), numSamples);
-        const float dryRMS  = computeRMS (dryBuffer.getReadPointer (0), numSamples);
-
-        if (dryRMS > 1.0e-6f && wetRMS > 0.0f)
-        {
-            // If wet is significantly below dry, apply bounded makeup gain
-            const float targetRatio = juce::jlimit (0.5f, 1.0f, 0.85f); // aim ~85% of dry
-            const float desired = targetRatio * dryRMS;
-            if (wetRMS < 0.6f * dryRMS)
-            {
-                float makeup = juce::jlimit (1.0f, 12.0f, desired / juce::jmax (wetRMS, 1.0e-6f));
-                for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
-                {
-                    juce::FloatVectorOperations::multiply (buffer.getWritePointer (ch), makeup, numSamples);
-                }
-            }
-        }
-    }
-
-    // Apply makeup gain to wet signal when formant preserve is off
-    if (params.formantPreserve <= 0.0f)
-    {
-        // Apply fixed +12dB boost to wet signal
-        const float makeupGain = 4.0f;  // +12 dB = 4.0 linear gain
-        for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
-        {
-            auto* data = buffer.getWritePointer(ch);
-            for (int i = 0; i < numSamples; ++i)
-                data[i] = juce::jlimit(-1.0f, 1.0f, data[i] * makeupGain);
-        }
-    }
-    else if (params.formantPreserve > 0.0f)
-    {
-        auto dryAmount = juce::jlimit (0.0f, 1.0f, params.formantPreserve);
-
-        // Equal-power crossfade keeps the perceived loudness stable while
-        // allowing the user to re-introduce the dry timbre.
-        auto wetGain = std::sqrt (juce::jlimit (0.0f, 1.0f, 1.0f - dryAmount));
-        auto dryGain = std::sqrt (dryAmount);
-
-        for (int ch = 0; ch < buffer.getNumChannels(); ++ch)
-        {
-            auto* data = buffer.getWritePointer (ch);
-            auto* dry = dryBuffer.getReadPointer (ch);
-            for (int i = 0; i < numSamples; ++i)
-            {
-                auto mixed = wetGain * data[i] + dryGain * dry[i];
-                data[i] = juce::jlimit (-1.0f, 1.0f, mixed);
-            }
-        }
-    }
+    lastLoggedDetected = detected;
+    lastLoggedTarget = finalTarget;
 }
 
 void PitchCorrectionEngine::analyseBlock (const juce::AudioBuffer<float>& buffer)
@@ -736,6 +646,11 @@ void PitchCorrectionEngine::SpectralPeakVocoder::prepare (double sampleRateIn, i
     frameRatio = 1.0f;
 
     fft = std::make_unique<juce::dsp::FFT> (fftOrder);
+    envelopeFft = std::make_unique<juce::dsp::FFT> (fftOrder); // for cepstral envelope
+
+    // Set lifter cutoff based on sample rate (approximately 30-50 for speech/vocals)
+    // Higher values = more detail, lower values = smoother envelope
+    lifterCutoff = juce::jlimit (20, fftSize / 4, (int) (sampleRate / 1000.0));
 
     analysisWindow.resize ((size_t) fftSize);
     synthesisWindow.resize ((size_t) fftSize);
@@ -748,11 +663,9 @@ void PitchCorrectionEngine::SpectralPeakVocoder::prepare (double sampleRateIn, i
     }
 
     // Compute OLA normalization (COLA) gain for the chosen window and hop
-    {
-        // With sqrt-Hann windows and 75% overlap, the theoretical sum of squares is 1.5
-        // This gives us perfect energy preservation with our window configuration
-        olaGain = 1.0f / 1.5f;
-    }
+    // With sqrt-Hann (sine) windows for both analysis and synthesis, the combined
+    // window is Hann. With 75% overlap (4 overlapping frames), Hann windows sum to 2.0
+    olaGain = 1.0f / 2.0f;
 
     analysisFifo.assign ((size_t) fftSize, 0.0f);
     ratioFifo.assign ((size_t) fftSize, 1.0f);
@@ -767,6 +680,12 @@ void PitchCorrectionEngine::SpectralPeakVocoder::prepare (double sampleRateIn, i
     phases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
     destPhases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
     phaseInitialised.assign ((size_t) (fftSize / 2 + 1), 0);
+
+    // Cepstral envelope buffers
+    logMagnitudes.assign ((size_t) fftSize, 0.0f);
+    cepstrumBuffer.assign ((size_t) fftSize, juce::dsp::Complex<float>());
+    inputEnvelope.assign ((size_t) (fftSize / 2 + 1), 1.0f);
+    outputEnvelope.assign ((size_t) (fftSize / 2 + 1), 1.0f);
 }
 
 void PitchCorrectionEngine::SpectralPeakVocoder::reset()
@@ -782,7 +701,8 @@ void PitchCorrectionEngine::SpectralPeakVocoder::reset()
 }
 
 void PitchCorrectionEngine::SpectralPeakVocoder::process (const float* input, float* output,
-                                                          int numSamples, const float* ratioValues)
+                                                          int numSamples, const float* ratioValues,
+                                                          float formantPreserve)
 {
     if (output == nullptr || numSamples <= 0)
         return;
@@ -815,7 +735,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::process (const float* input, fl
                 frameRatio += ratioFifo[(size_t) n];
             frameRatio = juce::jlimit (0.25f, 4.0f, frameRatio / (float) fftSize);
 
-            processFrame();
+            processFrame (formantPreserve);
 
             if (hopSize < fftSize)
             {
@@ -833,13 +753,61 @@ void PitchCorrectionEngine::SpectralPeakVocoder::process (const float* input, fl
         {
             processed = outputQueue.front();
             outputQueue.pop_front();
+
+            // Safety check: if processed is NaN or extremely quiet, use input
+            if (std::isnan (processed) || std::isinf (processed))
+                processed = sample;
         }
 
         output[i] = juce::jlimit (-1.0f, 1.0f, processed);
     }
 }
 
-void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
+// Compute spectral envelope using cepstral method
+void PitchCorrectionEngine::SpectralPeakVocoder::computeSpectralEnvelope (const float* mags, int numBins,
+                                                                           float* envelope)
+{
+    if (envelopeFft == nullptr || numBins <= 0)
+    {
+        for (int k = 0; k <= numBins; ++k)
+            envelope[k] = 1.0f;
+        return;
+    }
+
+    // Step 1: Compute log magnitude spectrum (symmetric for real cepstrum)
+    const float epsilon = 1.0e-10f;
+    for (int k = 0; k <= numBins; ++k)
+        logMagnitudes[(size_t) k] = std::log (mags[k] + epsilon);
+
+    // Mirror for symmetric spectrum (real cepstrum)
+    for (int k = 1; k < numBins; ++k)
+        logMagnitudes[(size_t) (fftSize - k)] = logMagnitudes[(size_t) k];
+
+    // Step 2: IFFT to get cepstrum
+    for (int n = 0; n < fftSize; ++n)
+        cepstrumBuffer[(size_t) n] = juce::dsp::Complex<float> (logMagnitudes[(size_t) n], 0.0f);
+
+    envelopeFft->perform (cepstrumBuffer.data(), cepstrumBuffer.data(), true);
+
+    // Step 3: Lifter - keep only low quefrency components (smooth envelope)
+    // Zero out high quefrency bins (fine pitch detail)
+    for (int n = lifterCutoff; n < fftSize - lifterCutoff; ++n)
+        cepstrumBuffer[(size_t) n] = juce::dsp::Complex<float> (0.0f, 0.0f);
+
+    // Step 4: FFT back to get smoothed log envelope
+    envelopeFft->perform (cepstrumBuffer.data(), cepstrumBuffer.data(), false);
+
+    // Step 5: Exponentiate to get linear envelope
+    // Note: After round-trip FFT, we need to normalize by fftSize
+    const float norm = 1.0f / (float) fftSize;
+    for (int k = 0; k <= numBins; ++k)
+    {
+        float smoothedLog = cepstrumBuffer[(size_t) k].real() * norm;
+        envelope[k] = std::exp (smoothedLog);
+    }
+}
+
+void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPreserve)
 {
     if (fft == nullptr || fftSize <= 0)
         return;
@@ -864,6 +832,10 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
         phases[(size_t) k] = std::atan2 (imag, real);
     }
 
+    // Compute input spectral envelope for formant preservation
+    if (formantPreserve > 0.0f)
+        computeSpectralEnvelope (magnitudes.data(), numBins, inputEnvelope.data());
+
     std::fill (outputSpectrum.begin(), outputSpectrum.end(), juce::dsp::Complex<float>());
 
     const float binToOmega = juce::MathConstants<float>::twoPi / (float) fftSize;
@@ -872,82 +844,199 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
 
     // Calculate total energy in input spectrum for normalization
     float totalInputEnergy = 0.0f;
-    for (int k = 0; k <= numBins; ++k) 
-        totalInputEnergy += magnitudes[(size_t)k] * magnitudes[(size_t)k];
+    for (int k = 0; k <= numBins; ++k)
+        totalInputEnergy += magnitudes[(size_t) k] * magnitudes[(size_t) k];
 
-    auto addContribution = [&] (int sourceBin, int destBin, float weight)
-    {
-        if (destBin < 0 || destBin > numBins || weight <= 0.0f)
-            return;
+    // ============================================================
+    // Phase-Locked Spectral Peak Vocoder (Laroche & Dolson 1999)
+    // ============================================================
 
-        // Basic peak contribution
-        auto magnitude = magnitudes[(size_t) sourceBin] * weight;
-        if (magnitude <= 0.0f)
-            return;
-
-        const float omega = binToOmega * (float) sourceBin;
-
-        float previousPhase = destPhases[(size_t) destBin];
-        if (phaseInitialised[(size_t) destBin] == 0)
-            previousPhase = phases[(size_t) sourceBin] - beta * omega * hopSamples;
-
-        const float newPhase = wrapPhase (previousPhase + beta * omega * hopSamples);
-        destPhases[(size_t) destBin] = newPhase;
-        phaseInitialised[(size_t) destBin] = 1;
-
-        outputSpectrum[(size_t) destBin] += juce::dsp::Complex<float> (magnitude * std::cos (newPhase),
-                                                                       magnitude * std::sin (newPhase));
-    };
+    // Step 1: Identify all peaks and assign each bin to its nearest peak
+    std::vector<int> peakIndices;
+    std::vector<int> nearestPeak (numBins + 1, -1);
 
     for (int k = 1; k < numBins; ++k)
     {
-        auto magnitude = magnitudes[(size_t) k];
-        if (magnitude <= 0.0f)
+        if (magnitudes[(size_t) k] > magnitudes[(size_t) (k - 1)]
+            && magnitudes[(size_t) k] >= magnitudes[(size_t) (k + 1)])
+        {
+            peakIndices.push_back (k);
+        }
+    }
+
+    // Assign each bin to its nearest peak
+    if (! peakIndices.empty())
+    {
+        for (int k = 0; k <= numBins; ++k)
+        {
+            int closest = peakIndices[0];
+            int minDist = std::abs (k - closest);
+            for (size_t p = 1; p < peakIndices.size(); ++p)
+            {
+                int dist = std::abs (k - peakIndices[p]);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closest = peakIndices[p];
+                }
+            }
+            nearestPeak[(size_t) k] = closest;
+        }
+    }
+
+    // Step 2: Process peaks - compute and store their target phases
+    std::vector<float> peakDestPhases (numBins + 1, 0.0f);
+    std::vector<int> peakDestBins (numBins + 1, -1);
+
+    for (int peakBin : peakIndices)
+    {
+        const float targetIndex = beta * (float) peakBin;
+        const int destBin = (int) std::round (targetIndex);
+
+        if (destBin < 0 || destBin > numBins)
             continue;
 
-        const bool isPeak = magnitude > magnitudes[(size_t) (k - 1)]
-                             && magnitude >= magnitudes[(size_t) (k + 1)];
+        peakDestBins[(size_t) peakBin] = destBin;
+
+        // Phase propagation for peaks: φ_dest = φ_prev + ω_dest * hopSize
+        const float destOmega = binToOmega * (float) destBin;
+
+        float prevPhase = destPhases[(size_t) destBin];
+        if (phaseInitialised[(size_t) destBin] == 0)
+        {
+            // Initialize from source phase, accounting for frequency shift
+            prevPhase = phases[(size_t) peakBin];
+        }
+
+        const float newPhase = wrapPhase (prevPhase + destOmega * hopSamples);
+        peakDestPhases[(size_t) peakBin] = newPhase;
+        destPhases[(size_t) destBin] = newPhase;
+        phaseInitialised[(size_t) destBin] = 1;
+    }
+
+    // Step 3: Process all bins with phase locking to nearest peak
+    for (int k = 1; k < numBins; ++k)
+    {
+        const float magnitude = magnitudes[(size_t) k];
+        if (magnitude <= 1.0e-10f)
+            continue;
 
         const float targetIndex = beta * (float) k;
-        const int lowerIndex = (int) std::floor (targetIndex);
-        const float frac = targetIndex - (float) lowerIndex;
+        const int lowerDest = (int) std::floor (targetIndex);
+        const float frac = targetIndex - (float) lowerDest;
 
-        if (isPeak)
+        // Find the controlling peak for this bin
+        const int controlPeak = nearestPeak[(size_t) k];
+
+        float outputPhase;
+        if (controlPeak >= 0 && peakDestBins[(size_t) controlPeak] >= 0)
         {
-            addContribution (k, lowerIndex, 1.0f - frac);
-            addContribution (k, lowerIndex + 1, frac);
+            // Phase locking: preserve phase relationship to controlling peak
+            // Δφ_source = φ[k] - φ[peak]
+            // φ_output = φ_peak_dest + Δφ_source
+            const float phaseOffset = phases[(size_t) k] - phases[(size_t) controlPeak];
+            outputPhase = wrapPhase (peakDestPhases[(size_t) controlPeak] + phaseOffset);
         }
         else
         {
-            addContribution (k, lowerIndex, 1.0f - frac);
-            addContribution (k, lowerIndex + 1, frac);
+            // No controlling peak - use simple phase propagation
+            const float destOmega = binToOmega * targetIndex;
+            float prevPhase = destPhases[(size_t) lowerDest];
+            if (phaseInitialised[(size_t) lowerDest] == 0)
+                prevPhase = phases[(size_t) k];
+            outputPhase = wrapPhase (prevPhase + destOmega * hopSamples);
         }
+
+        // Distribute magnitude to surrounding bins (linear interpolation)
+        auto addBin = [&] (int destBin, float weight)
+        {
+            if (destBin < 0 || destBin > numBins || weight <= 0.0f)
+                return;
+
+            const float mag = magnitude * weight;
+            outputSpectrum[(size_t) destBin] += juce::dsp::Complex<float> (
+                mag * std::cos (outputPhase), mag * std::sin (outputPhase));
+
+            // Update phase tracking for this destination bin
+            if (phaseInitialised[(size_t) destBin] == 0)
+            {
+                destPhases[(size_t) destBin] = outputPhase;
+                phaseInitialised[(size_t) destBin] = 1;
+            }
+        };
+
+        addBin (lowerDest, 1.0f - frac);
+        addBin (lowerDest + 1, frac);
     }
 
     outputSpectrum[0] = juce::dsp::Complex<float> (fftBuffer[0].real(), 0.0f);
     outputSpectrum[(size_t) numBins] = juce::dsp::Complex<float> (fftBuffer[(size_t) numBins].real(), 0.0f);
 
+    // ============================================================
+    // Formant Preservation via Cepstral Envelope
+    // ============================================================
+    // Apply envelope correction to preserve formants when pitch shifting
+    // formantPreserve = 0: No correction (formants shift with pitch - "chipmunk")
+    // formantPreserve = 1: Full correction (formants preserved - natural voice)
+    if (formantPreserve > 0.0f)
+    {
+        // Compute magnitudes of output spectrum
+        std::vector<float> outputMags (numBins + 1);
+        for (int k = 0; k <= numBins; ++k)
+        {
+            const auto& bin = outputSpectrum[(size_t) k];
+            outputMags[(size_t) k] = std::sqrt (bin.real() * bin.real() + bin.imag() * bin.imag());
+        }
+
+        // Compute envelope of the shifted spectrum
+        computeSpectralEnvelope (outputMags.data(), numBins, outputEnvelope.data());
+
+        // Apply envelope correction: restore original formant structure
+        for (int k = 0; k <= numBins; ++k)
+        {
+            const float shiftedEnv = outputEnvelope[(size_t) k];
+            const float originalEnv = inputEnvelope[(size_t) k];
+
+            // Compute correction factor
+            float correction = (shiftedEnv > 1.0e-10f) ? (originalEnv / shiftedEnv) : 1.0f;
+
+            // Blend based on formantPreserve amount
+            // 0 = no correction, 1 = full correction
+            float blendedCorrection = 1.0f + formantPreserve * (correction - 1.0f);
+
+            // Clamp to avoid extreme amplification
+            blendedCorrection = juce::jlimit (0.1f, 10.0f, blendedCorrection);
+
+            // Apply correction while preserving phase
+            outputSpectrum[(size_t) k] *= blendedCorrection;
+        }
+    }
+
+    // Calculate output spectrum energy BEFORE inverse FFT (while still in frequency domain)
+    float totalOutputEnergy = 0.0f;
+    for (int k = 0; k <= numBins; ++k)
+    {
+        const auto& bin = outputSpectrum[(size_t) k];
+        totalOutputEnergy += bin.real() * bin.real() + bin.imag() * bin.imag();
+    }
+
+    // Energy preservation factor (comparing pre and post pitch-shift energies)
+    float energyFactor = (totalOutputEnergy > 1.0e-10f)
+                             ? std::sqrt (totalInputEnergy / totalOutputEnergy)
+                             : 1.0f;
+
+    // Mirror negative frequencies for inverse FFT
     for (int k = 1; k < numBins; ++k)
     {
         const auto bin = outputSpectrum[(size_t) k];
         outputSpectrum[(size_t) (fftSize - k)] = std::conj (bin);
     }
 
+    // Inverse FFT to time domain
     fft->perform (outputSpectrum.data(), outputSpectrum.data(), true);
 
-    // Calculate output spectrum energy for normalization
-    float totalOutputEnergy = 0.0f;
-    for (int k = 0; k <= numBins; ++k) {
-        auto bin = outputSpectrum[(size_t)k];
-        totalOutputEnergy += bin.real() * bin.real() + bin.imag() * bin.imag();
-    }
-
-    // Energy preservation factor (comparing pre and post pitch-shift energies)
-    float energyFactor = (totalOutputEnergy > 1.0e-30f) ? 
-        std::sqrt(totalInputEnergy / totalOutputEnergy) : 1.0f;
-
     // Apply energy preservation, OLA gain, and IFFT normalization
-    const float normalisation = olaGain * (1.0f / (float)fftSize) * energyFactor;
+    const float normalisation = olaGain * (1.0f / (float) fftSize) * energyFactor;
     
     for (int n = 0; n < fftSize; ++n)
     {

@@ -155,19 +155,25 @@ private:
     {
         void prepare (double sampleRateIn, int fftOrderIn);
         void reset();
-        void process (const float* input, float* output, int numSamples, const float* ratioValues);
+        void process (const float* input, float* output, int numSamples, const float* ratioValues,
+                      float formantPreserve);
 
     private:
-        void processFrame();
+        void processFrame (float formantPreserve);
+        void computeSpectralEnvelope (const float* mags, int numBins, float* envelope);
 
         double sampleRate = 44100.0;
         int fftOrder = defaultAnalysisFftOrder;
         int fftSize = 0;
         int hopSize = 0;
         float frameRatio = 1.0f;
-    float olaGain = 1.0f; // normalisation to satisfy COLA for chosen window/hop
+        float olaGain = 1.0f; // normalisation to satisfy COLA for chosen window/hop
+
+        // Cepstral envelope estimation parameters
+        int lifterCutoff = 40; // quefrency bins to keep (controls envelope smoothness)
 
         std::unique_ptr<juce::dsp::FFT> fft;
+        std::unique_ptr<juce::dsp::FFT> envelopeFft; // separate FFT for envelope estimation
         std::vector<float> analysisWindow;
         std::vector<float> synthesisWindow;
         std::vector<float> analysisFifo;
@@ -181,6 +187,12 @@ private:
         std::vector<float> phases;
         std::vector<float> destPhases;
         std::vector<uint8_t> phaseInitialised;
+
+        // Cepstral envelope buffers
+        std::vector<float> logMagnitudes;
+        std::vector<juce::dsp::Complex<float>> cepstrumBuffer;
+        std::vector<float> inputEnvelope;
+        std::vector<float> outputEnvelope;
     };
 
     std::vector<SpectralPeakVocoder> vocoderChannels;
