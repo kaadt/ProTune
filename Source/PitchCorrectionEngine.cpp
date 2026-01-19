@@ -946,8 +946,8 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame()
     float energyFactor = (totalOutputEnergy > 1.0e-30f) ? 
         std::sqrt(totalInputEnergy / totalOutputEnergy) : 1.0f;
 
-    // Apply energy preservation and IFFT normalization
-    const float normalisation = (1.0f / (float)fftSize) * energyFactor;
+    // Apply energy preservation, OLA gain, and IFFT normalization
+    const float normalisation = olaGain * (1.0f / (float)fftSize) * energyFactor;
     
     for (int n = 0; n < fftSize; ++n)
     {
