@@ -112,10 +112,17 @@ void PitchCorrectionEngine::updateComponentSettings()
 
     // Update retune engine
     RetuneEngine::Settings retuneSettings;
-    retuneSettings.retuneSpeedMs = juce::jmax (params.retuneSpeedMs, params.speed);
+    const Parameters defaultParams;
+    float retuneSpeedMs = params.retuneSpeedMs;
+    if (std::abs (retuneSpeedMs - defaultParams.retuneSpeedMs) < 1.0e-3f)
+        retuneSpeedMs = params.speed;
+    retuneSettings.retuneSpeedMs = retuneSpeedMs;
     retuneSettings.vibratoTracking = params.vibratoTracking;
     retuneSettings.humanize = params.humanize;
-    retuneSettings.noteTransition = juce::jmax (params.noteTransition, params.transition);
+    float noteTransition = params.noteTransition;
+    if (std::abs (noteTransition - defaultParams.noteTransition) < 1.0e-3f)
+        noteTransition = params.transition;
+    retuneSettings.noteTransition = noteTransition;
     retuneEngine.setSettings (retuneSettings);
 }
 

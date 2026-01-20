@@ -6,11 +6,11 @@
 // Simple WAV writer
 void writeWav(const char* filename, const float* data, int numSamples, int sampleRate) {
     std::ofstream file(filename, std::ios::binary);
-    
+
     // WAV header
     int dataSize = numSamples * 2;  // 16-bit samples
     int fileSize = 44 + dataSize - 8;
-    
+
     file.write("RIFF", 4);
     file.write(reinterpret_cast<char*>(&fileSize), 4);
     file.write("WAVE", 4);
@@ -30,7 +30,7 @@ void writeWav(const char* filename, const float* data, int numSamples, int sampl
     file.write(reinterpret_cast<char*>(&bitsPerSample), 2);
     file.write("data", 4);
     file.write(reinterpret_cast<char*>(&dataSize), 4);
-    
+
     // Write samples
     for (int i = 0; i < numSamples; i++) {
         short s = static_cast<short>(data[i] * 32767.0f);
@@ -43,51 +43,77 @@ int main() {
     const int duration = 2;  // seconds
     const int numSamples = sampleRate * duration;
     const float inputFreq = 220.0f;  // A3
-    
+
     std::vector<float> input(numSamples);
     std::vector<float> output(numSamples);
-    
+
     // Generate 220 Hz sine wave
     for (int i = 0; i < numSamples; i++) {
         input[i] = 0.5f * std::sin(2.0f * 3.14159265f * inputFreq * i / sampleRate);
     }
-    
+
     // Write input for reference
     writeWav("sine_input.wav", input.data(), numSamples, sampleRate);
     std::cout << "Input: " << inputFreq << " Hz sine wave" << std::endl;
-    
+
     // Process with +5 semitone shift (ratio ~1.335)
     PitchCorrectionEngine engine;
     engine.prepare(sampleRate, 512);
-    
+
     PitchCorrectionEngine::Parameters params;
     params.retuneSpeedMs = 0.0f;  // Instant
     params.transpose = 5;  // +5 semitones
     params.bypass = false;
     params.scale.type = PitchCorrectionEngine::Parameters::ScaleSettings::Type::Chromatic;
     engine.setParameters(params);
-    
+
     float expectedFreq = inputFreq * std::pow(2.0f, 5.0f / 12.0f);
     std::cout << "Expected output: " << expectedFreq << " Hz" << std::endl;
-    
+
     // Process in blocks
     const int blockSize = 512;
     juce::MidiBuffer emptyMidi;
-    
+
+    int voicedBlocks = 0;
+    int correctedBlocks = 0;
+    float totalRatioSum = 0;
+
     for (int i = 0; i < numSamples; i += blockSize) {
         int samplesThisBlock = std::min(blockSize, numSamples - i);
         juce::AudioBuffer<float> block(1, samplesThisBlock);
         block.copyFrom(0, 0, input.data() + i, samplesThisBlock);
-        
+
         engine.pushMidi(emptyMidi);
         engine.process(block);
-        
+
+        float detFreq = engine.getLastDetectedFrequency();
+        float ratio = engine.getLastPitchRatio();
+
+        if (detFreq > 0) {
+            voicedBlocks++;
+            totalRatioSum += ratio;
+            if (std::abs(ratio - 1.0f) > 0.01f)
+                correctedBlocks++;
+        }
+
+        // Debug output for first few blocks
+        if (i < blockSize * 5) {
+            std::cout << "Block " << (i/blockSize) << ": detected=" << detFreq
+                      << " Hz, ratio=" << ratio
+                      << ", confidence=" << engine.getLastDetectionConfidence() << std::endl;
+        }
+
         std::memcpy(output.data() + i, block.getReadPointer(0), samplesThisBlock * sizeof(float));
     }
-    
+
+    std::cout << "\nVoiced blocks: " << voicedBlocks << "/" << (numSamples/blockSize) << std::endl;
+    std::cout << "Corrected blocks: " << correctedBlocks << std::endl;
+    if (voicedBlocks > 0)
+        std::cout << "Average ratio: " << (totalRatioSum / voicedBlocks) << std::endl;
+
     // Write output
     writeWav("sine_output.wav", output.data(), numSamples, sampleRate);
-    
+
     // Analyze output: count zero crossings to estimate frequency
     int zeroCrossings = 0;
     for (int i = 1; i < numSamples; i++) {
@@ -97,14 +123,24 @@ int main() {
     }
     float estimatedFreq = (zeroCrossings / 2.0f) / duration;
     std::cout << "Measured output: " << estimatedFreq << " Hz (from zero crossings)" << std::endl;
-    
+
     // Calculate RMS to verify signal exists
     float rms = 0;
     for (int i = 0; i < numSamples; i++) {
         rms += output[i] * output[i];
     }
     rms = std::sqrt(rms / numSamples);
-    std::cout << "Output RMS: " << rms << std::endl;
-    
+    std::cout << "Output RMS: " << rms << " (input RMS was ~0.35)" << std::endl;
+
+    // Also check a specific segment
+    float segRms = 0;
+    int segStart = sampleRate;  // 1 second in
+    int segEnd = sampleRate + sampleRate/2;  // 0.5 seconds
+    for (int i = segStart; i < segEnd; i++) {
+        segRms += output[i] * output[i];
+    }
+    segRms = std::sqrt(segRms / (segEnd - segStart));
+    std::cout << "Segment RMS (1-1.5s): " << segRms << std::endl;
+
     return 0;
 }

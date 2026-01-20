@@ -14,11 +14,11 @@ void PsolaShifter::prepare (double sampleRate, int maxBlockSize)
     maxPeriodSamples = static_cast<int> (sampleRate / 50.0);
     minPeriodSamples = static_cast<int> (sampleRate / 1000.0);
 
-    // Input buffer: large enough for several periods plus block
+    // Input buffer: large enough to hold samples for look-back
     int inputBufferSize = maxPeriodSamples * 8 + maxBlockSize;
     inputBuffer.assign (static_cast<size_t> (inputBufferSize), 0.0f);
 
-    // Latency for look-ahead
+    // Latency
     latencySamples = maxPeriodSamples * 2;
 
     reset();
@@ -28,13 +28,12 @@ void PsolaShifter::reset()
 {
     std::fill (inputBuffer.begin(), inputBuffer.end(), 0.0f);
     inputWritePos = 0;
-    outputWritePos = 0;
-    outputReadPos = 0;
     activeGrains.clear();
     lastPeriod = 0.0f;
-    synthesisPosition = 0.0f;
-    lastGrainInputCenter = 0;
+    grainPhase = 0.0f;
+    inputReadPosition = -1.0;
     totalInputSamples = 0;
+    totalOutputSamples = 0;
 }
 
 void PsolaShifter::process (const float* input, float* output, int numSamples,
@@ -59,6 +58,9 @@ void PsolaShifter::process (const float* input, float* output, int numSamples,
         totalInputSamples += numSamples;
     }
 
+    // Clear output
+    std::fill (output, output + numSamples, 0.0f);
+
     // If unvoiced or no pitch detected, pass through
     if (detectedPeriod <= 0.0f || confidence < 0.2f)
     {
@@ -67,17 +69,15 @@ void PsolaShifter::process (const float* input, float* output, int numSamples,
             for (int i = 0; i < numSamples; ++i)
                 output[i] = input[i];
         }
-        else
-        {
-            std::fill (output, output + numSamples, 0.0f);
-        }
         lastPeriod = 0.0f;
-        synthesisPosition = 0.0f;
+        grainPhase = 0.0f;
+        inputReadPosition = -1.0;
         activeGrains.clear();
+        totalOutputSamples += numSamples;
         return;
     }
 
-    // Clamp and smooth period
+    // Smooth period
     float period = juce::jlimit (static_cast<float> (minPeriodSamples),
                                   static_cast<float> (maxPeriodSamples),
                                   detectedPeriod);
@@ -89,122 +89,126 @@ void PsolaShifter::process (const float* input, float* output, int numSamples,
 
     period = lastPeriod;
     int periodInt = juce::jmax (minPeriodSamples, static_cast<int> (period + 0.5f));
+    int grainSize = periodInt * 2;
 
-    // Pitch-synchronous OLA with per-grain resampling:
+    // ============================================================================
+    // FORMANT-PRESERVING PSOLA - Duration-Preserving Pitch Shift
+    // ============================================================================
     //
-    // The KEY to pitch shifting is that each grain represents TWO pitch cycles.
-    // By resampling the grain, we change the apparent frequency.
+    // For realtime pitch correction with duration preservation:
     //
-    // Original: grain of 2*period samples = 2 cycles at input frequency
-    // Resampled: same grain compressed/stretched to 2*period samples
-    //            but containing pitchRatio more/fewer waveform cycles
+    // Keep the analysis read position moving in real time (1 sample out per 1 sample in)
+    // so grain contents are not time-scaled (formants stay put). Pitch shifting is
+    // achieved only by changing the spacing of synthesis grains.
     //
-    // For pitch UP: compress waveform within grain (more cycles per grain)
-    //   -> Read from input at rate pitchRatio (faster)
-    //   -> Each output sample reads from input[i * pitchRatio]
+    // For pitch UP (pitchRatio > 1):
+    //   - Place grains closer together (period / pitchRatio)
+    //   - This repeats cycles at a higher rate
     //
-    // We keep grain SIZE the same (2*period samples) to maintain constant overlap
-    // but change the CONTENT to have more/fewer waveform cycles.
+    // For pitch DOWN (pitchRatio < 1):
+    //   - Place grains further apart
+    //   - This skips cycles to lower the pitch
+    // ============================================================================
 
-    int grainSize = periodInt * 2;  // Fixed size for consistent overlap
-    float hop = period;  // Extract and place grains every period samples
+    float outputHop = period / pitchRatio;  // Grain output spacing
+    float phaseIncrement = 1.0f / outputHop;
 
-    // Clear output buffer for this block
-    std::fill (output, output + numSamples, 0.0f);
+    // Initialize input read position to current block start
+    if (inputReadPosition < 0.0)
+    {
+        inputReadPosition = static_cast<double> (totalInputSamples - numSamples);
+        grainPhase = 1.0f;
+    }
 
-    // Process: spawn grains at regular intervals
+    int outputBlockStart = totalOutputSamples;
+
     for (int outSample = 0; outSample < numSamples; ++outSample)
     {
-        // Check if we need to spawn a new grain
-        while (synthesisPosition <= static_cast<float> (outSample))
+        // Advance input read position in real time to preserve formants
+        inputReadPosition += 1.0;
+
+        // Grain spawn phase
+        grainPhase += phaseIncrement;
+
+        while (grainPhase >= 1.0f)
         {
-            // Calculate input position for this grain
-            float inputPos = static_cast<float> (lastGrainInputCenter) + hop;
+            grainPhase -= 1.0f;
 
-            // For pitch up, we need more input content per grain
-            // So we read from a larger region of input (grainSize * pitchRatio samples)
-            int inputReadSize = static_cast<int> (static_cast<float> (grainSize) * pitchRatio + 0.5f);
+            int oldestAvailable = totalInputSamples - inputBufSize;
 
-            // Check if we have enough input data
-            if (static_cast<int> (inputPos) + inputReadSize / 2 > totalInputSamples)
-                break;
+            int minCenter = oldestAvailable + grainSize / 2;
+            int maxCenter = totalInputSamples - grainSize / 2;
 
-            // Create grain
-            Grain grain;
-            grain.samples.resize (static_cast<size_t> (grainSize));
-            grain.period = period;
-            grain.centerPosition = static_cast<int> (inputPos);
-            grain.outputPosition = outSample;
+            if (maxCenter < minCenter)
+                continue;
 
-            // Extract and resample: read inputReadSize samples, output grainSize samples
-            int inputStart = static_cast<int> (inputPos) - inputReadSize / 2;
+            int inputCenter = static_cast<int> (inputReadPosition + 0.5);
+            inputCenter = juce::jlimit (minCenter, maxCenter, inputCenter);
+            inputCenter = alignToPeak (inputCenter, juce::jmax (1, periodInt / 2), minCenter, maxCenter);
+            int inputStart = inputCenter - grainSize / 2;
 
-            for (int i = 0; i < grainSize; ++i)
+            if (inputStart >= oldestAvailable)
             {
-                // Map output index to input index
-                // For pitch UP: read MORE input samples per output sample
-                float inputIdx = static_cast<float> (i) * pitchRatio;
+                Grain grain;
+                grain.samples.resize (static_cast<size_t> (grainSize));
+                grain.window.resize (static_cast<size_t> (grainSize));
+                grain.outputPosition = outputBlockStart + outSample;
+                grain.centerPosition = inputCenter;
+                grain.period = period;
 
-                int idx0 = static_cast<int> (inputIdx);
-                int idx1 = idx0 + 1;
-                float frac = inputIdx - static_cast<float> (idx0);
+                for (int i = 0; i < grainSize; ++i)
+                {
+                    int bufIdx = (inputStart + i) % inputBufSize;
+                    if (bufIdx < 0) bufIdx += inputBufSize;
 
-                // Clamp to input bounds
-                if (idx0 >= inputReadSize) idx0 = inputReadSize - 1;
-                if (idx1 >= inputReadSize) idx1 = inputReadSize - 1;
+                    float sample = inputBuffer[static_cast<size_t> (bufIdx)];
+                    float window = getHannWindow (i, grainSize);
+                    grain.window[static_cast<size_t> (i)] = window;
+                    grain.samples[static_cast<size_t> (i)] = sample * window;
+                }
 
-                // Get input samples
-                int bufIdx0 = ((inputStart + idx0) % inputBufSize + inputBufSize) % inputBufSize;
-                int bufIdx1 = ((inputStart + idx1) % inputBufSize + inputBufSize) % inputBufSize;
-
-                float s0 = inputBuffer[static_cast<size_t> (bufIdx0)];
-                float s1 = inputBuffer[static_cast<size_t> (bufIdx1)];
-
-                // Linear interpolation
-                float sample = s0 + frac * (s1 - s0);
-
-                // Apply Hanning window
-                float window = getHannWindow (i, grainSize);
-                grain.samples[static_cast<size_t> (i)] = sample * window;
+                activeGrains.push_back (std::move (grain));
             }
-
-            activeGrains.push_back (std::move (grain));
-
-            // Update positions
-            lastGrainInputCenter = static_cast<int> (inputPos);
-            synthesisPosition += hop;
         }
 
-        // Synthesize: overlap-add all active grains
-        for (auto it = activeGrains.begin(); it != activeGrains.end();)
+        // Overlap-add
+        float outValue = 0.0f;
+        float windowSum = 0.0f;
+        int currentOutputIdx = outputBlockStart + outSample;
+
+        for (auto& grain : activeGrains)
         {
-            Grain& grain = *it;
-            int grainIdx = outSample - grain.outputPosition;
             int grainLen = static_cast<int> (grain.samples.size());
+            int grainStart = grain.outputPosition - grainLen / 2;
+            int relIdx = currentOutputIdx - grainStart;
 
-            if (grainIdx >= 0 && grainIdx < grainLen)
+            if (relIdx >= 0 && relIdx < grainLen)
             {
-                output[outSample] += grain.samples[static_cast<size_t> (grainIdx)];
-            }
-
-            if (grainIdx >= grainLen)
-            {
-                it = activeGrains.erase (it);
-            }
-            else
-            {
-                ++it;
+                outValue += grain.samples[static_cast<size_t> (relIdx)];
+                windowSum += grain.window[static_cast<size_t> (relIdx)];
             }
         }
+
+        if (windowSum > 1.0e-6f)
+            outValue /= windowSum;
+
+        output[outSample] = outValue;
     }
 
-    // Adjust for next block
-    synthesisPosition -= static_cast<float> (numSamples);
-
-    for (auto& grain : activeGrains)
+    // Cleanup finished grains
+    int blockEnd = totalOutputSamples + numSamples;
+    while (!activeGrains.empty())
     {
-        grain.outputPosition -= numSamples;
+        auto& front = activeGrains.front();
+        int grainLen = static_cast<int> (front.samples.size());
+        int grainEnd = front.outputPosition + grainLen / 2;
+        if (grainEnd <= blockEnd)
+            activeGrains.pop_front();
+        else
+            break;
     }
+
+    totalOutputSamples += numSamples;
 }
 
 float PsolaShifter::getHannWindow (int index, int size) const
@@ -214,4 +218,34 @@ float PsolaShifter::getHannWindow (int index, int size) const
 
     float phase = static_cast<float> (index) / static_cast<float> (size - 1);
     return 0.5f * (1.0f - std::cos (juce::MathConstants<float>::twoPi * phase));
+}
+
+int PsolaShifter::alignToPeak (int center, int searchRadius, int minCenter, int maxCenter) const
+{
+    if (inputBuffer.empty())
+        return center;
+
+    int inputBufSize = static_cast<int> (inputBuffer.size());
+    int start = juce::jmax (center - searchRadius, minCenter);
+    int end = juce::jmin (center + searchRadius, maxCenter);
+
+    int bestPos = center;
+    float bestValue = -1.0f;
+
+    for (int pos = start; pos <= end; ++pos)
+    {
+        int bufIdx = pos % inputBufSize;
+        if (bufIdx < 0)
+            bufIdx += inputBufSize;
+
+        float sample = inputBuffer[static_cast<size_t> (bufIdx)];
+        float magnitude = std::abs (sample);
+        if (magnitude > bestValue)
+        {
+            bestValue = magnitude;
+            bestPos = pos;
+        }
+    }
+
+    return bestPos;
 }
