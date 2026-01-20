@@ -179,6 +179,7 @@ private:
         std::vector<float> analysisFifo;
         std::vector<float> ratioFifo;
         int fifoFill = 0;
+        int framesProcessed = 0; // Track OLA stability
         std::vector<float> outputAccum;
         std::deque<float> outputQueue;
         std::vector<juce::dsp::Complex<float>> fftBuffer;

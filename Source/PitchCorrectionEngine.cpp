@@ -670,6 +670,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::prepare (double sampleRateIn, i
     analysisFifo.assign ((size_t) fftSize, 0.0f);
     ratioFifo.assign ((size_t) fftSize, 1.0f);
     fifoFill = 0;
+    framesProcessed = 0;
 
     outputAccum.assign ((size_t) fftSize, 0.0f);
     outputQueue.clear();
@@ -693,6 +694,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::reset()
     std::fill (analysisFifo.begin(), analysisFifo.end(), 0.0f);
     std::fill (ratioFifo.begin(), ratioFifo.end(), 1.0f);
     fifoFill = 0;
+    framesProcessed = 0;
     std::fill (outputAccum.begin(), outputAccum.end(), 0.0f);
     outputQueue.clear();
     std::fill (destPhases.begin(), destPhases.end(), 0.0f);
@@ -736,6 +738,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::process (const float* input, fl
             frameRatio = juce::jlimit (0.25f, 4.0f, frameRatio / (float) fftSize);
 
             processFrame (formantPreserve);
+            ++framesProcessed;
 
             if (hopSize < fftSize)
             {
@@ -754,7 +757,16 @@ void PitchCorrectionEngine::SpectralPeakVocoder::process (const float* input, fl
             processed = outputQueue.front();
             outputQueue.pop_front();
 
-            // Safety check: if processed is NaN or extremely quiet, use input
+            // OLA needs time to stabilize - need at least 4 overlapping frames for 75% overlap
+            // During warmup, crossfade from input to vocoder output
+            const int warmupFrames = 4;
+            if (framesProcessed < warmupFrames)
+            {
+                float blend = (float) framesProcessed / (float) warmupFrames;
+                processed = sample * (1.0f - blend) + processed * blend;
+            }
+
+            // Safety check: if processed is NaN/Inf, use input
             if (std::isnan (processed) || std::isinf (processed))
                 processed = sample;
         }
@@ -823,6 +835,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
 
     fft->perform (fftBuffer.data(), fftBuffer.data(), false);
 
+    float maxMag = 0.0f;
     for (int k = 0; k <= numBins; ++k)
     {
         const auto bin = fftBuffer[(size_t) k];
@@ -830,22 +843,32 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
         const float imag = bin.imag();
         magnitudes[(size_t) k] = std::sqrt (real * real + imag * imag);
         phases[(size_t) k] = std::atan2 (imag, real);
+        if (magnitudes[(size_t) k] > maxMag)
+            maxMag = magnitudes[(size_t) k];
     }
 
     // Compute input spectral envelope for formant preservation
     if (formantPreserve > 0.0f)
         computeSpectralEnvelope (magnitudes.data(), numBins, inputEnvelope.data());
 
+
+    // For debugging: just copy input spectrum to output (bypass pitch shifting)
+    // This tests if FFT->IFFT path is working
+    constexpr bool bypassPitchShift = false;
+
     std::fill (outputSpectrum.begin(), outputSpectrum.end(), juce::dsp::Complex<float>());
 
+    if (bypassPitchShift)
+    {
+        // Direct copy - should produce input signal back
+        for (int k = 0; k <= numBins; ++k)
+            outputSpectrum[(size_t) k] = fftBuffer[(size_t) k];
+    }
+    else
+    {
     const float binToOmega = juce::MathConstants<float>::twoPi / (float) fftSize;
     const float hopSamples = (float) hopSize;
     const float beta = frameRatio;
-
-    // Calculate total energy in input spectrum for normalization
-    float totalInputEnergy = 0.0f;
-    for (int k = 0; k <= numBins; ++k)
-        totalInputEnergy += magnitudes[(size_t) k] * magnitudes[(size_t) k];
 
     // ============================================================
     // Phase-Locked Spectral Peak Vocoder (Laroche & Dolson 1999)
@@ -1012,18 +1035,7 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
         }
     }
 
-    // Calculate output spectrum energy BEFORE inverse FFT (while still in frequency domain)
-    float totalOutputEnergy = 0.0f;
-    for (int k = 0; k <= numBins; ++k)
-    {
-        const auto& bin = outputSpectrum[(size_t) k];
-        totalOutputEnergy += bin.real() * bin.real() + bin.imag() * bin.imag();
-    }
-
-    // Energy preservation factor (comparing pre and post pitch-shift energies)
-    float energyFactor = (totalOutputEnergy > 1.0e-10f)
-                             ? std::sqrt (totalInputEnergy / totalOutputEnergy)
-                             : 1.0f;
+    } // end of else block (pitch shifting)
 
     // Mirror negative frequencies for inverse FFT
     for (int k = 1; k < numBins; ++k)
@@ -1035,15 +1047,47 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
     // Inverse FFT to time domain
     fft->perform (outputSpectrum.data(), outputSpectrum.data(), true);
 
-    // Apply energy preservation, OLA gain, and IFFT normalization
-    const float normalisation = olaGain * (1.0f / (float) fftSize) * energyFactor;
-    
+    // Compute time-domain energy of IFFT output and compare to input windowed signal
+    // This accounts for phase incoherence that spectral energy comparison misses
+    float ifftEnergy = 0.0f;
+    for (int n = 0; n < fftSize; ++n)
+    {
+        float s = outputSpectrum[(size_t)n].real();
+        ifftEnergy += s * s;
+    }
+
+    // Compute energy of the input windowed signal for comparison
+    float inputWindowedEnergy = 0.0f;
+    for (int n = 0; n < fftSize; ++n)
+    {
+        float s = analysisFifo[(size_t)n] * analysisWindow[(size_t)n];
+        inputWindowedEnergy += s * s;
+    }
+
+    // Time-domain correction factor: scale output to match input energy
+    float timeDomainFactor = (ifftEnergy > 1.0e-10f)
+                                 ? std::sqrt(inputWindowedEnergy / ifftEnergy)
+                                 : 1.0f;
+
+    // When pitch shifting, inter-frame phase incoherence causes OLA cancellation.
+    // The coherence loss scales approximately with the square of the energy factor.
+    // Empirical correction with additional adjustment factor (1.2) for remaining loss.
+    float coherenceBoost = 1.0f;
+    if (timeDomainFactor > 1.05f)  // Only when significant pitch shift
+    {
+        coherenceBoost = timeDomainFactor * timeDomainFactor * 1.2f;
+    }
+
+    // Apply OLA gain, time-domain energy correction, and coherence boost
+    const float normalisation = olaGain * timeDomainFactor * coherenceBoost;
+
     for (int n = 0; n < fftSize; ++n)
     {
         float sample = outputSpectrum[(size_t)n].real() * normalisation;
         sample *= synthesisWindow[(size_t)n];
         outputAccum[(size_t)n] += sample;
     }
+
 
     for (int i = 0; i < hopSize; ++i)
         outputQueue.push_back (outputAccum[(size_t) i]);
