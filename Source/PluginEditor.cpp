@@ -1,13 +1,11 @@
 #include "PluginEditor.h"
 #include "PluginProcessor.h"
-
 #include <cmath>
 
 namespace
 {
-constexpr int windowWidth = 400;
-constexpr int windowHeight = 500;
-constexpr float meterDiameter = 200.0f;
+constexpr int windowWidth = 600;
+constexpr int windowHeight = 450;
 
 static const juce::StringArray noteNames { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 }
@@ -15,62 +13,107 @@ static const juce::StringArray noteNames { "C", "C#", "D", "D#", "E", "F", "F#",
 ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor& p)
     : juce::AudioProcessorEditor (&p), processor (p)
 {
-    configureSlider (speedSlider, "Speed");
-    configureSlider (formantSlider, "Formant");
+    // Bypass button
+    bypassButton.setColour (juce::ToggleButton::textColourId, juce::Colours::white);
+    bypassButton.setColour (juce::ToggleButton::tickColourId, accentColor);
+    addAndMakeVisible (bypassButton);
 
-    auto setupLabel = [] (juce::Label& label)
-    {
-        label.setJustificationType (juce::Justification::centred);
-        label.setColour (juce::Label::textColourId, juce::Colours::white);
-        label.setFont (juce::Font (juce::FontOptions (13.0f, juce::Font::bold)));
-    };
+    // Note display (large)
+    noteLabel.setJustificationType (juce::Justification::centred);
+    noteLabel.setFont (juce::Font (juce::FontOptions (48.0f, juce::Font::bold)));
+    noteLabel.setColour (juce::Label::textColourId, juce::Colours::white);
+    noteLabel.setText ("--", juce::dontSendNotification);
+    addAndMakeVisible (noteLabel);
 
-    setupLabel (speedLabel);
-    setupLabel (formantLabel);
-    setupLabel (scaleLabel);
-    setupLabel (keyLabel);
+    // Frequency display
+    frequencyLabel.setJustificationType (juce::Justification::centred);
+    frequencyLabel.setFont (juce::Font (juce::FontOptions (16.0f)));
+    frequencyLabel.setColour (juce::Label::textColourId, juce::Colours::lightgrey);
+    addAndMakeVisible (frequencyLabel);
 
-    addAndMakeVisible (speedLabel);
-    addAndMakeVisible (formantLabel);
-    addAndMakeVisible (scaleLabel);
+    // Input pitch label
+    inputPitchLabel.setJustificationType (juce::Justification::centred);
+    inputPitchLabel.setFont (juce::Font (juce::FontOptions (14.0f)));
+    inputPitchLabel.setColour (juce::Label::textColourId, juce::Colours::grey);
+    inputPitchLabel.setText ("No pitch detected", juce::dontSendNotification);
+    addAndMakeVisible (inputPitchLabel);
+
+    // Input Type selector
+    inputTypeSelector.addItemList ({ "Soprano", "Alto/Tenor", "Low Male", "Instrument", "Bass Inst." }, 1);
+    inputTypeSelector.setColour (juce::ComboBox::backgroundColourId, meterBgColor);
+    inputTypeSelector.setColour (juce::ComboBox::textColourId, juce::Colours::white);
+    inputTypeSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
+    addAndMakeVisible (inputTypeSelector);
+    configureLabel (inputTypeLabel);
+    addAndMakeVisible (inputTypeLabel);
+
+    // Key selector
+    keySelector.addItemList (noteNames, 1);
+    keySelector.setColour (juce::ComboBox::backgroundColourId, meterBgColor);
+    keySelector.setColour (juce::ComboBox::textColourId, juce::Colours::white);
+    keySelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
+    addAndMakeVisible (keySelector);
+    configureLabel (keyLabel);
     addAndMakeVisible (keyLabel);
 
-    auto comboStyle = [this] (juce::ComboBox& combo)
-    {
-        combo.setColour (juce::ComboBox::backgroundColourId, juce::Colour::fromRGB (30, 35, 45));
-        combo.setColour (juce::ComboBox::textColourId, juce::Colours::white);
-        combo.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
-        addAndMakeVisible (combo);
-    };
-
+    // Scale selector
     scaleSelector.addItemList ({
-        "Chromatic", "Major", "Minor", "Dorian", "Mixolydian", "Blues", "Pentatonic"
+        "Chromatic", "Major", "Minor", "Harm Minor", "Mel Minor",
+        "Dorian", "Phrygian", "Lydian", "Mixolyd.", "Locrian",
+        "Whole Tone", "Blues", "Maj Pent.", "Min Pent.", "Dim", "Custom"
     }, 1);
-    comboStyle (scaleSelector);
+    scaleSelector.setColour (juce::ComboBox::backgroundColourId, meterBgColor);
+    scaleSelector.setColour (juce::ComboBox::textColourId, juce::Colours::white);
+    scaleSelector.setColour (juce::ComboBox::outlineColourId, juce::Colours::transparentBlack);
+    addAndMakeVisible (scaleSelector);
+    configureLabel (scaleLabel);
+    addAndMakeVisible (scaleLabel);
 
-    keySelector.addItemList (noteNames, 1);
-    comboStyle (keySelector);
+    // Retune Speed (main knob)
+    configureSlider (retuneSpeedSlider, " ms");
+    retuneSpeedSlider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 60, 18);
+    addAndMakeVisible (retuneSpeedSlider);
+    configureLabel (retuneSpeedLabel, 14.0f);
+    addAndMakeVisible (retuneSpeedLabel);
 
-    centralNoteLabel.setJustificationType (juce::Justification::centred);
-    centralNoteLabel.setFont (juce::Font (juce::FontOptions (48.0f, juce::Font::bold)));
-    centralNoteLabel.setColour (juce::Label::textColourId, juce::Colours::white);
-    addAndMakeVisible (centralNoteLabel);
+    // Control strip sliders
+    configureSlider (trackingSlider, "%");
+    configureSlider (humanizeSlider, "%");
+    configureSlider (vibratoSlider);
+    configureSlider (transposeSlider, " st");
+    configureSlider (detuneSlider, " c");
 
-    centralFreqLabel.setJustificationType (juce::Justification::centred);
-    centralFreqLabel.setFont (juce::Font (juce::FontOptions (16.0f)));
-    centralFreqLabel.setColour (juce::Label::textColourId, juce::Colours::lightgrey);
-    addAndMakeVisible (centralFreqLabel);
+    addAndMakeVisible (trackingSlider);
+    addAndMakeVisible (humanizeSlider);
+    addAndMakeVisible (vibratoSlider);
+    addAndMakeVisible (transposeSlider);
+    addAndMakeVisible (detuneSlider);
 
-    detectedLabel.setJustificationType (juce::Justification::centred);
-    detectedLabel.setFont (juce::Font (juce::FontOptions (14.0f)));
-    detectedLabel.setColour (juce::Label::textColourId, juce::Colours::grey);
-    addAndMakeVisible (detectedLabel);
+    configureLabel (trackingLabel);
+    configureLabel (humanizeLabel);
+    configureLabel (vibratoLabel);
+    configureLabel (transposeLabel);
+    configureLabel (detuneLabel);
 
+    addAndMakeVisible (trackingLabel);
+    addAndMakeVisible (humanizeLabel);
+    addAndMakeVisible (vibratoLabel);
+    addAndMakeVisible (transposeLabel);
+    addAndMakeVisible (detuneLabel);
+
+    // Parameter attachments
     auto& vts = processor.getValueTreeState();
-    speedAttachment = std::make_unique<SliderAttachment> (vts, "speed", speedSlider);
-    formantAttachment = std::make_unique<SliderAttachment> (vts, "formant", formantSlider);
+
+    bypassAttachment = std::make_unique<ButtonAttachment> (vts, "bypass", bypassButton);
+    inputTypeAttachment = std::make_unique<ComboBoxAttachment> (vts, "inputType", inputTypeSelector);
+    keyAttachment = std::make_unique<ComboBoxAttachment> (vts, "key", keySelector);
     scaleAttachment = std::make_unique<ComboBoxAttachment> (vts, "scaleMode", scaleSelector);
-    keyAttachment = std::make_unique<ComboBoxAttachment> (vts, "scaleRoot", keySelector);
+    retuneSpeedAttachment = std::make_unique<SliderAttachment> (vts, "retuneSpeed", retuneSpeedSlider);
+    trackingAttachment = std::make_unique<SliderAttachment> (vts, "tracking", trackingSlider);
+    humanizeAttachment = std::make_unique<SliderAttachment> (vts, "humanize", humanizeSlider);
+    vibratoAttachment = std::make_unique<SliderAttachment> (vts, "vibrato", vibratoSlider);
+    transposeAttachment = std::make_unique<SliderAttachment> (vts, "transpose", transposeSlider);
+    detuneAttachment = std::make_unique<SliderAttachment> (vts, "detune", detuneSlider);
 
     setSize (windowWidth, windowHeight);
     startTimerHz (30);
@@ -78,103 +121,169 @@ ProTuneAudioProcessorEditor::ProTuneAudioProcessorEditor (ProTuneAudioProcessor&
 
 void ProTuneAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colour::fromRGB (18, 22, 30));
+    // Background
+    g.fillAll (bgColor);
 
-    // Header
-    juce::Rectangle<float> header (0, 0, (float) getWidth(), 50);
+    // Header gradient
+    juce::Rectangle<float> header (0, 0, static_cast<float> (getWidth()), 45);
     g.setGradientFill (juce::ColourGradient (
-        juce::Colour::fromRGB (30, 80, 140), header.getTopLeft(),
-        juce::Colour::fromRGB (20, 40, 70), header.getBottomRight(), false));
+        headerColor1, header.getTopLeft(),
+        headerColor2, header.getBottomRight(), false));
     g.fillRect (header);
 
+    // Title
     g.setColour (juce::Colours::white);
     g.setFont (juce::Font (juce::FontOptions (24.0f, juce::Font::bold)));
-    g.drawText ("ProTune", header, juce::Justification::centred);
+    g.drawText ("ProTune", header.withTrimmedRight (100).withTrimmedLeft (20), juce::Justification::centredLeft);
 
-    // Pitch meter circle
-    auto meterArea = getLocalBounds().toFloat()
-                         .withTrimmedTop (140)
-                         .withHeight (meterDiameter + 20)
-                         .withSizeKeepingCentre (meterDiameter, meterDiameter);
+    // Pitch meter area (left side)
+    auto meterArea = juce::Rectangle<float> (20, 60, 260, 200);
+    g.setColour (meterBgColor);
+    g.fillRoundedRectangle (meterArea, 10.0f);
+    g.setColour (accentColor.withAlpha (0.5f));
+    g.drawRoundedRectangle (meterArea, 10.0f, 2.0f);
 
-    g.setColour (juce::Colour::fromRGB (25, 30, 40));
-    g.fillEllipse (meterArea);
+    // Cents deviation bar (horizontal)
+    auto barArea = meterArea.reduced (20).removeFromBottom (40);
+    g.setColour (juce::Colour::fromRGB (40, 45, 55));
+    g.fillRoundedRectangle (barArea, 5.0f);
 
-    auto accent = juce::Colour::fromRGB (0, 180, 255);
-    g.setColour (accent);
-    g.drawEllipse (meterArea.reduced (2), 3.0f);
-
-    // Pitch deviation indicator
-    if (displayedDetectedHz > 0.0f && displayedTargetHz > 0.0f)
-    {
-        auto cents = 1200.0f * std::log2 (displayedDetectedHz / displayedTargetHz);
-        cents = juce::jlimit (-50.0f, 50.0f, cents);
-        auto angle = juce::degreesToRadians (cents * 2.0f); // +-50 cents = +-100 degrees
-
-        auto centre = meterArea.getCentre();
-        auto radius = meterArea.getWidth() * 0.38f;
-        auto tip = juce::Point<float> (
-            centre.x + radius * std::sin (angle),
-            centre.y - radius * std::cos (angle));
-
-        g.setColour (juce::Colours::white);
-        g.drawLine (centre.x, centre.y, tip.x, tip.y, 3.0f);
-
-        // Center dot
-        g.fillEllipse (centre.x - 4, centre.y - 4, 8, 8);
-    }
-
-    // Tick marks
+    // Draw tick marks
     g.setColour (juce::Colours::white.withAlpha (0.3f));
-    auto centre = meterArea.getCentre();
-    auto radius = meterArea.getWidth() * 0.46f;
+    float barCenterX = barArea.getCentreX();
+    float barY = barArea.getY();
+
     for (int tick = -2; tick <= 2; ++tick)
     {
-        auto angle = juce::degreesToRadians (tick * 40.0f);
-        auto outer = juce::Point<float> (centre.x + radius * std::sin (angle), centre.y - radius * std::cos (angle));
-        auto inner = juce::Point<float> (centre.x + (radius - 10) * std::sin (angle), centre.y - (radius - 10) * std::cos (angle));
-        g.drawLine (outer.x, outer.y, inner.x, inner.y, tick == 0 ? 2.0f : 1.0f);
+        float x = barCenterX + tick * (barArea.getWidth() / 4.0f) * 0.5f;
+        float tickHeight = (tick == 0) ? 15.0f : 10.0f;
+        g.drawLine (x, barY + 5, x, barY + 5 + tickHeight, tick == 0 ? 2.0f : 1.0f);
     }
+
+    // Deviation indicator
+    if (displayedTargetHz > 0.0f)
+    {
+        float deviation = juce::jlimit (-50.0f, 50.0f, displayedDeviation);
+        float indicatorX = barCenterX + (deviation / 50.0f) * (barArea.getWidth() * 0.4f);
+
+        // Color based on deviation
+        juce::Colour indicatorColor;
+        float absDeviation = std::abs (deviation);
+        if (absDeviation < 10.0f)
+            indicatorColor = juce::Colour::fromRGB (0, 255, 100);  // Green
+        else if (absDeviation < 25.0f)
+            indicatorColor = juce::Colour::fromRGB (255, 255, 0);  // Yellow
+        else
+            indicatorColor = juce::Colour::fromRGB (255, 80, 80);  // Red
+
+        g.setColour (indicatorColor);
+        g.fillEllipse (indicatorX - 8, barArea.getCentreY() - 8, 16, 16);
+        g.setColour (juce::Colours::white);
+        g.drawEllipse (indicatorX - 8, barArea.getCentreY() - 8, 16, 16, 2.0f);
+    }
+
+    // Cents labels
+    g.setColour (juce::Colours::grey);
+    g.setFont (juce::Font (juce::FontOptions (10.0f)));
+    g.drawText ("-50", barArea.withWidth (30), juce::Justification::centredLeft);
+    g.drawText ("+50", barArea.withTrimmedLeft (barArea.getWidth() - 30), juce::Justification::centredRight);
+    g.drawText ("0", juce::Rectangle<float> (barCenterX - 10, barArea.getBottom() + 2, 20, 14),
+                juce::Justification::centred);
+
+    // Control panel background (right side)
+    auto controlArea = juce::Rectangle<float> (300, 60, 280, 200);
+    g.setColour (meterBgColor.withAlpha (0.5f));
+    g.fillRoundedRectangle (controlArea, 10.0f);
+
+    // Bottom control strip background
+    auto stripArea = juce::Rectangle<float> (20, 330, static_cast<float> (getWidth() - 40), 100);
+    g.setColour (meterBgColor.withAlpha (0.3f));
+    g.fillRoundedRectangle (stripArea, 10.0f);
 }
 
 void ProTuneAudioProcessorEditor::resized()
 {
     auto bounds = getLocalBounds();
-    bounds.removeFromTop (60); // Header
 
-    // Scale and Key selectors row
-    auto selectorRow = bounds.removeFromTop (60).reduced (20, 10);
-    auto halfWidth = selectorRow.getWidth() / 2;
+    // Header
+    auto headerArea = bounds.removeFromTop (45);
+    bypassButton.setBounds (headerArea.removeFromRight (100).reduced (10, 8));
 
-    auto scaleArea = selectorRow.removeFromLeft (halfWidth).reduced (5, 0);
-    scaleLabel.setBounds (scaleArea.removeFromTop (18));
-    scaleSelector.setBounds (scaleArea);
+    bounds.removeFromTop (15);  // Spacing
 
-    auto keyArea = selectorRow.reduced (5, 0);
-    keyLabel.setBounds (keyArea.removeFromTop (18));
-    keySelector.setBounds (keyArea);
+    // Main area split: left (pitch meter), right (controls)
+    auto mainArea = bounds.removeFromTop (200);
+    auto leftArea = mainArea.removeFromLeft (280).reduced (20, 0);
+    auto rightArea = mainArea.reduced (20, 0);
 
-    // Meter area (labels positioned inside)
-    auto meterSection = bounds.removeFromTop (220);
-    auto meterArea = meterSection.withSizeKeepingCentre ((int) meterDiameter, (int) meterDiameter);
-    auto innerArea = meterArea.reduced (50);
-    centralFreqLabel.setBounds (innerArea.removeFromBottom (24));
-    centralNoteLabel.setBounds (innerArea);
+    // Pitch meter area - note and frequency displays
+    auto noteArea = leftArea.removeFromTop (80);
+    noteLabel.setBounds (noteArea);
 
-    // Detected label below meter
-    detectedLabel.setBounds (bounds.removeFromTop (30).reduced (20, 0));
+    auto freqArea = leftArea.removeFromTop (25);
+    frequencyLabel.setBounds (freqArea);
 
-    // Sliders row
-    auto sliderRow = bounds.removeFromTop (120).reduced (20, 10);
-    auto sliderWidth = sliderRow.getWidth() / 2;
+    leftArea.removeFromTop (10);
+    auto inputArea = leftArea.removeFromTop (20);
+    inputPitchLabel.setBounds (inputArea);
 
-    auto speedArea = sliderRow.removeFromLeft (sliderWidth).reduced (10, 0);
-    speedLabel.setBounds (speedArea.removeFromTop (20));
-    speedSlider.setBounds (speedArea);
+    // Right side controls
+    auto selectorHeight = 28;
+    auto labelHeight = 18;
+    auto spacing = 8;
 
-    auto formantArea = sliderRow.reduced (10, 0);
-    formantLabel.setBounds (formantArea.removeFromTop (20));
-    formantSlider.setBounds (formantArea);
+    // Input Type
+    inputTypeLabel.setBounds (rightArea.removeFromTop (labelHeight));
+    inputTypeSelector.setBounds (rightArea.removeFromTop (selectorHeight).reduced (0, 2));
+    rightArea.removeFromTop (spacing);
+
+    // Key and Scale on same row
+    auto keyScaleRow = rightArea.removeFromTop (labelHeight + selectorHeight + 4);
+    auto halfWidth = keyScaleRow.getWidth() / 2 - 5;
+
+    auto keyArea = keyScaleRow.removeFromLeft (halfWidth);
+    keyLabel.setBounds (keyArea.removeFromTop (labelHeight));
+    keySelector.setBounds (keyArea.reduced (0, 2));
+
+    keyScaleRow.removeFromLeft (10);
+    scaleLabel.setBounds (keyScaleRow.removeFromTop (labelHeight));
+    scaleSelector.setBounds (keyScaleRow.reduced (0, 2));
+
+    rightArea.removeFromTop (spacing * 2);
+
+    // Retune Speed knob
+    retuneSpeedLabel.setBounds (rightArea.removeFromTop (20));
+    retuneSpeedSlider.setBounds (rightArea.removeFromTop (80).withSizeKeepingCentre (100, 80));
+
+    // Bottom control strip
+    bounds.removeFromTop (30);
+    auto stripArea = bounds.removeFromTop (100).reduced (20, 10);
+    auto sliderWidth = stripArea.getWidth() / 5;
+
+    auto makeSliderArea = [&] () -> juce::Rectangle<int>
+    {
+        return stripArea.removeFromLeft (sliderWidth).reduced (5, 0);
+    };
+
+    auto trackingArea = makeSliderArea();
+    trackingLabel.setBounds (trackingArea.removeFromTop (18));
+    trackingSlider.setBounds (trackingArea);
+
+    auto humanizeArea = makeSliderArea();
+    humanizeLabel.setBounds (humanizeArea.removeFromTop (18));
+    humanizeSlider.setBounds (humanizeArea);
+
+    auto vibratoArea = makeSliderArea();
+    vibratoLabel.setBounds (vibratoArea.removeFromTop (18));
+    vibratoSlider.setBounds (vibratoArea);
+
+    auto transposeArea = makeSliderArea();
+    transposeLabel.setBounds (transposeArea.removeFromTop (18));
+    transposeSlider.setBounds (transposeArea);
+
+    auto detuneArea = makeSliderArea();
+    detuneLabel.setBounds (detuneArea.removeFromTop (18));
+    detuneSlider.setBounds (detuneArea);
 }
 
 void ProTuneAudioProcessorEditor::timerCallback()
@@ -182,27 +291,66 @@ void ProTuneAudioProcessorEditor::timerCallback()
     auto detected = processor.getLastDetectedFrequency();
     auto target = processor.getLastTargetFrequency();
 
+    // Smooth the display values
     constexpr float smoothing = 0.25f;
     displayedDetectedHz += (detected - displayedDetectedHz) * smoothing;
     displayedTargetHz += (target - displayedTargetHz) * smoothing;
 
+    // Calculate deviation in cents
+    if (displayedDetectedHz > 20.0f && displayedTargetHz > 20.0f)
+    {
+        float deviation = frequencyToDeviation (displayedDetectedHz, displayedTargetHz);
+        displayedDeviation += (deviation - displayedDeviation) * smoothing;
+    }
+    else
+    {
+        displayedDeviation *= 0.9f;  // Fade out
+    }
+
+    // Update note display
     if (displayedTargetHz > 20.0f)
     {
-        centralNoteLabel.setText (frequencyToNoteName (displayedTargetHz), juce::dontSendNotification);
-        centralFreqLabel.setText (juce::String (displayedTargetHz, 1) + " Hz", juce::dontSendNotification);
+        noteLabel.setText (frequencyToNoteName (displayedTargetHz), juce::dontSendNotification);
+        frequencyLabel.setText (juce::String (displayedTargetHz, 1) + " Hz", juce::dontSendNotification);
     }
     else
     {
-        centralNoteLabel.setText ("--", juce::dontSendNotification);
-        centralFreqLabel.setText ("", juce::dontSendNotification);
+        noteLabel.setText ("--", juce::dontSendNotification);
+        frequencyLabel.setText ("", juce::dontSendNotification);
     }
 
+    // Update input pitch label
     if (displayedDetectedHz > 20.0f)
-        detectedLabel.setText ("Input: " + frequencyToNoteName (displayedDetectedHz) + " (" + juce::String (displayedDetectedHz, 1) + " Hz)", juce::dontSendNotification);
+    {
+        juce::String inputText = "Input: " + frequencyToNoteName (displayedDetectedHz) +
+                                  " (" + juce::String (displayedDetectedHz, 1) + " Hz)";
+        inputPitchLabel.setText (inputText, juce::dontSendNotification);
+    }
     else
-        detectedLabel.setText ("No pitch detected", juce::dontSendNotification);
+    {
+        inputPitchLabel.setText ("No pitch detected", juce::dontSendNotification);
+    }
 
     repaint();
+}
+
+void ProTuneAudioProcessorEditor::configureSlider (juce::Slider& slider, const juce::String& suffix)
+{
+    slider.setSliderStyle (juce::Slider::RotaryVerticalDrag);
+    slider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 50, 16);
+    slider.setColour (juce::Slider::rotarySliderFillColourId, accentColor);
+    slider.setColour (juce::Slider::rotarySliderOutlineColourId, juce::Colours::white.withAlpha (0.2f));
+    slider.setColour (juce::Slider::thumbColourId, juce::Colours::white);
+    slider.setColour (juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
+    slider.setColour (juce::Slider::textBoxTextColourId, juce::Colours::white);
+    slider.setTextValueSuffix (suffix);
+}
+
+void ProTuneAudioProcessorEditor::configureLabel (juce::Label& label, float fontSize)
+{
+    label.setJustificationType (juce::Justification::centred);
+    label.setColour (juce::Label::textColourId, juce::Colours::white);
+    label.setFont (juce::Font (juce::FontOptions (fontSize, juce::Font::bold)));
 }
 
 juce::String ProTuneAudioProcessorEditor::frequencyToNoteName (float frequency) const
@@ -210,22 +358,18 @@ juce::String ProTuneAudioProcessorEditor::frequencyToNoteName (float frequency) 
     if (frequency <= 0.0f)
         return "--";
 
-    auto midi = 69.0f + 12.0f * std::log2 (frequency / 440.0f);
-    auto rounded = (int) std::round (midi);
-    auto noteIndex = ((rounded % 12) + 12) % 12;
-    auto octave = (rounded / 12) - 1;
+    float midi = 69.0f + 12.0f * std::log2 (frequency / 440.0f);
+    int rounded = static_cast<int> (std::round (midi));
+    int noteIndex = ((rounded % 12) + 12) % 12;
+    int octave = (rounded / 12) - 1;
+
     return noteNames[noteIndex] + juce::String (octave);
 }
 
-void ProTuneAudioProcessorEditor::configureSlider (juce::Slider& slider, const juce::String& name)
+float ProTuneAudioProcessorEditor::frequencyToDeviation (float detected, float target) const
 {
-    slider.setSliderStyle (juce::Slider::RotaryVerticalDrag);
-    slider.setTextBoxStyle (juce::Slider::TextBoxBelow, false, 70, 18);
-    slider.setColour (juce::Slider::rotarySliderFillColourId, juce::Colour::fromRGB (0, 180, 255));
-    slider.setColour (juce::Slider::rotarySliderOutlineColourId, juce::Colours::white.withAlpha (0.2f));
-    slider.setColour (juce::Slider::thumbColourId, juce::Colours::white);
-    slider.setColour (juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
-    slider.setColour (juce::Slider::textBoxTextColourId, juce::Colours::white);
-    slider.setName (name);
-    addAndMakeVisible (slider);
+    if (detected <= 0.0f || target <= 0.0f)
+        return 0.0f;
+
+    return 1200.0f * std::log2 (detected / target);
 }

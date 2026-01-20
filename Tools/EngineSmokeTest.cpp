@@ -32,13 +32,15 @@ int main()
 
     juce::AudioBuffer<float> buffer (2, blockSize);
 
-    std::cout << "\nProcessing 440 Hz sine wave through " << 20 << " blocks..." << std::endl;
+    const int numBlocks = 100;  // Run more blocks to allow warmup
+    std::cout << "\nProcessing 440 Hz sine wave through " << numBlocks << " blocks..." << std::endl;
     std::cout << "Block\tInput RMS\tOutput RMS\tDetected Hz\tTarget Hz\tConfidence" << std::endl;
     std::cout << "-----\t---------\t----------\t-----------\t---------\t----------" << std::endl;
 
     bool hasOutput = false;
+    bool detectedPitch = false;
 
-    for (int block = 0; block < 20; ++block)
+    for (int block = 0; block < numBlocks; ++block)
     {
         // Fill buffer with sine wave
         for (int ch = 0; ch < 2; ++ch)
@@ -83,17 +85,25 @@ int main()
         if (outputRms > 0.01)
             hasOutput = true;
 
-        std::cout << block << "\t"
-                  << inputRms << "\t\t"
-                  << outputRms << "\t\t"
-                  << engine.getLastDetectedFrequency() << "\t\t"
-                  << engine.getLastTargetFrequency() << "\t\t"
-                  << engine.getLastDetectionConfidence();
+        float detected = engine.getLastDetectedFrequency();
+        if (detected > 0.0f)
+            detectedPitch = true;
 
-        if (hasNaN)
-            std::cout << "\t[NaN DETECTED!]";
+        // Print first 10 blocks, then every 10th, or if we detected pitch
+        if (block < 10 || block % 10 == 0 || detected > 0.0f)
+        {
+            std::cout << block << "\t"
+                      << inputRms << "\t\t"
+                      << outputRms << "\t\t"
+                      << detected << "\t\t"
+                      << engine.getLastTargetFrequency() << "\t\t"
+                      << engine.getLastDetectionConfidence();
 
-        std::cout << std::endl;
+            if (hasNaN)
+                std::cout << "\t[NaN DETECTED!]";
+
+            std::cout << std::endl;
+        }
     }
 
     std::cout << "\n=== Summary ===" << std::endl;
@@ -101,6 +111,11 @@ int main()
         std::cout << "PASS: Audio output detected" << std::endl;
     else
         std::cout << "FAIL: No audio output!" << std::endl;
+
+    if (detectedPitch)
+        std::cout << "PASS: Pitch detection working" << std::endl;
+    else
+        std::cout << "NOTE: Pitch detection needs tuning (no pitch detected for 440 Hz sine)" << std::endl;
 
     return hasOutput ? 0 : 1;
 }

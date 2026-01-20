@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(ProTune VERSION 0.1.0)
+project(ProTune VERSION 0.2.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -38,9 +38,15 @@ juce_add_plugin(ProTune
 juce_generate_juce_header(ProTune)
 
 target_sources(ProTune PRIVATE
+    # Core plugin files
     Source/PluginEditor.cpp
     Source/PluginProcessor.cpp
     Source/PitchCorrectionEngine.cpp
+    # New modular DSP components
+    Source/PitchDetector.cpp
+    Source/PsolaShifter.cpp
+    Source/ScaleMapper.cpp
+    Source/RetuneEngine.cpp
 )
 
 target_compile_definitions(ProTune
@@ -75,6 +81,10 @@ target_link_libraries(VST3Probe PRIVATE
 add_executable(EngineSmokeTest
     Tools/EngineSmokeTest.cpp
     Source/PitchCorrectionEngine.cpp
+    Source/PitchDetector.cpp
+    Source/PsolaShifter.cpp
+    Source/ScaleMapper.cpp
+    Source/RetuneEngine.cpp
 )
 
 target_link_libraries(EngineSmokeTest PRIVATE

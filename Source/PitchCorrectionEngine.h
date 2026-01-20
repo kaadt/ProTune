@@ -8,9 +8,24 @@
 #include <memory>
 #include <vector>
 #include <cstdint>
-#include <initializer_list>
-#include <deque>
 
+#include "PitchDetector.h"
+#include "ScaleMapper.h"
+#include "RetuneEngine.h"
+#include "PsolaShifter.h"
+
+/**
+ * Main Pitch Correction Engine
+ *
+ * Orchestrates pitch detection, scale mapping, retune smoothing, and pitch shifting.
+ * Redesigned to match Auto-Tune Evo's functionality with formant-preserving PSOLA.
+ *
+ * Processing flow:
+ * 1. PitchDetector: Cycle-based pitch detection (patent US 5,973,252)
+ * 2. ScaleMapper: Map to target note based on key/scale/MIDI
+ * 3. RetuneEngine: Apply retune speed and humanization
+ * 4. PsolaShifter: Pitch shift with natural formant preservation
+ */
 class PitchCorrectionEngine
 {
 public:
@@ -18,13 +33,37 @@ public:
 
     struct Parameters
     {
-        float speed = 0.85f;
-        float transition = 0.2f;
-        float toleranceCents = 2.0f;
-        float formantPreserve = 0.0f;
-        float vibratoTracking = 0.5f;
+        // Input type for frequency range optimization
+        PitchDetector::InputType inputType = PitchDetector::InputType::AltoTenor;
+
+        // Scale settings
+        ScaleMapper::ScaleType scaleType = ScaleMapper::ScaleType::Chromatic;
+        int scaleRoot = 0;                          // 0-11 (C=0)
+        AllowedMask customScaleMask = 0x0FFF;       // For custom scale
+        int transpose = 0;                          // -24 to +24 semitones
+        float detune = 0.0f;                        // -100 to +100 cents
+
+        // Retune settings
+        float retuneSpeedMs = 20.0f;                // 0 = instant, 400 = slow
+        float tracking = 0.5f;                      // Pitch detection sensitivity
+        float humanize = 0.0f;                      // Natural variation
+        float vibratoTracking = 0.5f;               // Vibrato preservation
+        float noteTransition = 0.2f;                // Note transition smoothness
+
+        // Legacy compatibility (kept for existing presets)
+        float speed = 20.0f;                        // Alias for retuneSpeedMs
+        float transition = 0.2f;                    // Alias for noteTransition
+        float toleranceCents = 0.0f;                // Deprecated
+        float formantPreserve = 1.0f;               // PSOLA always preserves, but kept for UI
         float rangeLowHz = 80.0f;
         float rangeHighHz = 1000.0f;
+
+        // Global
+        bool bypass = false;
+        bool midiEnabled = false;                   // Use MIDI notes as target
+        bool forceCorrection = true;
+
+        // Scale settings struct for legacy compatibility
         struct ScaleSettings
         {
             enum class Type
@@ -64,9 +103,10 @@ public:
         };
 
         ScaleSettings scale;
-        bool midiEnabled = false;
-        bool forceCorrection = true;
     };
+
+    PitchCorrectionEngine();
+    ~PitchCorrectionEngine() = default;
 
     void prepare (double sampleRate, int samplesPerBlock);
     void reset();
@@ -76,127 +116,39 @@ public:
 
     void process (juce::AudioBuffer<float>& buffer);
 
-    void setAnalysisWindowOrder (int newOrder);
-
     [[nodiscard]] float getLastDetectedFrequency() const noexcept { return lastDetectedFrequency; }
     [[nodiscard]] float getLastTargetFrequency() const noexcept { return lastTargetFrequency; }
     [[nodiscard]] float getLastDetectionConfidence() const noexcept { return lastDetectionConfidence; }
+    [[nodiscard]] float getLastPitchRatio() const noexcept { return lastPitchRatio; }
+
+    [[nodiscard]] int getLatencySamples() const noexcept;
 
 private:
-    void analyseBlock (const juce::AudioBuffer<float>& buffer);
-    float estimatePitchFromAutocorrelation (const float* frame, int frameSize, float& confidenceOut);
-    float chooseTargetFrequency (float detectedFrequency);
-    void updateAnalysisResources();
-    void updateDownsamplingResources();
-    [[nodiscard]] float computeDynamicRatioTime (float detectedFrequency, float targetFrequency) const;
-    [[nodiscard]] float computeDynamicTransitionTime (float detectedFrequency, float targetFrequency) const;
-    [[nodiscard]] float applyTargetHysteresis (float candidateMidi, float rawMidi);
-    [[nodiscard]] float clampMidiToRange (float midi) const noexcept;
-    [[nodiscard]] float minimumConfidenceForLock() const noexcept;
-    [[nodiscard]] int getAnalysisFftSize() const noexcept { return 1 << analysisFftOrder; }
+    void updateComponentSettings();
 
-    static float frequencyToMidiNote (float freq);
-    static float midiNoteToFrequency (float midiNote);
-    static float snapNoteToMask (float midiNote, AllowedMask mask);
+    // New modular components
+    PitchDetector detector;
+    ScaleMapper scaleMapper;
+    RetuneEngine retuneEngine;
+    std::vector<PsolaShifter> shifters;  // One per channel
 
-    static constexpr int minAnalysisFftOrder = 9;
-    static constexpr int maxAnalysisFftOrder = 12;
-    static constexpr int defaultAnalysisFftOrder = 11;
-    static constexpr int pitchDetectionDownsample = 8;
-
+    // Parameters
+    Parameters params;
     double currentSampleRate = 44100.0;
     int maxBlockSize = 0;
 
-    int analysisFftOrder = defaultAnalysisFftOrder;
+    // MIDI state
+    int heldMidiNote = -1;
 
-    Parameters params;
-    float baseRatioGlideTime = 0.01f;
-    float baseTargetTransitionTime = 0.01f;
-
-    juce::AudioBuffer<float> analysisBuffer;
-    juce::AudioBuffer<float> windowedBuffer;
-    juce::AudioBuffer<float> analysisFrame;
-    std::vector<float> downsampledFrame;
-    std::vector<float> filteredFrame;
-    std::vector<float> decimationFilter;
-    struct PeriodicitySample
-    {
-        double error = 0.0;
-        double energy = 0.0;
-        double correlation = 0.0;
-    };
-    std::vector<PeriodicitySample> periodicityScratch;
-    int analysisWritePosition = 0;
-
+    // Telemetry
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;
     float lastDetectionConfidence = 0.0f;
+    float lastPitchRatio = 1.0f;
 
-    float lastStableDetectedFrequency = 0.0f;
-    int lowConfidenceSampleCounter = 0;
+    // Analysis buffer for mono mixdown
+    juce::AudioBuffer<float> monoBuffer;
 
-    float lastLoggedDetected = 0.0f;
-    float lastLoggedTarget = 0.0f;
-
-    juce::SmoothedValue<float> ratioSmoother;
-    juce::SmoothedValue<float> pitchSmoother;
-
-    juce::AudioBuffer<float> dryBuffer;
-
-    float heldMidiNote = std::numeric_limits<float>::quiet_NaN();
-    float activeTargetMidi = std::numeric_limits<float>::quiet_NaN();
-
-    juce::LinearSmoothedValue<float> detectionSmoother { 0.0f };
-
-    void ensureVocoderChannels (int requiredChannels);
-    void updateVocoderResources();
-
-    struct SpectralPeakVocoder
-    {
-        void prepare (double sampleRateIn, int fftOrderIn);
-        void reset();
-        void process (const float* input, float* output, int numSamples, const float* ratioValues,
-                      float formantPreserve);
-
-    private:
-        void processFrame (float formantPreserve);
-        void computeSpectralEnvelope (const float* mags, int numBins, float* envelope);
-
-        double sampleRate = 44100.0;
-        int fftOrder = defaultAnalysisFftOrder;
-        int fftSize = 0;
-        int hopSize = 0;
-        float frameRatio = 1.0f;
-        float olaGain = 1.0f; // normalisation to satisfy COLA for chosen window/hop
-
-        // Cepstral envelope estimation parameters
-        int lifterCutoff = 40; // quefrency bins to keep (controls envelope smoothness)
-
-        std::unique_ptr<juce::dsp::FFT> fft;
-        std::unique_ptr<juce::dsp::FFT> envelopeFft; // separate FFT for envelope estimation
-        std::vector<float> analysisWindow;
-        std::vector<float> synthesisWindow;
-        std::vector<float> analysisFifo;
-        std::vector<float> ratioFifo;
-        int fifoFill = 0;
-        int framesProcessed = 0; // Track OLA stability
-        std::vector<float> outputAccum;
-        std::deque<float> outputQueue;
-        std::vector<juce::dsp::Complex<float>> fftBuffer;
-        std::vector<juce::dsp::Complex<float>> outputSpectrum;
-        std::vector<float> magnitudes;
-        std::vector<float> phases;
-        std::vector<float> prevPhases;      // Previous frame phases for instantaneous frequency
-        std::vector<float> destPhases;
-        std::vector<float> prevDestPhases;  // Previous output phases for propagation
-        std::vector<uint8_t> phaseInitialised;
-
-        // Cepstral envelope buffers
-        std::vector<float> logMagnitudes;
-        std::vector<juce::dsp::Complex<float>> cepstrumBuffer;
-        std::vector<float> inputEnvelope;
-        std::vector<float> outputEnvelope;
-    };
-
-    std::vector<SpectralPeakVocoder> vocoderChannels;
+    // Ensure enough shifters for channels
+    void ensureShifterChannels (int numChannels);
 };

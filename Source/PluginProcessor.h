@@ -6,22 +6,21 @@
 class ProTuneAudioProcessor : public juce::AudioProcessor
 {
 public:
+    using ScaleSettings = PitchCorrectionEngine::Parameters::ScaleSettings;
+    using AllowedMask = PitchCorrectionEngine::AllowedMask;
+
     ProTuneAudioProcessor();
     ~ProTuneAudioProcessor() override = default;
 
-    // AudioProcessor overrides
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
-
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
-
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
 
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override { return true; }
 
     const juce::String getName() const override { return JucePlugin_Name; }
-
     bool acceptsMidi() const override { return true; }
     bool producesMidi() const override { return false; }
     bool isMidiEffect() const override { return false; }
@@ -38,13 +37,13 @@ public:
 
     juce::AudioProcessorValueTreeState& getValueTreeState() { return parameters; }
 
-    using AllowedMask = PitchCorrectionEngine::AllowedMask;
-    using ScaleSettings = PitchCorrectionEngine::Parameters::ScaleSettings;
-
+    // Telemetry for UI
     float getLastDetectedFrequency() const noexcept { return lastDetectedFrequency; }
     float getLastTargetFrequency() const noexcept { return lastTargetFrequency; }
     float getLastDetectionConfidence() const noexcept { return lastDetectionConfidence; }
+    float getLastPitchRatio() const noexcept { return lastPitchRatio; }
 
+    // Scale utilities
     ScaleSettings getScaleSettings() const;
     AllowedMask getEffectiveScaleMask() const;
     AllowedMask getCustomScaleMask() const;
@@ -58,30 +57,44 @@ public:
 private:
     void updateEngineParameters();
 
+    juce::AudioProcessorValueTreeState parameters;
     PitchCorrectionEngine engine;
     PitchCorrectionEngine::Parameters engineParameters;
 
-    juce::AudioProcessorValueTreeState parameters;
+    // New Auto-Tune Evo style parameters
+    std::atomic<float>* inputTypeParam = nullptr;
+    std::atomic<float>* retuneSpeedParam = nullptr;
+    std::atomic<float>* trackingParam = nullptr;
+    std::atomic<float>* humanizeParam = nullptr;
+    std::atomic<float>* transposeParam = nullptr;
+    std::atomic<float>* detuneParam = nullptr;
+    std::atomic<float>* bypassParam = nullptr;
 
+    // Core parameters (shared)
+    std::atomic<float>* keyParam = nullptr;
+    std::atomic<float>* scaleModeParam = nullptr;
+    std::atomic<float>* vibratoParam = nullptr;
+    std::atomic<float>* formantParam = nullptr;
+    std::atomic<float>* midiParam = nullptr;
+
+    // Legacy parameters (for preset compatibility)
     std::atomic<float>* speedParam = nullptr;
     std::atomic<float>* transitionParam = nullptr;
     std::atomic<float>* toleranceParam = nullptr;
-    std::atomic<float>* formantParam = nullptr;
-    std::atomic<float>* vibratoParam = nullptr;
     std::atomic<float>* rangeLowParam = nullptr;
     std::atomic<float>* rangeHighParam = nullptr;
-    std::atomic<float>* scaleModeParam = nullptr;
     std::atomic<float>* scaleRootParam = nullptr;
     std::atomic<float>* scaleMaskParam = nullptr;
     std::atomic<float>* enharmonicParam = nullptr;
-    std::atomic<float>* midiParam = nullptr;
     std::atomic<float>* forceCorrectionParam = nullptr;
 
+    // Telemetry
     float lastDetectedFrequency = 0.0f;
     float lastTargetFrequency = 0.0f;
     float lastDetectionConfidence = 0.0f;
-};
+    float lastPitchRatio = 1.0f;
 
-class ProTuneAudioProcessorEditor;
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProTuneAudioProcessor)
+};
 
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter();
