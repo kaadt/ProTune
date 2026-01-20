@@ -186,7 +186,9 @@ private:
         std::vector<juce::dsp::Complex<float>> outputSpectrum;
         std::vector<float> magnitudes;
         std::vector<float> phases;
+        std::vector<float> prevPhases;      // Previous frame phases for instantaneous frequency
         std::vector<float> destPhases;
+        std::vector<float> prevDestPhases;  // Previous output phases for propagation
         std::vector<uint8_t> phaseInitialised;
 
         // Cepstral envelope buffers

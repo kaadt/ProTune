@@ -679,7 +679,9 @@ void PitchCorrectionEngine::SpectralPeakVocoder::prepare (double sampleRateIn, i
     outputSpectrum.assign ((size_t) fftSize, juce::dsp::Complex<float>());
     magnitudes.assign ((size_t) (fftSize / 2 + 1), 0.0f);
     phases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
+    prevPhases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
     destPhases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
+    prevDestPhases.assign ((size_t) (fftSize / 2 + 1), 0.0f);
     phaseInitialised.assign ((size_t) (fftSize / 2 + 1), 0);
 
     // Cepstral envelope buffers
@@ -697,7 +699,9 @@ void PitchCorrectionEngine::SpectralPeakVocoder::reset()
     framesProcessed = 0;
     std::fill (outputAccum.begin(), outputAccum.end(), 0.0f);
     outputQueue.clear();
+    std::fill (prevPhases.begin(), prevPhases.end(), 0.0f);
     std::fill (destPhases.begin(), destPhases.end(), 0.0f);
+    std::fill (prevDestPhases.begin(), prevDestPhases.end(), 0.0f);
     std::fill (phaseInitialised.begin(), phaseInitialised.end(), 0);
     frameRatio = 1.0f;
 }
@@ -907,9 +911,10 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
         }
     }
 
-    // Step 2: Process peaks - compute and store their target phases
+    // Step 2: Process peaks - compute instantaneous frequency and target phases
     std::vector<float> peakDestPhases (numBins + 1, 0.0f);
     std::vector<int> peakDestBins (numBins + 1, -1);
+    std::vector<float> peakInstFreq (numBins + 1, 0.0f);
 
     for (int peakBin : peakIndices)
     {
@@ -921,17 +926,27 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
 
         peakDestBins[(size_t) peakBin] = destBin;
 
-        // Phase propagation for peaks: φ_dest = φ_prev + ω_dest * hopSize
-        const float destOmega = binToOmega * (float) destBin;
+        // Calculate instantaneous frequency from phase derivative
+        // ω_inst = ω_bin + (phase_diff - expected_phase_diff) / hopSize
+        const float expectedOmega = binToOmega * (float) peakBin;
+        const float phaseDiff = wrapPhase (phases[(size_t) peakBin] - prevPhases[(size_t) peakBin]);
+        const float expectedPhaseDiff = expectedOmega * hopSamples;
+        const float phaseDeviation = wrapPhase (phaseDiff - expectedPhaseDiff);
+        const float instFreq = expectedOmega + phaseDeviation / hopSamples;
+        peakInstFreq[(size_t) peakBin] = instFreq;
 
-        float prevPhase = destPhases[(size_t) destBin];
+        // Scale instantaneous frequency by pitch shift ratio
+        const float destInstFreq = instFreq * beta;
+
+        // Phase propagation using scaled instantaneous frequency
+        float prevDestPhase = prevDestPhases[(size_t) destBin];
         if (phaseInitialised[(size_t) destBin] == 0)
         {
-            // Initialize from source phase, accounting for frequency shift
-            prevPhase = phases[(size_t) peakBin];
+            // First frame: initialize from source phase
+            prevDestPhase = phases[(size_t) peakBin];
         }
 
-        const float newPhase = wrapPhase (prevPhase + destOmega * hopSamples);
+        const float newPhase = wrapPhase (prevDestPhase + destInstFreq * hopSamples);
         peakDestPhases[(size_t) peakBin] = newPhase;
         destPhases[(size_t) destBin] = newPhase;
         phaseInitialised[(size_t) destBin] = 1;
@@ -955,19 +970,24 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
         if (controlPeak >= 0 && peakDestBins[(size_t) controlPeak] >= 0)
         {
             // Phase locking: preserve phase relationship to controlling peak
-            // Δφ_source = φ[k] - φ[peak]
-            // φ_output = φ_peak_dest + Δφ_source
+            // Use the same phase offset from the input signal
             const float phaseOffset = phases[(size_t) k] - phases[(size_t) controlPeak];
             outputPhase = wrapPhase (peakDestPhases[(size_t) controlPeak] + phaseOffset);
         }
         else
         {
-            // No controlling peak - use simple phase propagation
-            const float destOmega = binToOmega * targetIndex;
-            float prevPhase = destPhases[(size_t) lowerDest];
+            // No controlling peak - use instantaneous frequency propagation
+            const float expectedOmega = binToOmega * (float) k;
+            const float phaseDiff = wrapPhase (phases[(size_t) k] - prevPhases[(size_t) k]);
+            const float expectedPhaseDiff = expectedOmega * hopSamples;
+            const float phaseDeviation = wrapPhase (phaseDiff - expectedPhaseDiff);
+            const float instFreq = expectedOmega + phaseDeviation / hopSamples;
+            const float destInstFreq = instFreq * beta;
+
+            float prevDestPhase = prevDestPhases[(size_t) lowerDest];
             if (phaseInitialised[(size_t) lowerDest] == 0)
-                prevPhase = phases[(size_t) k];
-            outputPhase = wrapPhase (prevPhase + destOmega * hopSamples);
+                prevDestPhase = phases[(size_t) k];
+            outputPhase = wrapPhase (prevDestPhase + destInstFreq * hopSamples);
         }
 
         // Distribute magnitude to surrounding bins (linear interpolation)
@@ -1044,48 +1064,57 @@ void PitchCorrectionEngine::SpectralPeakVocoder::processFrame (float formantPres
         outputSpectrum[(size_t) (fftSize - k)] = std::conj (bin);
     }
 
+    // Store current phases as previous for next frame (before IFFT)
+    std::copy (phases.begin(), phases.end(), prevPhases.begin());
+    std::copy (destPhases.begin(), destPhases.end(), prevDestPhases.begin());
+
     // Inverse FFT to time domain
     fft->perform (outputSpectrum.data(), outputSpectrum.data(), true);
 
-    // Compute time-domain energy of IFFT output and compare to input windowed signal
-    // This accounts for phase incoherence that spectral energy comparison misses
-    float ifftEnergy = 0.0f;
-    for (int n = 0; n < fftSize; ++n)
-    {
-        float s = outputSpectrum[(size_t)n].real();
-        ifftEnergy += s * s;
-    }
-
-    // Compute energy of the input windowed signal for comparison
-    float inputWindowedEnergy = 0.0f;
-    for (int n = 0; n < fftSize; ++n)
-    {
-        float s = analysisFifo[(size_t)n] * analysisWindow[(size_t)n];
-        inputWindowedEnergy += s * s;
-    }
-
-    // Time-domain correction factor: scale output to match input energy
-    float timeDomainFactor = (ifftEnergy > 1.0e-10f)
-                                 ? std::sqrt(inputWindowedEnergy / ifftEnergy)
-                                 : 1.0f;
-
-    // When pitch shifting, inter-frame phase incoherence causes OLA cancellation.
-    // The coherence loss scales approximately with the square of the energy factor.
-    // Empirical correction with additional adjustment factor (1.2) for remaining loss.
-    float coherenceBoost = 1.0f;
-    if (timeDomainFactor > 1.05f)  // Only when significant pitch shift
-    {
-        coherenceBoost = timeDomainFactor * timeDomainFactor * 1.2f;
-    }
-
-    // Apply OLA gain, time-domain energy correction, and coherence boost
-    const float normalisation = olaGain * timeDomainFactor * coherenceBoost;
+    // Time-domain energy matching:
+    // Compare synthesized frame energy to input frame energy and correct
+    float inputFrameEnergy = 0.0f;
+    float outputFrameEnergy = 0.0f;
 
     for (int n = 0; n < fftSize; ++n)
     {
-        float sample = outputSpectrum[(size_t)n].real() * normalisation;
-        sample *= synthesisWindow[(size_t)n];
-        outputAccum[(size_t)n] += sample;
+        float inSample = analysisFifo[(size_t) n] * analysisWindow[(size_t) n];
+        float outSample = outputSpectrum[(size_t) n].real() * synthesisWindow[(size_t) n];
+        inputFrameEnergy += inSample * inSample;
+        outputFrameEnergy += outSample * outSample;
+    }
+
+    // Compute frame energy correction factor
+    float frameEnergyFactor = 1.0f;
+    if (outputFrameEnergy > 1.0e-10f && inputFrameEnergy > 1.0e-10f)
+        frameEnergyFactor = std::sqrt (inputFrameEnergy / outputFrameEnergy);
+
+    // OLA phase coherence compensation:
+    // With 75% overlap (4 frames), phase relationships become decorrelated when pitch
+    // shifting, causing destructive interference during overlap-add. Even small pitch
+    // shifts cause significant phase decorrelation, resulting in ~3.5x energy loss.
+    //
+    // Apply full boost for any noticeable pitch shift (>0.5%), with smooth transition.
+    float olaCoherenceBoost = 1.0f;
+    const float ratioDeviation = std::abs (frameRatio - 1.0f);
+    if (ratioDeviation > 0.001f)
+    {
+        constexpr float fullBoost = 3.5f;
+        // Use tanh for smooth, fast ramp to full boost
+        // At 1% deviation: tanh(1.0) ≈ 0.76 → boost ≈ 2.9x
+        // At 2% deviation: tanh(2.0) ≈ 0.96 → boost ≈ 3.4x
+        const float rampFactor = std::tanh (ratioDeviation * 100.0f);
+        olaCoherenceBoost = 1.0f + (fullBoost - 1.0f) * rampFactor;
+    }
+
+    // Apply OLA gain, energy correction, and coherence boost
+    const float normalisation = olaGain * frameEnergyFactor * olaCoherenceBoost;
+
+    for (int n = 0; n < fftSize; ++n)
+    {
+        float sample = outputSpectrum[(size_t) n].real() * normalisation;
+        sample *= synthesisWindow[(size_t) n];
+        outputAccum[(size_t) n] += sample;
     }
 
 
