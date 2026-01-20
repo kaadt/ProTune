@@ -95,3 +95,41 @@ target_link_libraries(EngineSmokeTest PRIVATE
 )
 
 target_compile_definitions(EngineSmokeTest PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)
+
+add_executable(AudioFileTest
+    Tools/AudioFileTest.cpp
+    Source/PitchCorrectionEngine.cpp
+    Source/PitchDetector.cpp
+    Source/PsolaShifter.cpp
+    Source/ScaleMapper.cpp
+    Source/RetuneEngine.cpp
+)
+
+target_link_libraries(AudioFileTest PRIVATE
+    juce::juce_core
+    juce::juce_audio_basics
+    juce::juce_audio_formats
+    juce::juce_graphics
+    juce::juce_dsp
+    juce::juce_gui_basics
+)
+
+target_compile_definitions(AudioFileTest PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)
+
+add_executable(SineTest
+    Tools/SineTest.cpp
+    Source/PitchCorrectionEngine.cpp
+    Source/PitchDetector.cpp
+    Source/PsolaShifter.cpp
+    Source/ScaleMapper.cpp
+    Source/RetuneEngine.cpp
+)
+
+target_link_libraries(SineTest PRIVATE
+    juce::juce_core
+    juce::juce_audio_basics
+    juce::juce_graphics
+    juce::juce_dsp
+)
+
+target_compile_definitions(SineTest PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)

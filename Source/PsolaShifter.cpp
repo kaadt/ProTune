@@ -11,17 +11,14 @@ void PsolaShifter::prepare (double sampleRate, int maxBlockSize)
     currentSampleRate = sampleRate;
 
     // Period range for typical voice: 50 Hz - 1000 Hz
-    maxPeriodSamples = static_cast<int> (sampleRate / 50.0);   // ~50 Hz minimum
-    minPeriodSamples = static_cast<int> (sampleRate / 1000.0); // ~1000 Hz maximum
+    maxPeriodSamples = static_cast<int> (sampleRate / 50.0);
+    minPeriodSamples = static_cast<int> (sampleRate / 1000.0);
 
-    // Input buffer: need at least 4 periods worth for grain extraction
+    // Input buffer: large enough for several periods plus block
     int inputBufferSize = maxPeriodSamples * 8 + maxBlockSize;
     inputBuffer.assign (static_cast<size_t> (inputBufferSize), 0.0f);
 
-    // Output accumulator: same size for overlap-add
-    outputAccum.assign (static_cast<size_t> (inputBufferSize), 0.0f);
-
-    // Latency is approximately 2 periods at minimum frequency
+    // Latency for look-ahead
     latencySamples = maxPeriodSamples * 2;
 
     reset();
@@ -30,15 +27,13 @@ void PsolaShifter::prepare (double sampleRate, int maxBlockSize)
 void PsolaShifter::reset()
 {
     std::fill (inputBuffer.begin(), inputBuffer.end(), 0.0f);
-    std::fill (outputAccum.begin(), outputAccum.end(), 0.0f);
     inputWritePos = 0;
-    inputReadPos = 0;
     outputWritePos = 0;
     outputReadPos = 0;
     activeGrains.clear();
     lastPeriod = 0.0f;
     synthesisPosition = 0.0f;
-    lastGrainInputCenter = -maxPeriodSamples * 4;  // Force first grain extraction
+    lastGrainInputCenter = 0;
     totalInputSamples = 0;
 }
 
@@ -48,11 +43,24 @@ void PsolaShifter::process (const float* input, float* output, int numSamples,
     if (numSamples <= 0 || output == nullptr)
         return;
 
-    // Clamp pitch ratio to reasonable range
+    // Clamp pitch ratio
     pitchRatio = juce::jlimit (0.5f, 2.0f, pitchRatio);
 
-    // Handle unvoiced or no detection: pass through with slight smoothing
-    if (detectedPeriod <= 0.0f || confidence < 0.1f)
+    int inputBufSize = static_cast<int> (inputBuffer.size());
+
+    // Write input to circular buffer
+    if (input != nullptr)
+    {
+        for (int i = 0; i < numSamples; ++i)
+        {
+            inputBuffer[static_cast<size_t> (inputWritePos)] = input[i];
+            inputWritePos = (inputWritePos + 1) % inputBufSize;
+        }
+        totalInputSamples += numSamples;
+    }
+
+    // If unvoiced or no pitch detected, pass through
+    if (detectedPeriod <= 0.0f || confidence < 0.2f)
     {
         if (input != nullptr)
         {
@@ -63,150 +71,139 @@ void PsolaShifter::process (const float* input, float* output, int numSamples,
         {
             std::fill (output, output + numSamples, 0.0f);
         }
+        lastPeriod = 0.0f;
+        synthesisPosition = 0.0f;
+        activeGrains.clear();
         return;
     }
 
-    // Clamp detected period to valid range
+    // Clamp and smooth period
     float period = juce::jlimit (static_cast<float> (minPeriodSamples),
                                   static_cast<float> (maxPeriodSamples),
                                   detectedPeriod);
 
-    // Smooth period transitions to avoid artifacts
     if (lastPeriod <= 0.0f)
         lastPeriod = period;
     else
-        lastPeriod += (period - lastPeriod) * 0.3f;
+        lastPeriod = lastPeriod * 0.9f + period * 0.1f;
 
     period = lastPeriod;
+    int periodInt = juce::jmax (minPeriodSamples, static_cast<int> (period + 0.5f));
 
-    int periodInt = static_cast<int> (period + 0.5f);
-    int grainSize = periodInt * 2;  // Grain is 2 periods
+    // Pitch-synchronous OLA with per-grain resampling:
+    //
+    // The KEY to pitch shifting is that each grain represents TWO pitch cycles.
+    // By resampling the grain, we change the apparent frequency.
+    //
+    // Original: grain of 2*period samples = 2 cycles at input frequency
+    // Resampled: same grain compressed/stretched to 2*period samples
+    //            but containing pitchRatio more/fewer waveform cycles
+    //
+    // For pitch UP: compress waveform within grain (more cycles per grain)
+    //   -> Read from input at rate pitchRatio (faster)
+    //   -> Each output sample reads from input[i * pitchRatio]
+    //
+    // We keep grain SIZE the same (2*period samples) to maintain constant overlap
+    // but change the CONTENT to have more/fewer waveform cycles.
 
-    // Write input to circular buffer
-    if (input != nullptr)
-    {
-        for (int i = 0; i < numSamples; ++i)
-        {
-            inputBuffer[static_cast<size_t> (inputWritePos)] = input[i];
-            inputWritePos = (inputWritePos + 1) % static_cast<int> (inputBuffer.size());
-        }
-    }
-    totalInputSamples += numSamples;
+    int grainSize = periodInt * 2;  // Fixed size for consistent overlap
+    float hop = period;  // Extract and place grains every period samples
 
-    // Determine grain spacing for synthesis
-    // For pitch up: grains are placed closer together (synthesis hop < analysis hop)
-    // For pitch down: grains are placed further apart (synthesis hop > analysis hop)
-    float analysisHop = period;  // Extract grains every period
-
-    // Extract new grains as needed
-    int availableInput = totalInputSamples - lastGrainInputCenter;
-
-    while (availableInput >= static_cast<int> (analysisHop) + grainSize)
-    {
-        int grainCenter = lastGrainInputCenter + static_cast<int> (analysisHop);
-        extractGrain (grainCenter, period);
-        lastGrainInputCenter = grainCenter;
-        availableInput = totalInputSamples - lastGrainInputCenter;
-    }
-
-    // Synthesize output via overlap-add
-    synthesizeGrains (output, numSamples);
-}
-
-void PsolaShifter::extractGrain (int centerPos, float period)
-{
-    int periodInt = static_cast<int> (period + 0.5f);
-    int grainSize = periodInt * 2;  // 2 periods per grain
-
-    Grain grain;
-    grain.samples.resize (static_cast<size_t> (grainSize));
-    grain.centerPosition = centerPos;
-    grain.period = period;
-
-    int bufferSize = static_cast<int> (inputBuffer.size());
-    int startPos = centerPos - periodInt;
-
-    // Extract samples with Hanning window
-    for (int i = 0; i < grainSize; ++i)
-    {
-        int bufIdx = ((startPos + i) % bufferSize + bufferSize) % bufferSize;
-        float window = getHannWindow (i, grainSize);
-        grain.samples[static_cast<size_t> (i)] = inputBuffer[static_cast<size_t> (bufIdx)] * window;
-    }
-
-    // Calculate output position based on synthesis timeline
-    // Each grain is placed at synthesisPosition, then we advance by synthesisHop
-    grain.outputPosition = static_cast<int> (synthesisPosition);
-
-    activeGrains.push_back (std::move (grain));
-
-    // Advance synthesis position by synthesis hop (period / pitchRatio already factored in)
-    synthesisPosition += period;  // Will be adjusted in synthesize
-}
-
-void PsolaShifter::synthesizeGrains (float* output, int numSamples)
-{
-    // Clear output first
+    // Clear output buffer for this block
     std::fill (output, output + numSamples, 0.0f);
 
-    // Process each active grain
-    auto it = activeGrains.begin();
-    while (it != activeGrains.end())
+    // Process: spawn grains at regular intervals
+    for (int outSample = 0; outSample < numSamples; ++outSample)
     {
-        Grain& grain = *it;
-        int grainSize = static_cast<int> (grain.samples.size());
-
-        // Calculate where this grain contributes to current output
-        int grainStart = grain.outputPosition - outputReadPos;
-        int grainEnd = grainStart + grainSize;
-
-        // Check if grain is completely past
-        if (grainEnd < 0)
+        // Check if we need to spawn a new grain
+        while (synthesisPosition <= static_cast<float> (outSample))
         {
-            it = activeGrains.erase (it);
-            continue;
-        }
+            // Calculate input position for this grain
+            float inputPos = static_cast<float> (lastGrainInputCenter) + hop;
 
-        // Check if grain hasn't started yet
-        if (grainStart >= numSamples)
-        {
-            ++it;
-            continue;
-        }
+            // For pitch up, we need more input content per grain
+            // So we read from a larger region of input (grainSize * pitchRatio samples)
+            int inputReadSize = static_cast<int> (static_cast<float> (grainSize) * pitchRatio + 0.5f);
 
-        // Add grain contribution to output
-        int outStart = std::max (0, grainStart);
-        int outEnd = std::min (numSamples, grainEnd);
+            // Check if we have enough input data
+            if (static_cast<int> (inputPos) + inputReadSize / 2 > totalInputSamples)
+                break;
 
-        for (int i = outStart; i < outEnd; ++i)
-        {
-            int grainIdx = i - grainStart;
-            if (grainIdx >= 0 && grainIdx < grainSize)
+            // Create grain
+            Grain grain;
+            grain.samples.resize (static_cast<size_t> (grainSize));
+            grain.period = period;
+            grain.centerPosition = static_cast<int> (inputPos);
+            grain.outputPosition = outSample;
+
+            // Extract and resample: read inputReadSize samples, output grainSize samples
+            int inputStart = static_cast<int> (inputPos) - inputReadSize / 2;
+
+            for (int i = 0; i < grainSize; ++i)
             {
-                output[i] += grain.samples[static_cast<size_t> (grainIdx)];
+                // Map output index to input index
+                // For pitch UP: read MORE input samples per output sample
+                float inputIdx = static_cast<float> (i) * pitchRatio;
+
+                int idx0 = static_cast<int> (inputIdx);
+                int idx1 = idx0 + 1;
+                float frac = inputIdx - static_cast<float> (idx0);
+
+                // Clamp to input bounds
+                if (idx0 >= inputReadSize) idx0 = inputReadSize - 1;
+                if (idx1 >= inputReadSize) idx1 = inputReadSize - 1;
+
+                // Get input samples
+                int bufIdx0 = ((inputStart + idx0) % inputBufSize + inputBufSize) % inputBufSize;
+                int bufIdx1 = ((inputStart + idx1) % inputBufSize + inputBufSize) % inputBufSize;
+
+                float s0 = inputBuffer[static_cast<size_t> (bufIdx0)];
+                float s1 = inputBuffer[static_cast<size_t> (bufIdx1)];
+
+                // Linear interpolation
+                float sample = s0 + frac * (s1 - s0);
+
+                // Apply Hanning window
+                float window = getHannWindow (i, grainSize);
+                grain.samples[static_cast<size_t> (i)] = sample * window;
             }
+
+            activeGrains.push_back (std::move (grain));
+
+            // Update positions
+            lastGrainInputCenter = static_cast<int> (inputPos);
+            synthesisPosition += hop;
         }
 
-        // Remove if grain is complete
-        if (grainEnd <= numSamples)
+        // Synthesize: overlap-add all active grains
+        for (auto it = activeGrains.begin(); it != activeGrains.end();)
         {
-            it = activeGrains.erase (it);
-        }
-        else
-        {
-            ++it;
+            Grain& grain = *it;
+            int grainIdx = outSample - grain.outputPosition;
+            int grainLen = static_cast<int> (grain.samples.size());
+
+            if (grainIdx >= 0 && grainIdx < grainLen)
+            {
+                output[outSample] += grain.samples[static_cast<size_t> (grainIdx)];
+            }
+
+            if (grainIdx >= grainLen)
+            {
+                it = activeGrains.erase (it);
+            }
+            else
+            {
+                ++it;
+            }
         }
     }
 
-    // Update read position for next block
-    outputReadPos += numSamples;
+    // Adjust for next block
+    synthesisPosition -= static_cast<float> (numSamples);
 
-    // Normalize output to prevent clipping from overlap-add
-    // With 50% overlap and Hanning windows, the sum should be close to 1.0
-    // but we add a safety limiter
-    for (int i = 0; i < numSamples; ++i)
+    for (auto& grain : activeGrains)
     {
-        output[i] = juce::jlimit (-1.0f, 1.0f, output[i]);
+        grain.outputPosition -= numSamples;
     }
 }
 

@@ -157,7 +157,7 @@ PitchDetector::Result PitchDetector::process (const float* input, int numSamples
     result.frequency = frequency;
     result.period = refinedPeriod;
     result.confidence = confidence;
-    result.voiced = (confidence > 0.3f);
+    result.voiced = (confidence > 0.2f);  // Match PSOLA threshold
 
     lastPeriod = refinedPeriod;
     lastConfidence = confidence;
